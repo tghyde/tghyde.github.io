@@ -1,0 +1,235 @@
+% CV_proposed.tex -- proposed redesign of CV.tex (self-contained; does not use cv.cls)
+% Lines marked "TODO" are items only you can fill in or confirm.
+\documentclass[11pt,letterpaper]{article}
+
+% ---------- Fonts, encoding, typography ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}     % modern Times replacement (the 'times' package is obsolete)
+\usepackage{microtype}
+
+% ---------- Layout ----------
+\usepackage[left=0.9in,right=0.9in,top=0.75in,bottom=0.75in]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,urlcolor=linkblue,linkcolor=linkblue}
+\usepackage{xcolor}
+\definecolor{linkblue}{RGB}{20,60,120}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1.05}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\small\color{gray}Trevor Hyde\ \textperiodcentered\ Curriculum Vitae\ \textperiodcentered\ updated \today}
+\fancyfoot[R]{\small\color{gray}\thepage\ of \pageref{LastPage}}
+
+% Section headings: small caps with a rule beneath, tight spacing
+\titleformat{\section}{\large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{12pt}{5pt}
+\titleformat{\subsection}{\normalsize\bfseries\raggedright}{}{0em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+
+% ---------- Helpers ----------
+% Three-column row: description | institution | dates. Column widths are fixed once here
+% so every table in the document lines up (no per-table \hspace hacks needed).
+\newenvironment{cvtable}
+  {\tabularx{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}}
+  {\endtabularx}
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:#1}}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+\newcommand{\ug}{$^{\ast}$}   % marks an undergraduate coauthor (see note under Publications)
+\newcommand{\upcoming}{\textit{(upcoming)}}
+\setlist[enumerate]{leftmargin=*,itemsep=2pt,parsep=0pt,topsep=3pt}
+\setlist[itemize]{leftmargin=*,itemsep=1pt,parsep=0pt,topsep=3pt,label={--}}
+\newcommand{\RR}{\mathbb{R}}
+
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge\bfseries\scshape Trevor Hyde}\\[2pt]
+    {\large\scshape Assistant Professor of Mathematics and Statistics}\\[2pt]
+    Vassar College\\[3pt]
+    \href{mailto:thyde@vassar.edu}{thyde@vassar.edu}
+    \ \textperiodcentered\ \href{https://pages.vassar.edu/thyde/}{pages.vassar.edu/thyde}
+    \ \textperiodcentered\ 403 Rockefeller Hall, 124 Raymond Ave, Poughkeepsie, NY 12604
+\end{center}
+
+% ---------- Research interests ----------
+\section{Research Interests}
+Arithmetic dynamics, number theory, algebraic geometry, combinatorics, representation theory, and topology.
+
+% ---------- Education ----------
+\section{Education}
+\begin{cvtable}
+    \textbf{Ph.D.}, Mathematics & University of Michigan & 2019\\
+    \multicolumn{3}{@{}p{\textwidth}@{}}{\quad Thesis: \textit{Polynomial Statistics, Necklace Polynomials, and the Arithmetic Dynamical Mordell--Lang Conjecture}}\\
+    \multicolumn{3}{@{}p{\textwidth}@{}}{\quad Advisors: Jeffrey Lagarias and Michael Zieve}\\[3pt]
+    \textbf{B.A.}, Mathematics, \textit{summa cum laude}, Phi Beta Kappa & Amherst College & 2012
+\end{cvtable}
+
+% ---------- Appointments ----------
+\section{Appointments}
+\begin{cvtable}
+    Assistant Professor of Mathematics and Statistics & Vassar College & 2023--present\\
+    NSF Mathematical Sciences Postdoctoral Research Fellow & University of Chicago & 2020--2023\\
+    L.\,E. Dickson Instructor & University of Chicago & 2019--2023\\
+    Moss Quantitative Fellow & Amherst College & 2012--2013
+\end{cvtable}
+
+% ---------- Grants, fellowships, awards ----------
+\section{Grants, Fellowships, and Awards}
+\begin{cvtable}
+    AMS--Simons Research Enhancement Grant for PUI Faculty & AMS / Simons Foundation & 2026--2029\\
+    NSF Mathematical Sciences Postdoctoral Research Fellowship (DMS-2002176) & National Science Foundation & 2020--2023\\
+    Swogger Award for Exemplary Classroom Teaching & University of Chicago & 2022\\
+    Rackham Predoctoral Fellowship & University of Michigan & 2018\\
+    Wirt and Mary Cornwell Prize & University of Michigan & 2018\\
+    Rackham Outstanding Graduate Student Instructor Award & University of Michigan & 2018\\
+    Department of Mathematics Outstanding Teaching Award & University of Michigan & 2017\\
+    Robert Breuch Thesis Prize & Amherst College & 2012\\
+    Post-Baccalaureate Fellowship & Amherst College & 2012
+\end{cvtable}
+% TODO: any Vassar-internal grants (research or curricular), travel grants, or conference funding since 2023.
+
+% ---------- Publications ----------
+\section{Publications}
+{\small\ug\ denotes an undergraduate coauthor at the time of the work.}
+
+\subsection{Preprints}
+\begin{enumerate}
+    \item The arithmetic of semirings part I: ideals, with J. Chen\ug, D. Laurens\ug, J. Piermarini\ug, and H. Simons\ug, submitted (2026), \arxiv{2607.10778}.
+    \item Rational orbits under correspondences, submitted (2026), \arxiv{2605.04391}.
+\end{enumerate}
+
+\subsection{Refereed journal articles}
+\begin{enumerate}[resume]
+    \item Profinite iterated monodromy groups of unicritical polynomials, with O. Adams, to appear in \emph{Algebra Number Theory} (2026), \arxiv{2504.13028}.
+    \item Polynomials with many rational preperiodic points, with J. R. Doyle, \emph{Trans. Amer. Math. Soc.} \textbf{378} (2025), no. 8, 5981--6011, \arxiv{2201.11707}.
+    \item Cyclotomic factors of necklace polynomials, \emph{Acta Arith.} \textbf{204} (2022), 287--316.
+    \item Dynatomic polynomials, necklace operators, and universal relations for dynamical units, with J. R. Doyle and P. Fili, \emph{New York J. Math.} \textbf{28} (2022), 534--556, \arxiv{2108.09333}.
+    \item Dynamical moduli spaces and polynomial endomorphisms of configurations, with T. Blum\ug, J. R. Doyle, C. Kelln\ug, H. Talbott\ug, and M. Weinreich, \emph{Arnold Math. J.} \textbf{8} (2022), 285--317.
+    \item Euler characteristic of the space of real multivariate irreducible polynomials, \emph{Proc. Amer. Math. Soc.} \textbf{150} (2022), 2331--2343.
+    \item Density of periodic points for Latt\`es maps over finite fields, with Z. Bell\ug, J. Camero\ug, K. Cho\ug, C. Lu\ug, R. Miller, B. Thompson, and E. Zhu\ug, \emph{J. Number Theory} \textbf{238} (2022), 951--966.
+    \item Polynomial factorization statistics and point configurations in $\RR^3$, \emph{Int. Math. Res. Not. IMRN} \textbf{2020}, no. 24, 10154--10179.
+    \item Liminal reciprocity and factorization statistics, \emph{Algebr. Comb.} \textbf{2} (2019), no. 4, 521--539.
+    \item Polynomial splitting measures and cohomology of the pure braid group, with J. C. Lagarias, \emph{Arnold Math. J.} \textbf{3} (2017), no. 2, 219--249.
+    \item Gauss' hidden menagerie: from cyclotomy to supercharacters, with S. R. Garcia and B. Lutz, \emph{Notices Amer. Math. Soc.} \textbf{62} (2015), no. 8, 878--888.
+    \item Galois theory of the lemniscate, with D. A. Cox, \emph{J. Number Theory} \textbf{135} (2014), 43--59.
+    \item Small dynamical heights for quadratic polynomials and rational functions, with R. Benedetto, R. Chen, Y. Kovacheva, and C. White, \emph{Exp. Math.} \textbf{23} (2014), 433--447.
+    \item A Wallis product on clovers, \emph{Amer. Math. Monthly} \textbf{121} (2014), no. 3, 237--243.
+    \item Pre-images in quadratic dynamical systems, with B. Hutz and B. Krause, \emph{Involve} \textbf{4} (2011), no. 4, 343--363.
+\end{enumerate}
+
+\subsection{Conference proceedings and thesis}
+\begin{enumerate}[resume]
+    \item Factorization statistics and the twisted Grothendieck--Lefschetz formula, extended abstract, \emph{S\'em. Lothar. Combin.} \textbf{80B} (2018), Art.\ 6 (FPSAC 2018).
+    \item Arithmetic dynamical Mordell--Lang, and Noncommutative arithmetic dynamical Mordell--Lang, with M. Zieve, Chapters 5--6 of the author's dissertation, University of Michigan (2019), \href{https://deepblue.lib.umich.edu/handle/2027.42/151684}{available on Deep Blue}.
+\end{enumerate}
+
+% ---------- Teaching ----------
+\section{Teaching}
+\subsection{Vassar College}
+\begin{itemize}
+    \item Math 261, Introduction to Number Theory: Fall 2023 (2 sections), Fall 2024 (2 sections), Spring 2025, Fall 2025 (2 sections)
+    \item Math 361, Modern Algebra: Spring 2024, Fall 2024
+    \item Math 331, Topics in Geometry: Fall 2025
+    \item Math 301, Senior Seminar: Formalizing Mathematics (Spring 2025); Representation Theory (Fall 2026)
+    \item Math 221, Linear Algebra: Spring 2024, Fall 2026 (2 sections)
+    \item Math 399, Senior Independent Work: Galois Theory (3 students, Fall 2024); Advanced Algebra (1 student, Spring 2025); Category Theory (3 students, Fall 2025); Algebraic Number Theory (3 students), Computational Algebraic Geometry (1 student), and Topos Theory (1 student), Fall 2026
+    \item On sabbatical leave, Spring 2026
+\end{itemize}
+\subsection{University of Chicago}
+\begin{itemize}
+    \item Math 161--162, Honors Calculus (inquiry-based learning): 2019--2020
+    \item Math 202, Abstract Linear Algebra: Winter 2020
+    \item Math 242, Algebraic Number Theory: Spring 2022
+    \item Math 254, Group Theory: Winter 2022
+    \item Math 255, Rings and Fields: Winter 2022, Spring 2023
+\end{itemize}
+\newpage % keeps the Michigan block together at the top of a page; remove if content shifts
+\subsection{University of Michigan}
+\begin{itemize}
+    \item Math 116, Intermediate Calculus: seven semesters, 2014--2018; course co-coordinator, Winter 2018 (exams and assignments for 800+ students, 30+ instructors)
+    \item Math 115, Introduction to Calculus: Fall 2013
+    \item Math 215, Multivariable Calculus (lab instructor): Fall 2016
+\end{itemize}
+
+% ---------- Mentoring ----------
+\section{Student Research and Mentoring}
+\begin{cvtable}
+    URSI Mentor (Undergraduate Research Summer Institute) & Vassar College & 2025\\
+    Directed Reading Program Mentor & University of Chicago & 2021--2023\\
+    REU Mentor & University of Chicago & 2020--2022\\
+    REU Mentor, Summer@ICERM (led to publications 7 and 9 above) & ICERM & 2019\\
+    Math Circle Instructor & University of Michigan & 2019\\
+    REU Mentor & University of Michigan & 2015\\
+    Michigan Math and Science Scholars Instructor & University of Michigan & 2015\\
+    Ross Mathematics Program Counselor & Ohio State University & 2013
+\end{cvtable}
+
+% ---------- Service ----------
+\section{Service and Organizing}
+\begin{cvtable}
+    Co-organizer, AMS Special Session on Arithmetic Dynamics & Joint Math Meetings & January 2027\\
+    Fellowship Committee & Vassar College & Fall 2026\\
+    Library Committee & Vassar College & Fall 2025\\
+    Co-organizer, Asprey Lecture Series & Vassar College & 2023--present\\
+    Co-organizer, Department Colloquium (15+ speakers hosted) & Vassar College & 2023--present\\
+    Speaker, DUSO lecture series & Vassar College & 2024\\
+    Organizer, \textit{Let's Talk About Math Grad School} information session & Vassar College & 2023\\
+    Co-organizer, \textit{No Boundaries Seminar} & University of Chicago & 2021--2023\\
+    Organizer, \textit{Farb and Friends Seminar} & University of Chicago & 2021\\
+    Co-organizer, AMS Special Session \textit{Current Trends in Arithmetic Dynamics} & Joint Math Meetings & 2021\\
+    Organizer, Student Representation Theory Seminar & University of Michigan & 2018\\[2pt]
+    \multicolumn{3}{@{}p{\textwidth}@{}}{\textbf{Referee for} Proc.\ Amer.\ Math.\ Soc., Trans.\ Amer.\ Math.\ Soc., J.\ Th\'eor.\ Nombres Bordeaux, New York J.\ Math., Finite Fields Appl., Int.\ J.\ Number Theory, Exp.\ Math., Proc.\ Roy.\ Soc.\ Edinburgh Sect.\ A, J.\ Combin.\ Theory Ser.\ A, Ergodic Theory Dynam.\ Systems, Int.\ Math.\ Res.\ Not.\ IMRN, Amer.\ Math.\ Monthly, Math.\ Intelligencer}\\
+    \multicolumn{3}{@{}p{\textwidth}@{}}{\textbf{Grant reviewer for} the Israel Science Foundation (ISF) and the Austrian Science Fund (FWF)}
+\end{cvtable}
+
+% ---------- Talks ----------
+\section{Invited Talks}
+\begin{itemize}
+    \item Math Day Keynote Address, Colorado State University, November 2026 \upcoming
+    \item Number Theory Seminar, Academia Sinica, Taiwan, May 2026
+    \item Algebra Seminar, National Central University, Taiwan, May 2026
+    \item AG@PUI Seminar (online), March 2026
+    \item Special Session on Arithmetic Dynamics, AMS Sectional Meeting, Boston College, March 2026
+    \item Colloquium, Amherst College, March 2026
+    \item AIM Workshop \textit{Dynamics of Multiple Maps}, Caltech, November 2025
+    \item Algebra/Number Theory Seminar, University of Rochester, March 2025
+    \item Algebra Seminar, Florida State University, February 2025
+    \item Special Session on Arithmetic Dynamics, Joint Mathematics Meetings, January 2025
+    \item Algebra and Number Theory Seminar, Penn State University, November 2024
+    \item Special Session on Arithmetic Dynamics, Joint Mathematics Meetings, January 2023
+    \item Special Session on Arithmetic Dynamics, AMS Sectional Meeting, University of Utah, October 2022
+    \item Arithmetic Dynamics International Online Seminar (ADIOS), February 2022
+    \item Algebraic Dynamics Seminar, Harvard University, February 2022
+    \item Number Theory Seminar, Oklahoma State University, March 2021
+    \item Algebraic Geometry Seminar, University of Washington, February 2021
+    \item Math Club, University of Connecticut, October 2020
+    \item Special Session on Arithmetic Dynamics, Joint Mathematics Meetings, January 2020
+    \item Combinatorial and Additive Number Theory Workshop, CUNY Graduate Center, May 2019
+    \item Midwest Representation Stability Research Meeting, University of Chicago, April 2019
+    \item Emerging Connections in Number Theory, AMS Sectional Meeting, March 2019
+    \item Graduate Recruitment Symposium, University of Michigan, March 2019
+    \item Complex Analysis, Dynamics, and Geometry Seminar, University of Michigan, March 2019
+    \item Combinatorics Seminar, University of Michigan, February 2019
+    \item Algebra Seminar, Wayne State University, January 2019
+    \item Combinatorics Seminar, University of California, Berkeley, November 2018
+    \item Geometry/Topology Seminar, University of Chicago, November 2018
+    \item Formal Power Series and Algebraic Combinatorics (FPSAC), Dartmouth College, July 2018
+    \item Combinatorial and Additive Number Theory Workshop, CUNY Graduate Center, May 2018
+    \item Special Session on Arithmetic Dynamics, AMS Sectional Meeting, Northeastern University, April 2018
+    \item Special Session on Arithmetic Dynamics, Joint Mathematics Meetings, January 2018
+    \item Interactions between Model Theory and Arithmetic Dynamics, Fields Institute, July 2016
+    \item Colloquium, Amherst College, April 2013
+    \item Pi Day Colloquium, University of Connecticut, March 2013
+\end{itemize}
+\end{document}

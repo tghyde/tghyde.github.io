@@ -1,0 +1,32 @@
+# Recompiles cv/CV.pdf whenever cv/CV.tex changes (for example after an Overleaf push)
+# and commits the new PDF back to main.
+name: Build CV PDF
+
+on:
+  push:
+    branches: [main]
+    paths: ["cv/CV.tex"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile CV.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: cv
+          root_file: CV.tex
+
+      - name: Commit updated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv/CV.pdf
+          git diff --cached --quiet || git commit -m "Rebuild CV.pdf from CV.tex"
+          git push

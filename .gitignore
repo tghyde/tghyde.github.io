@@ -1,0 +1,11 @@
+.DS_Store
+# LaTeX build files (Overleaf and latexmk)
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
