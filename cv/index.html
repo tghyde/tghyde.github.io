@@ -6,10 +6,13 @@
 <title>Curriculum Vitae · Trevor Hyde</title>
 <meta name="description" content="Curriculum vitae of Trevor Hyde, Assistant Professor of Mathematics and Statistics at Vassar College.">
 <link rel="stylesheet" href="/assets/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23143c78'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='bold' text-anchor='middle' fill='white'%3ETH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<script>(function(){try{var t=localStorage.getItem('th-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body>
-<div class="wrap cv">
+<button id="themetoggle" aria-label="Toggle light or dark theme" title="Toggle light/dark"></button>
+<div class="wrap cv" id="top">
 <header class="site">
   <a class="brand" href="/">Trevor Hyde</a>
   <nav class="main">
@@ -21,19 +24,50 @@
   </nav>
 </header>
 
+<div class="scrollbar" id="scrollnav"><a href="/">← Home</a><span class="sb-label">Curriculum Vitae</span><button type="button" class="sb-toc" aria-controls="toc" aria-expanded="false">Contents</button><a class="sb-top" href="#top" aria-label="Back to top">↑ Top</a></div>
+<nav class="toc" id="toc" aria-label="Table of contents">
+<p class="toc-title">Contents</p>
+<ul>
+<li class="toc-l1"><a href="#research">Research</a></li>
+<li class="toc-l1"><a href="#computational">Computational and Formal Methods</a></li>
+<li class="toc-l1"><a href="#education">Education</a></li>
+<li class="toc-l1"><a href="#appointments">Appointments</a></li>
+<li class="toc-l1"><a href="#awards">Grants, Fellowships, and Awards</a></li>
+<li class="toc-l1"><a href="#publications">Publications</a></li>
+<li class="toc-l2"><a href="#preprints">Preprints</a></li>
+<li class="toc-l2"><a href="#articles">Refereed journal articles</a></li>
+<li class="toc-l2"><a href="#proceedings">Proceedings and thesis</a></li>
+<li class="toc-l1"><a href="#teaching">Teaching</a></li>
+<li class="toc-l2"><a href="#teaching-vassar">Vassar College</a></li>
+<li class="toc-l2"><a href="#teaching-chicago">University of Chicago</a></li>
+<li class="toc-l2"><a href="#teaching-michigan">University of Michigan</a></li>
+<li class="toc-l1"><a href="#mentoring">Student Research and Mentoring</a></li>
+<li class="toc-l1"><a href="#service">Service and Organizing</a></li>
+<li class="toc-l1"><a href="#talks">Invited Talks</a></li>
+</ul>
+</nav>
 <main>
 <div class="head">
   <h1>Trevor Hyde</h1>
   <div class="t">Assistant Professor of Mathematics and Statistics</div>
   <div>Vassar College</div>
   <div class="c"><a href="mailto:thyde@vassar.edu">thyde@vassar.edu</a> &middot; <a href="https://tghyde.github.io/">tghyde.github.io</a> &middot; 403 Rockefeller Hall, 124 Raymond Ave, Poughkeepsie, NY 12604</div>
+  <div class="c"><a href="https://scholar.google.com/citations?user=mjTVg8UAAAAJ">Google Scholar</a> &middot; <a href="https://arxiv.org/search/?searchtype=author&query=Hyde%2C+Trevor">arXiv</a> &middot; <a href="https://orcid.org/0000-0002-9380-1928">ORCID</a> &middot; <a href="https://github.com/tghyde">GitHub</a></div>
 </div>
-<p class="actions"><a href="/cv/CV.pdf">Download as PDF</a></p>
+<p class="actions"><a class="btn" href="/cv/CV.pdf" download>Download PDF <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8.75 1h-1.5v7.1L4.9 5.75 3.85 6.8 8 10.95 12.15 6.8 11.1 5.75 8.75 8.1V1z"/><path d="M2.5 12.5h11V14h-11z"/></svg></a> <a class="btn" href="https://github.com/tghyde/tghyde.github.io/blob/main/cv/CV.tex">LaTeX source</a></p>
 
-<h2>Research Interests</h2>
-<p>Arithmetic dynamics, number theory, algebraic geometry, combinatorics, representation theory, and topology.</p>
+<h2 id="research">Research</h2>
+<p>I work in arithmetic dynamics and number theory, with excursions into algebraic geometry, combinatorics, representation theory, and topology. Recurring themes in my work include rational points in orbits, preperiodic points, and profinite iterated monodromy groups; the statistics of polynomial factorization over finite fields and their connection to the cohomology of configuration spaces; and explicit Galois theory. My recent work focuses on the arithmetic of absolute geometry.</p>
 
-<h2>Education</h2>
+<h2 id="computational">Computational and Formal Methods</h2>
+<ul class="dash">
+  <li><strong>Lean / formal verification.</strong> Designed and taught <em>Formalizing Mathematics</em> (Math 301, senior seminar, Spring 2025), an intensive course on the Lean 4 proof assistant (<a href="https://github.com/tghyde/math301spring2025">course repository</a>). Self-taught in Lean since 2024.</li>
+  <li><strong>AI tools in research.</strong> Exploring the use of AI tools in my research since late 2022; regular user of Claude, ChatGPT, and Gemini. Interested in alignment and safety of AI.</li>
+  <li><strong>Software projects.</strong> AI-assisted coding projects on <a href="https://github.com/tghyde">GitHub</a>, including <a href="https://github.com/tghyde/hwgenie">hwgenie</a> (bespoke course management software), <a href="https://github.com/tghyde/rowreducer">Row Reducer</a> (an interactive row-reduction practice tool with exact arithmetic), <a href="https://tghyde.github.io/Portalz/">Portalz</a> (visualization tool for exploring branched coverings of 3-manifolds), and <a href="https://github.com/tghyde/ricochet-solitaire">Ricochet Solitaire</a> (a solitaire version of the board game <em>Ricochet Robots</em>).</li>
+  <li><strong>Computer algebra and programming.</strong> SageMath and Python, for research computation (e.g. the <a href="https://github.com/tghyde/portrait_moduli_supplement">Sage notebook supplement</a> to publication 7 below) and for exploratory problem sets in number theory and linear algebra courses.</li>
+</ul>
+
+<h2 id="education">Education</h2>
 <table class="cv">
   <tr><td class="what"><strong>Ph.D.</strong>, Mathematics</td><td class="where">University of Michigan</td><td class="when">2019</td></tr>
   <tr><td class="note" colspan="3">Thesis: <em>Polynomial Statistics, Necklace Polynomials, and the Arithmetic Dynamical Mordell–Lang Conjecture</em></td></tr>
@@ -41,7 +75,7 @@
   <tr><td class="what"><strong>B.A.</strong>, Mathematics, <em>summa cum laude</em>, Phi Beta Kappa</td><td class="where">Amherst College</td><td class="when">2012</td></tr>
 </table>
 
-<h2>Appointments</h2>
+<h2 id="appointments">Appointments</h2>
 <table class="cv">
   <tr><td class="what">Assistant Professor of Mathematics and Statistics</td><td class="where">Vassar College</td><td class="when">2023–present</td></tr>
   <tr><td class="what">NSF Mathematical Sciences Postdoctoral Research Fellow</td><td class="where">University of Chicago</td><td class="when">2020–2023</td></tr>
@@ -49,7 +83,7 @@
   <tr><td class="what">Moss Quantitative Fellow</td><td class="where">Amherst College</td><td class="when">2012–2013</td></tr>
 </table>
 
-<h2>Grants, Fellowships, and Awards</h2>
+<h2 id="awards">Grants, Fellowships, and Awards</h2>
 <table class="cv">
   <tr><td class="what">AMS–Simons Research Enhancement Grant for PUI Faculty</td><td class="where">AMS / Simons Foundation</td><td class="when">2026–2029</td></tr>
   <tr><td class="what">NSF Mathematical Sciences Postdoctoral Research Fellowship (DMS-2002176)</td><td class="where">National Science Foundation</td><td class="when">2020–2023</td></tr>
@@ -62,16 +96,16 @@
   <tr><td class="what">Post-Baccalaureate Fellowship</td><td class="where">Amherst College</td><td class="when">2012</td></tr>
 </table>
 
-<h2>Publications</h2>
+<h2 id="publications">Publications</h2>
 <p class="small muted"><span class="ug">*</span> denotes an undergraduate coauthor at the time of the work.</p>
 
-<h3>Preprints</h3>
+<h3 id="preprints">Preprints</h3>
 <ol start="1">
   <li>The arithmetic of semirings part I: ideals, with J. Chen<span class="ug">*</span>, D. Laurens<span class="ug">*</span>, J. Piermarini<span class="ug">*</span>, and H. Simons<span class="ug">*</span>, submitted (2026), <a href="https://arxiv.org/abs/2607.10778">arXiv:2607.10778</a>.</li>
   <li>Rational orbits under correspondences, submitted (2026), <a href="https://arxiv.org/abs/2605.04391">arXiv:2605.04391</a>.</li>
 </ol>
 
-<h3>Refereed journal articles</h3>
+<h3 id="articles">Refereed journal articles</h3>
 <ol start="3">
   <li>Profinite iterated monodromy groups of unicritical polynomials, with O. Adams, to appear in <em>Algebra Number Theory</em> (2026), <a href="https://arxiv.org/abs/2504.13028">arXiv:2504.13028</a>.</li>
   <li>Polynomials with many rational preperiodic points, with J. R. Doyle, <em>Trans. Amer. Math. Soc.</em> <strong>378</strong> (2025), no. 8, 5981–6011, <a href="https://arxiv.org/abs/2201.11707">arXiv:2201.11707</a>.</li>
@@ -90,15 +124,15 @@
   <li>Pre-images in quadratic dynamical systems, with B. Hutz and B. Krause, <em>Involve</em> <strong>4</strong> (2011), no. 4, 343–363.</li>
 </ol>
 
-<h3>Conference proceedings and thesis</h3>
+<h3 id="proceedings">Conference proceedings and thesis</h3>
 <ol start="18">
   <li>Factorization statistics and the twisted Grothendieck–Lefschetz formula, extended abstract, <em>Sém. Lothar. Combin.</em> <strong>80B</strong> (2018), Art. 6 (FPSAC 2018).</li>
   <li>Arithmetic dynamical Mordell–Lang, and Noncommutative arithmetic dynamical Mordell–Lang, with M. Zieve, Chapters 5–6 of the author’s dissertation, University of Michigan (2019), <a href="https://deepblue.lib.umich.edu/handle/2027.42/151684">available on Deep Blue</a>.</li>
 </ol>
 
-<h2>Teaching</h2>
-<h3>Vassar College</h3>
-<ul>
+<h2 id="teaching">Teaching</h2>
+<h3 id="teaching-vassar">Vassar College</h3>
+<ul class="dash">
   <li>Math 261, Introduction to Number Theory: Fall 2023 (2 sections), Fall 2024 (2 sections), Spring 2025, Fall 2025 (2 sections)</li>
   <li>Math 361, Modern Algebra: Spring 2024, Fall 2024</li>
   <li>Math 331, Topics in Geometry: Fall 2025</li>
@@ -107,22 +141,22 @@
   <li>Math 399, Senior Independent Work: Galois Theory (3 students, Fall 2024); Advanced Algebra (1 student, Spring 2025); Category Theory (3 students, Fall 2025); Algebraic Number Theory (3 students), Computational Algebraic Geometry (1 student), and Topos Theory (1 student), Fall 2026</li>
   <li>On sabbatical leave, Spring 2026</li>
 </ul>
-<h3>University of Chicago</h3>
-<ul>
+<h3 id="teaching-chicago">University of Chicago</h3>
+<ul class="dash">
   <li>Math 161–162, Honors Calculus (inquiry-based learning): 2019–2020</li>
   <li>Math 202, Abstract Linear Algebra: Winter 2020</li>
   <li>Math 242, Algebraic Number Theory: Spring 2022</li>
   <li>Math 254, Group Theory: Winter 2022</li>
   <li>Math 255, Rings and Fields: Winter 2022, Spring 2023</li>
 </ul>
-<h3>University of Michigan</h3>
-<ul>
+<h3 id="teaching-michigan">University of Michigan</h3>
+<ul class="dash">
   <li>Math 116, Intermediate Calculus: seven semesters, 2014–2018; course co-coordinator, Winter 2018 (exams and assignments for 800+ students, 30+ instructors)</li>
   <li>Math 115, Introduction to Calculus: Fall 2013</li>
   <li>Math 215, Multivariable Calculus (lab instructor): Fall 2016</li>
 </ul>
 
-<h2>Student Research and Mentoring</h2>
+<h2 id="mentoring">Student Research and Mentoring</h2>
 <table class="cv">
   <tr><td class="what">URSI Mentor (Undergraduate Research Summer Institute)</td><td class="where">Vassar College</td><td class="when">2025</td></tr>
   <tr><td class="what">Directed Reading Program Mentor</td><td class="where">University of Chicago</td><td class="when">2021–2023</td></tr>
@@ -134,7 +168,7 @@
   <tr><td class="what">Ross Mathematics Program Counselor</td><td class="where">Ohio State University</td><td class="when">2013</td></tr>
 </table>
 
-<h2>Service and Organizing</h2>
+<h2 id="service">Service and Organizing</h2>
 <table class="cv">
   <tr><td class="what">Co-organizer, AMS Special Session on Arithmetic Dynamics</td><td class="where">Joint Math Meetings</td><td class="when">January 2027</td></tr>
   <tr><td class="what">Fellowship Committee</td><td class="where">Vassar College</td><td class="when">Fall 2026</td></tr>
@@ -151,8 +185,8 @@
 <p><strong>Referee for</strong> Proc. Amer. Math. Soc., Trans. Amer. Math. Soc., J. Théor. Nombres Bordeaux, New York J. Math., Finite Fields Appl., Int. J. Number Theory, Exp. Math., Proc. Roy. Soc. Edinburgh Sect. A, J. Combin. Theory Ser. A, Ergodic Theory Dynam. Systems, Int. Math. Res. Not. IMRN, Amer. Math. Monthly, Math. Intelligencer</p>
 <p><strong>Grant reviewer for</strong> the Israel Science Foundation (ISF) and the Austrian Science Fund (FWF)</p>
 
-<h2>Invited Talks</h2>
-<ul>
+<h2 id="talks">Invited Talks</h2>
+<ul class="dash">
   <li>Math Day Keynote Address, Colorado State University, November 2026 <em>(upcoming)</em></li>
   <li>Number Theory Seminar, Academia Sinica, Taiwan, May 2026</li>
   <li>Algebra Seminar, National Central University, Taiwan, May 2026</li>
@@ -190,12 +224,13 @@
   <li>Pi Day Colloquium, University of Connecticut, March 2013</li>
 </ul>
 
-<p class="small muted">Last updated September 2026. <a href="/cv/CV.pdf">PDF version</a>.</p>
+<p class="small muted">Last updated September 2026. <a href="/cv/CV.pdf">PDF version</a> &middot; <a href="https://github.com/tghyde/tghyde.github.io/blob/main/cv/CV.tex">LaTeX source</a>.</p>
 </main>
 
 <footer class="site">
   &copy; Trevor Hyde &middot; <a href="https://github.com/tghyde/tghyde.github.io">Site source</a>
 </footer>
 </div>
+<script src="/assets/site.js"></script>
 </body>
 </html>

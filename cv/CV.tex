@@ -1,5 +1,4 @@
-% CV_proposed.tex -- proposed redesign of CV.tex (self-contained; does not use cv.cls)
-% Lines marked "TODO" are items only you can fill in or confirm.
+% CV.tex -- Trevor Hyde, curriculum vitae. Edited via Overleaf (GitHub sync); cv/CV.pdf is rebuilt automatically on push.
 \documentclass[11pt,letterpaper]{article}
 
 % ---------- Fonts, encoding, typography ----------
@@ -11,7 +10,9 @@
 % ---------- Layout ----------
 \usepackage[left=0.9in,right=0.9in,top=0.75in,bottom=0.75in]{geometry}
 \usepackage{enumitem}
-\usepackage{tabularx}
+\usepackage{ltablex}   % tabularx that can break across pages (loads tabularx + longtable)
+\keepXColumns
+\setlength{\LTpre}{2pt}\setlength{\LTpost}{0pt}   % no extra space around breakable tables
 \usepackage{array}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
@@ -39,9 +40,7 @@
 % ---------- Helpers ----------
 % Three-column row: description | institution | dates. Column widths are fixed once here
 % so every table in the document lines up (no per-table \hspace hacks needed).
-\newenvironment{cvtable}
-  {\tabularx{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}}
-  {\endtabularx}
+% (With ltablex, tables are written out directly as tabularx so they can break across pages.)
 \newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:#1}}
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
 \newcommand{\ug}{$^{\ast}$}   % marks an undergraduate coauthor (see note under Publications)
@@ -59,34 +58,52 @@
     Vassar College\\[3pt]
     \href{mailto:thyde@vassar.edu}{thyde@vassar.edu}
     \ \textperiodcentered\ \href{https://pages.vassar.edu/thyde/}{pages.vassar.edu/thyde}
-    \ \textperiodcentered\ 403 Rockefeller Hall, 124 Raymond Ave, Poughkeepsie, NY 12604
+    \ \textperiodcentered\ 403 Rockefeller Hall, 124 Raymond Ave, Poughkeepsie, NY 12604\\[2pt]
+    \href{https://scholar.google.com/citations?user=mjTVg8UAAAAJ}{Google Scholar}
+    \ \textperiodcentered\ \href{https://arxiv.org/search/?searchtype=author&query=Hyde%2C+Trevor}{arXiv}
+    \ \textperiodcentered\ \href{https://orcid.org/0000-0002-9380-1928}{ORCID}
+    \ \textperiodcentered\ \href{https://github.com/tghyde}{GitHub}
 \end{center}
 
-% ---------- Research interests ----------
-\section{Research Interests}
-Arithmetic dynamics, number theory, algebraic geometry, combinatorics, representation theory, and topology.
+% ---------- Research summary ----------
+\section{Research}
+I work in arithmetic dynamics and number theory, with excursions into algebraic geometry, combinatorics, representation theory, and topology.
+Recurring themes in my work include rational points in orbits, preperiodic points, and profinite iterated monodromy groups; the statistics of polynomial factorization over finite fields and their connection to the cohomology of configuration spaces; and explicit Galois theory.
+My recent work focuses on the arithmetic of absolute geometry.
+
+% ---------- Computational and formal methods ----------
+\section{Computational and Formal Methods}
+\begin{itemize}
+    \item \textbf{Lean / formal verification.} Designed and taught \textit{Formalizing Mathematics} (Math 301, senior seminar, Spring 2025), an intensive course on the Lean 4 proof assistant (\href{https://github.com/tghyde/math301spring2025}{course repository}). Self-taught in Lean since 2024.
+    
+    \item \textbf{AI tools in research.} Exploring the use of AI tools in my research since late 2022; regular user of Claude, ChatGPT, and Gemini.
+    Interested in alignment and safety of AI.
+    
+    \item \textbf{Software projects.} AI-assisted coding projects on \href{https://github.com/tghyde}{GitHub}, including \href{https://github.com/tghyde/hwgenie}{hwgenie} (bespoke course management software), \href{https://github.com/tghyde/rowreducer}{Row Reducer} (an interactive row-reduction practice tool with exact arithmetic), \href{https://tghyde.github.io/Portalz/}{Portalz} (visualization tool for exploring branched coverings of 3-manifolds), and \href{https://github.com/tghyde/ricochet-solitaire}{Ricochet Solitaire} (a solitaire version of the board game \emph{Ricochet Robots}).
+    \item \textbf{Computer algebra and programming.} SageMath and Python, for research computation (e.g.\ the \href{https://github.com/tghyde/portrait_moduli_supplement}{Sage notebook supplement} to publication 7 below) and for exploratory problem sets in number theory and linear algebra courses.
+\end{itemize}
 
 % ---------- Education ----------
 \section{Education}
-\begin{cvtable}
+\begin{tabularx}{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}
     \textbf{Ph.D.}, Mathematics & University of Michigan & 2019\\
     \multicolumn{3}{@{}p{\textwidth}@{}}{\quad Thesis: \textit{Polynomial Statistics, Necklace Polynomials, and the Arithmetic Dynamical Mordell--Lang Conjecture}}\\
     \multicolumn{3}{@{}p{\textwidth}@{}}{\quad Advisors: Jeffrey Lagarias and Michael Zieve}\\[3pt]
     \textbf{B.A.}, Mathematics, \textit{summa cum laude}, Phi Beta Kappa & Amherst College & 2012
-\end{cvtable}
+\end{tabularx}
 
 % ---------- Appointments ----------
 \section{Appointments}
-\begin{cvtable}
+\begin{tabularx}{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}
     Assistant Professor of Mathematics and Statistics & Vassar College & 2023--present\\
     NSF Mathematical Sciences Postdoctoral Research Fellow & University of Chicago & 2020--2023\\
     L.\,E. Dickson Instructor & University of Chicago & 2019--2023\\
     Moss Quantitative Fellow & Amherst College & 2012--2013
-\end{cvtable}
+\end{tabularx}
 
 % ---------- Grants, fellowships, awards ----------
 \section{Grants, Fellowships, and Awards}
-\begin{cvtable}
+\begin{tabularx}{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}
     AMS--Simons Research Enhancement Grant for PUI Faculty & AMS / Simons Foundation & 2026--2029\\
     NSF Mathematical Sciences Postdoctoral Research Fellowship (DMS-2002176) & National Science Foundation & 2020--2023\\
     Swogger Award for Exemplary Classroom Teaching & University of Chicago & 2022\\
@@ -96,8 +113,7 @@ Arithmetic dynamics, number theory, algebraic geometry, combinatorics, represent
     Department of Mathematics Outstanding Teaching Award & University of Michigan & 2017\\
     Robert Breuch Thesis Prize & Amherst College & 2012\\
     Post-Baccalaureate Fellowship & Amherst College & 2012
-\end{cvtable}
-% TODO: any Vassar-internal grants (research or curricular), travel grants, or conference funding since 2023.
+\end{tabularx}
 
 % ---------- Publications ----------
 \section{Publications}
@@ -154,7 +170,6 @@ Arithmetic dynamics, number theory, algebraic geometry, combinatorics, represent
     \item Math 254, Group Theory: Winter 2022
     \item Math 255, Rings and Fields: Winter 2022, Spring 2023
 \end{itemize}
-\newpage % keeps the Michigan block together at the top of a page; remove if content shifts
 \subsection{University of Michigan}
 \begin{itemize}
     \item Math 116, Intermediate Calculus: seven semesters, 2014--2018; course co-coordinator, Winter 2018 (exams and assignments for 800+ students, 30+ instructors)
@@ -164,7 +179,7 @@ Arithmetic dynamics, number theory, algebraic geometry, combinatorics, represent
 
 % ---------- Mentoring ----------
 \section{Student Research and Mentoring}
-\begin{cvtable}
+\begin{tabularx}{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}
     URSI Mentor (Undergraduate Research Summer Institute) & Vassar College & 2025\\
     Directed Reading Program Mentor & University of Chicago & 2021--2023\\
     REU Mentor & University of Chicago & 2020--2022\\
@@ -173,11 +188,11 @@ Arithmetic dynamics, number theory, algebraic geometry, combinatorics, represent
     REU Mentor & University of Michigan & 2015\\
     Michigan Math and Science Scholars Instructor & University of Michigan & 2015\\
     Ross Mathematics Program Counselor & Ohio State University & 2013
-\end{cvtable}
+\end{tabularx}
 
 % ---------- Service ----------
 \section{Service and Organizing}
-\begin{cvtable}
+\begin{tabularx}{\textwidth}{@{}X p{1.7in} @{\hspace{4pt}} >{\raggedleft\arraybackslash}p{1.05in}@{}}
     Co-organizer, AMS Special Session on Arithmetic Dynamics & Joint Math Meetings & January 2027\\
     Fellowship Committee & Vassar College & Fall 2026\\
     Library Committee & Vassar College & Fall 2025\\
@@ -191,7 +206,7 @@ Arithmetic dynamics, number theory, algebraic geometry, combinatorics, represent
     Organizer, Student Representation Theory Seminar & University of Michigan & 2018\\[2pt]
     \multicolumn{3}{@{}p{\textwidth}@{}}{\textbf{Referee for} Proc.\ Amer.\ Math.\ Soc., Trans.\ Amer.\ Math.\ Soc., J.\ Th\'eor.\ Nombres Bordeaux, New York J.\ Math., Finite Fields Appl., Int.\ J.\ Number Theory, Exp.\ Math., Proc.\ Roy.\ Soc.\ Edinburgh Sect.\ A, J.\ Combin.\ Theory Ser.\ A, Ergodic Theory Dynam.\ Systems, Int.\ Math.\ Res.\ Not.\ IMRN, Amer.\ Math.\ Monthly, Math.\ Intelligencer}\\
     \multicolumn{3}{@{}p{\textwidth}@{}}{\textbf{Grant reviewer for} the Israel Science Foundation (ISF) and the Austrian Science Fund (FWF)}
-\end{cvtable}
+\end{tabularx}
 
 % ---------- Talks ----------
 \section{Invited Talks}
