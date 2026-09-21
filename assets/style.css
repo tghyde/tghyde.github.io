@@ -151,9 +151,14 @@ footer.site a:hover { background: var(--hover-bg); }
 .contact { list-style: none; padding: 0; margin: 1.25rem 0 0; font-family: var(--sans); font-size: 0.92rem; }
 .contact li { margin-bottom: 0.3rem; }
 .contact .k { display: inline-block; min-width: 4.2rem; color: var(--muted); }
+.hero .aside { display: flex; flex-direction: column; gap: .9rem; }
+.hero .aside .links { flex-direction: column; align-items: stretch; margin: 0; }
+.hero .aside .links a { justify-content: center; }
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; }
+  .hero .aside { display: contents; }
   .hero .photo { width: 180px; order: -1; }
+  .hero .aside .links { order: 1; flex-direction: row; margin-top: .25rem; }
 }
 
 /* Publication and talk lists */
@@ -200,8 +205,8 @@ table.cv td.note { padding-left: 1.5rem; }
 .cv ol { padding-left: 1.6rem; }
 .cv ol li { margin-bottom: 0.4rem; }
 .cv ul.dash { list-style: none; padding-left: 0; }
-.cv ul.dash li { padding-left: 1rem; text-indent: -1rem; margin-bottom: 0.3rem; }
-.cv ul.dash li::before { content: "– "; color: var(--muted); }
+.cv ul.dash li { padding-left: 1.1rem; text-indent: -1.1rem; margin-bottom: 0.3rem; }
+.cv ul.dash li::before { content: "\25AA"; color: var(--muted); font-size: .7em; position: relative; top: -.1em; margin-right: .55em; }
 .cv .ug { color: var(--accent); }
 
 /* Sticky bar that slides in after scrolling (hwGenie "scrollbar") */
