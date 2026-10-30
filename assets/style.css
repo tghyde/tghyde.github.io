@@ -185,6 +185,12 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note { margin-bottom: 2.5rem; }
 .note .meta { font-family: var(--sans); font-size: 0.88rem; color: var(--muted); margin: -0.4rem 0 0.9rem; }
 .note .links { margin-top: 0.9rem; }
+.note .body { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: 1.5rem; align-items: center; }
+.note .body img { width: 100%; height: auto; }
+@media (max-width: 560px) {
+  .note .body { grid-template-columns: 1fr; gap: 0.5rem; }
+  .note .body img { width: 12rem; justify-self: center; }
+}
 
 /* Resources */
 .toc-inline { font-family: var(--sans); font-size: 0.9rem; columns: 2; column-gap: 2rem; }
