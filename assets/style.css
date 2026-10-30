@@ -184,7 +184,9 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 /* Notes */
 .note { margin-bottom: 2.5rem; }
 .note .meta { font-family: var(--sans); font-size: 0.88rem; color: var(--muted); margin: -0.4rem 0 0.9rem; }
-.note .links { margin-top: 0.9rem; }
+.note .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.2rem; margin: 2.25rem 0 0.9rem; }
+.note .head h2 { border: 0; padding: 0; margin: 0; }
+.note .head .btn { flex-shrink: 0; }
 .note .body { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: 1.5rem; align-items: center; }
 .note .body img { width: 100%; height: auto; }
 @media (max-width: 560px) {
