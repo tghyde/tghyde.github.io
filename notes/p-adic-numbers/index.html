@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Down the Rabbit Hole: An Introduction to p-adic Numbers</title>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ===================== Title ===================== -->
+    <section class="title-slide">
+      <div class="title-text">
+        <h1>Down the Rabbit Hole</h1>
+        <div class="sub">An introduction to $p$-adic numbers</div>
+        <div class="byline">
+          <div class="name">Trevor Hyde</div>
+          <div class="aff">Assistant Professor of Mathematics <span class="amp">&amp;</span> Statistics<br>Vassar College</div>
+        </div>
+      </div>
+      <img class="cutout cat" src="figs/cat2.svg" alt="The Cheshire Cat, reclining and pointing at the title">
+    </section>
+
+    <!-- ===================== Decimal expansions ===================== -->
+
+    <section data-pi-slide>
+      <h2>Decimal expansions</h2>
+      <p>Every real number can be expressed by a decimal expansion.</p>
+      <div class="pi-expand hidden2" id="pi-expand"></div>
+      <span class="fragment" data-fragment-index="1" data-pi-go></span>
+      <div class="slide2-rest">
+        <div>
+          <p class="fragment" data-fragment-index="2">Most numbers have a <em>unique</em> expansion, but some have two different expansions:</p>
+          <div class="fragment huge-math" data-fragment-index="2">\[ 0.999999999\ldots \;=\; 1.000000000\ldots \]</div>
+          <div class="fragment big-q" data-fragment-index="2">Why?</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 0.999... = 1 proof (animated derivation) ===================== -->
+    <section data-eqsteps="nines" data-numberline>
+      <h2>Why is $0.99999\ldots = 1$?</h2>
+      <div class="eqstack"></div>
+      <span class="fragment eqstep" data-fragment-index="1" data-eqstep="1"></span>
+      <span class="fragment eqstep" data-fragment-index="2" data-eqstep="2"></span>
+      <span class="fragment eqstep" data-fragment-index="3" data-eqstep="3"></span>
+      <span class="fragment eqstep" data-fragment-index="4" data-eqstep="4"></span>
+      <span class="fragment eqstep" data-fragment-index="5" data-eqstep="5"></span>
+      <!-- then the picture: a number line that zooms in on 1 -->
+      <div class="fragment nl-wrap" data-fragment-index="6">
+        <div class="numberline" id="numberline">
+          <div class="nl-limit fragment" data-fragment-index="12">$0.999999\ldots = 1$</div>
+        </div>
+        <div class="nl-eq">
+          <span class="eq on" data-level="0">$1 - 0.9 = 0.1$</span>
+          <span class="eq" data-level="1">$1 - 0.99 = 0.01$</span>
+          <span class="eq" data-level="2">$1 - 0.999 = 0.001$</span>
+          <span class="eq" data-level="3">$1 - 0.9999 = 0.0001$</span>
+          <span class="eq" data-level="4">$1 - 0.99999 = 0.00001$</span>
+          <span class="eq" data-level="5">$1 - 0.999999 = 0.000001$</span>
+          <span class="eq lim">$1 - 0.999999\ldots = 0.000000\ldots$</span>
+        </div>
+      </div>
+      <span class="zoom-ctrl fragment" data-zoom="1" data-fragment-index="7"></span>
+      <!-- one click: zoom on through 0.999, 0.9999, 0.99999, 0.999999, then the limit -->
+      <span class="zoom-ctrl fragment" data-zoom="2" data-fragment-index="8" data-auto="2300"></span>
+      <span class="zoom-ctrl fragment" data-zoom="3" data-fragment-index="9" data-auto="2300"></span>
+      <span class="zoom-ctrl fragment" data-zoom="4" data-fragment-index="10" data-auto="2300"></span>
+      <span class="zoom-ctrl fragment" data-zoom="5" data-fragment-index="11" data-auto="2400"></span>
+    </section>
+
+    <!-- ===================== Through the looking glass ===================== -->
+    <section class="looking-glass">
+      <h2>Through the looking glass</h2>
+      <div class="lg-text">
+        <p>We are quite comfortable with numbers that carry on forever to the <em>right</em> of the decimal point. But have you ever considered numbers that carry on forever to the <em>left</em>?</p>
+        <div class="huge-math">\[ \ldots 64832397985356295141.3 \;=\; \vas{\textbf{???}} \]</div>
+        <p>This seems crazy, but let's see where the idea takes us.</p>
+        <p class="fragment" data-fragment-index="1">First, let's try to figure out the value of</p>
+        <div class="fragment huge-math" data-fragment-index="1">\[ x = \ldots 999999999. \]</div>
+      </div>
+      <img class="cutout alice" src="figs/alice.svg" alt="Alice, thinking">
+    </section>
+
+    <!-- ===================== What is ...99999? (animated derivation) ===================== -->
+    <section data-eqsteps="tenadic" class="tenadic">
+      <h2>What is $\ldots 99999$?</h2>
+      <div class="eqstack"></div>
+      <span class="fragment eqstep" data-fragment-index="1" data-eqstep="1"></span>
+      <span class="fragment eqstep" data-fragment-index="2" data-eqstep="2"></span>
+      <span class="fragment eqstep" data-fragment-index="3" data-eqstep="3"></span>
+      <span class="fragment eqstep" data-fragment-index="4" data-eqstep="4"></span>
+      <span class="fragment eqstep" data-fragment-index="5" data-eqstep="5" data-auto="3000"></span>
+      <div class="fragment conclusion huge-math" data-fragment-index="6">\[ \ldots 99999 \mathrel{\overset{\vas{?}}{=}} -1 \]</div>
+      <img class="cutout hatter" src="figs/madhatter.svg" alt="The Mad Hatter, facing the calculation">
+    </section>
+
+    <!-- ===================== Addition, one step per click ===================== -->
+    <section>
+      <h2>But that would imply…</h2>
+      <div class="addition-wrap">
+        <div style="text-align:center">
+          <div class="addition" aria-label="Adding 1 to ...99999, column by column">
+            <!-- column highlights (custom fragments, only shown while current) -->
+            <span class="colhl fragment custom" data-fragment-index="1" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="2" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="3" data-auto="1000" style="left: calc(.6em + 4*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="4" data-auto="1000" style="left: calc(.6em + 3*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="5" data-auto="1000" style="left: calc(.6em + 2*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="6" data-auto="1300" style="left: calc(.6em + 1*1.15em)"></span>
+            <!-- carries -->
+            <span class="carry"></span>
+            <span class="carry fragment" data-fragment-index="5">1</span>
+            <span class="carry fragment" data-fragment-index="4">1</span>
+            <span class="carry fragment" data-fragment-index="3">1</span>
+            <span class="carry fragment" data-fragment-index="2">1</span>
+            <span class="carry fragment" data-fragment-index="1">1</span>
+            <span class="carry"></span>
+            <!-- x -->
+            <span class="op"></span><span class="dots">⋯</span><span>9</span><span>9</span><span>9</span><span>9</span><span>9</span>
+            <!-- + 1 -->
+            <span class="op">+</span><span></span><span></span><span></span><span></span><span></span><span>1</span>
+            <div class="rule"></div>
+            <!-- result -->
+            <span class="op"></span>
+            <span class="res dots fragment" data-fragment-index="6">⋯</span>
+            <span class="res fragment" data-fragment-index="5">0</span>
+            <span class="res fragment" data-fragment-index="4">0</span>
+            <span class="res fragment" data-fragment-index="3">0</span>
+            <span class="res fragment" data-fragment-index="2">0</span>
+            <span class="res fragment" data-fragment-index="1">0</span>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="intro"><div>If $\ldots 99999 = -1$, then that would imply that $\ldots 99999 + 1 = 0$, which seems absurd, but...</div></div>
+          <div class="step-area">
+          <div class="step fragment custom" data-fragment-index="1">
+            <div class="what">Rightmost column</div>
+            <div class="calc">\[ 9 + 1 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="2">
+            <div class="what">Next column</div>
+            <div class="calc">\[ \pink{1} + 9 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="3">
+            <div class="what">Next column</div>
+            <div class="calc">\[ \pink{1} + 9 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="4">
+            <div class="what">Next column</div>
+            <div class="calc">\[ \pink{1} + 9 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="5">
+            <div class="what">Next column</div>
+            <div class="calc">\[ \pink{1} + 9 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="6">
+            <div class="what">And the next, and the next…</div>
+            <div class="calc">\[ \pink{1} + 9 = 10 \]</div>
+            <div>Every column gives a <span class="vas"><b>0</b></span> and passes the <span class="pink"><b>1</b></span> along. It never comes back down.</div>
+          </div>
+        </div
+          </div>
+        </div>
+      <p class="fragment lead after-sum" data-fragment-index="7">It appears that $\ldots 99999 + 1 = 0$ works out after all!</p>
+    </section>
+
+    <!-- ===================== Multiplication: ...99999 squared ===================== -->
+    <section class="mulslide">
+      <h2>But what about multiplication?</h2>
+      <div class="mul-wrap">
+        <div class="steps">
+          <div class="intro"><div>We saw that $\ldots 99999 = -1$ was consistent with addition. But what about multiplication? For example, we know that $(-1)^2 = 1$. But what does $(\ldots 99999)^2$ work out to be?</div></div>
+          <div class="step-area">
+          <div class="step fragment custom" data-fragment-index="1">
+            <div class="what">Rightmost digit × first number: units column</div>
+            <div class="calc">\[ 9 \times 9 = 81 \]</div>
+            <div>Write down <span class="vas"><b>1</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="2">
+            <div class="what">Next column (tens)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="3">
+            <div class="what">Next column (hundreds)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="4">
+            <div class="what">Next column (thousands)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="5">
+            <div class="what">Next column (ten-thousands)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="6">
+            <div class="what">…and on it goes</div>
+            <div class="calc">\[ 9 \times \ldots 99999 = \ldots 99991 \]</div>
+            <div>Every further column gives a <span class="vas"><b>9</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="7">
+            <div class="what">Second digit × first number, shifted one place: tens column</div>
+            <div class="calc">\[ 9 \times 9 = 81 \]</div>
+            <div>Write down <span class="vas"><b>1</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="8">
+            <div class="what">Next column (hundreds)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="9">
+            <div class="what">Next column (thousands)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="10">
+            <div class="what">Next column (ten-thousands)</div>
+            <div class="calc">\[ 9 \times 9 + \pink{8} = 89 \]</div>
+            <div>Write down <span class="vas"><b>9</b></span>, carry the <span class="pink"><b>8</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="11">
+            <div class="what">…and on it goes</div>
+            <div class="calc">\[ 9 \times \ldots 99999 = \ldots 99991 \]</div>
+            <div>The same row again, shifted one place to the left.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="12">
+            <div class="what">A pattern emerges</div>
+            <div>Every digit of the second number gives the same row, each one shifted one more place to the left. Now we add the columns.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="13">
+            <div class="what">Units column</div>
+            <div class="calc">\[ 1 \]</div>
+            <div>Just a <span class="vas"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="14">
+            <div class="what">Tens column</div>
+            <div class="calc">\[ 9 + 1 = 10 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>1</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="15">
+            <div class="what">Hundreds column</div>
+            <div class="calc">\[ 9 + 9 + 1 + \pink{1} = 20 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>2</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="16">
+            <div class="what">Thousands column</div>
+            <div class="calc">\[ 9 + 9 + 9 + 1 + \pink{2} = 30 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>3</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="17">
+            <div class="what">Ten-thousands column</div>
+            <div class="calc">\[ 9 + 9 + 9 + 9 + 1 + \pink{3} = 40 \]</div>
+            <div>Write down <span class="vas"><b>0</b></span>, carry the <span class="pink"><b>4</b></span>.</div>
+          </div>
+          <div class="step fragment custom" data-fragment-index="18">
+            <div class="what">And every column after that…</div>
+            <div class="calc">\[ \underbrace{9 + \cdots + 9}_{k} + 1 + \pink{(k-1)} = 10k \]</div>
+            <div>Always a multiple of 10: write down <span class="vas"><b>0</b></span>, carry on.</div>
+          </div>
+          </div>
+          <p class="fragment lead after-mul" data-fragment-index="18">So $(\ldots 99999)^2 = \ldots 00001 = 1$, just as $(-1)^2 = 1$.</p>
+        </div>
+        <div style="text-align:center">
+          <div class="addition mul" aria-label="Multiplying ...99999 by ...99999, digit by digit">
+            <span class="mulhl mult multA fragment custom" data-fragment-index="1" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="mulhl mult multB fragment custom" data-fragment-index="7" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="1" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="2" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="3" data-auto="850" style="left: calc(.6em + 4*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="4" data-auto="850" style="left: calc(.6em + 3*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="5" data-auto="850" style="left: calc(.6em + 2*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="6" style="left: calc(.6em + 1*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="7" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="8" data-auto="850" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="9" data-auto="850" style="left: calc(.6em + 4*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="10" data-auto="850" style="left: calc(.6em + 3*1.15em)"></span>
+            <span class="mulhl digit fragment custom" data-fragment-index="11" style="left: calc(.6em + 2*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="13" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="14" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="15" style="left: calc(.6em + 4*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="16" style="left: calc(.6em + 3*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="17" style="left: calc(.6em + 2*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="18" style="left: calc(.6em + 1*1.15em)"></span>
+            <!-- carries while forming each partial product -->
+            <span class="carry"></span><span class="stack2"><span class="fragment carry carryA" data-fragment-index="5">8</span></span><span class="stack2"><span class="fragment carry carryA" data-fragment-index="4">8</span><span class="fragment carry carryB" data-fragment-index="10">8</span></span><span class="stack2"><span class="fragment carry carryA" data-fragment-index="3">8</span><span class="fragment carry carryB" data-fragment-index="9">8</span></span><span class="stack2"><span class="fragment carry carryA" data-fragment-index="2">8</span><span class="fragment carry carryB" data-fragment-index="8">8</span></span><span class="stack2"><span class="fragment carry carryA" data-fragment-index="1">8</span><span class="fragment carry carryB" data-fragment-index="7">8</span></span><span class="carry"></span>
+            <!-- …99999 -->
+            <span class="op"></span><span class="dots">⋯</span><span>9</span><span>9</span><span>9</span><span>9</span><span>9</span>
+            <!-- × …99999 -->
+            <span class="op">×</span><span class="dots">⋯</span><span class="mdig">9</span><span class="mdig">9</span><span class="mdig">9</span><span class="mdig">9</span><span class="mdig">9</span>
+            <div class="rule"></div>
+            <!-- carries of the final addition -->
+            <span class="carry"></span><span class="fragment carry carryS" data-fragment-index="17">4</span><span class="fragment carry carryS" data-fragment-index="16">3</span><span class="fragment carry carryS" data-fragment-index="15">2</span><span class="fragment carry carryS" data-fragment-index="14">1</span><span class="carry"></span><span class="carry"></span>
+            <!-- row 0: 9 × …99999 = …99991 -->
+            <span class="op"></span><span class="fragment pp dots" data-fragment-index="6">⋯</span><span class="fragment pp" data-fragment-index="5">9</span><span class="fragment pp" data-fragment-index="4">9</span><span class="fragment pp" data-fragment-index="3">9</span><span class="fragment pp" data-fragment-index="2">9</span><span class="fragment pp" data-fragment-index="1">1</span>
+            <!-- row 1: shifted one place -->
+            <span class="op"></span><span class="fragment pp dots" data-fragment-index="11">⋯</span><span class="fragment pp" data-fragment-index="10">9</span><span class="fragment pp" data-fragment-index="9">9</span><span class="fragment pp" data-fragment-index="8">9</span><span class="fragment pp ppB" data-fragment-index="7">1</span><span></span>
+            <!-- row 2 (rows 2-4, the dots and the rule are filled in by main.js: MulRows) -->
+            <span class="op"></span><span class="pp dots mrow" data-r="2" data-c="3">⋯</span><span class="pp mrow" data-r="2" data-c="2">9</span><span class="pp mrow" data-r="2" data-c="1">9</span><span class="pp mrow" data-r="2" data-c="0">1</span><span></span><span></span>
+            <!-- row 3 -->
+            <span class="op"></span><span class="pp dots mrow" data-r="3" data-c="2">⋯</span><span class="pp mrow" data-r="3" data-c="1">9</span><span class="pp mrow" data-r="3" data-c="0">1</span><span></span><span></span><span></span>
+            <!-- row 4 -->
+            <span class="op"></span><span class="pp dots mrow" data-r="4" data-c="1">⋯</span><span class="pp mrow" data-r="4" data-c="0">1</span><span></span><span></span><span></span><span></span>
+            <!-- and so on -->
+            <span class="op"></span><span class="pp dots vdots mrow" data-r="v">⋮</span><span></span><span></span><span></span><span></span><span></span>
+            <div class="rule mrule"></div>
+            <!-- the product -->
+            <span class="op"></span><span class="fragment res dots" data-fragment-index="18">⋯</span><span class="fragment res" data-fragment-index="17">0</span><span class="fragment res" data-fragment-index="16">0</span><span class="fragment res" data-fragment-index="15">0</span><span class="fragment res" data-fragment-index="14">0</span><span class="fragment res" data-fragment-index="13">1</span>
+          </div>
+          <span class="fragment mulrows-go" data-fragment-index="12" data-mulrows-go></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== What's going on? ===================== -->
+    <section class="going-on">
+      <h2>What's going on here???</h2>
+      <p class="lead center-text">Common sense tells us that $\ldots 99999$ is <em>not</em> a number.</p>
+      <div class="center-text"><img class="cutout" src="figs/cat.png" alt="The Cheshire Cat, fading" style="max-height: 460px;"></div>
+      <p class="lead center-text">…but these “proofs” that $\ldots 99999 = -1$ make it feel like there's <span class="vas">something there</span>.</p>
+    </section>
+
+    <!-- ===================== Two options ===================== -->
+    <section class="photo-slide" data-state="on-photo" data-background-image="figs/down.jpg" data-background-size="cover">
+      <div class="overlay">
+        <h2>Two options</h2>
+        <ol>
+          <li>Shrug your shoulders. Write this off as a curiosity and never think about this again.</li>
+          <li class="fragment">Keep an open mind. Embrace the mystery of the unknown. <b>Follow me down this rabbit hole.</b></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== Hensel ===================== -->
+    <section>
+      <h2>Dr. Hensel's wonderful numbers</h2>
+      <div class="cols c-7-3 top">
+        <div>
+          \[\begin{aligned}
+            x &= \ldots \vas{8424731}\\
+              &= \cdots + \vas{8}\cdot 10^5 + \vas{4}\cdot 10^4 + \vas{2}\cdot 10^3 + \vas{7}\cdot 10^2 + \vas{3}\cdot 10 + \vas{1}.
+          \end{aligned}\]
+          <p>The main objection to $x$ being a number is that this sum clearly does not converge to a <span class="vas">real number</span>.</p>
+          <p>In 1897, Kurt Hensel discovered that we can build a rigorous mathematical theory of an <span class="vas">alternate numerical universe</span> in which infinite sums like this <em>do</em> converge:</p>
+          <div class="huge-math">\[ \text{The } \vas{\text{10-adic numbers}}\ \ZZ_{10}. \]</div>
+        </div>
+        <figure class="hensel">
+          <img class="photo" src="figs/hensel.jpeg" alt="Portrait of Kurt Hensel">
+          <figcaption>Kurt Hensel (1861–1941)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== Z_10 ===================== -->
+    <section>
+      <h2>The 10-adic numbers $\ZZ_{10}$</h2>
+      <p>A <span class="vas">10-adic number</span> is an expression of the form</p>
+      \[ \cdots + \vas{a_4}10^4 + \vas{a_3}10^3 + \vas{a_2}10^2 + \vas{a_1}10 + \vas{a_0} \]
+      <p>with digits $a_i$ satisfying $0 \leq a_i \leq 9$. We write $\ldots \vas{a_4a_3a_2a_1a_0}$ as a shorthand.</p>
+      <p>Addition and multiplication work just like you would expect.</p>
+      <div class="callout">
+        <span class="label">Key observation</span>
+        <p>If $\vas{a}$ and $\vas{b}$ are 10-adic numbers, then the $n$th digit of $\vas{a + b}$ or $\vas{a\cdot b}$ only depends on the $k$th digits of $\vas{a}$ and $\vas{b}$ with $k \leq n$.</p>
+      </div>
+      <div class="ex-wrap">
+        <div class="addition ex">
+          <span class="op"></span><span class="dots">⋯</span><span class="">4</span><span class="">7</span><span class="">2</span><span class="">9</span><span class="">3</span><span class="">8</span>
+          <span class="op">+</span><span class="dots">⋯</span><span class="">8</span><span class="">5</span><span class="">1</span><span class="">6</span><span class="">4</span><span class="">7</span>
+          <div class="rule"></div>
+          <span class="op"></span><span class="dots">⋯</span><span class="res">3</span><span class="res">2</span><span class="res">4</span><span class="res">5</span><span class="res">8</span><span class="res">5</span>
+        </div>
+        <div class="addition ex">
+          <span class="op"></span><span class="dots">⋯</span><span class="">4</span><span class="">7</span><span class="">2</span><span class="">9</span><span class="">3</span><span class="">8</span>
+          <span class="op">×</span><span class="dots">⋯</span><span class="">8</span><span class="">5</span><span class="">1</span><span class="">6</span><span class="">4</span><span class="">7</span>
+          <div class="rule"></div>
+          <span class="op"></span><span class="dots">⋯</span><span class="res">2</span><span class="res">2</span><span class="res">8</span><span class="res">8</span><span class="res">8</span><span class="res">6</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Subtraction ===================== -->
+    <section>
+      <h2>What about subtraction?</h2>
+      <p>Addition and multiplication work in the familiar way, but what about subtraction?</p>
+      <ul>
+        <li>Subtraction is just addition with negatives: \(\,\, a - b = a + (-b). \)</li>
+        <li class="with-card"><span>So, how do negatives work? \( -(\ldots 5429831) = \vas{\textbf{???}} \)</span>
+        </li>
+      </ul>
+      <div class="neg-check fragment" data-fragment-index="3">
+        <div class="chk-label">Check: do they really add up to zero?</div>
+        <div class="addition chk" aria-label="Adding ...5429831 and ...4570169 column by column">
+            <span class="colhl fragment custom" data-fragment-index="4" style="left: calc(.6em + 8*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="5" style="left: calc(.6em + 7*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="6" data-auto="600" style="left: calc(.6em + 6*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="7" data-auto="600" style="left: calc(.6em + 5*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="8" data-auto="600" style="left: calc(.6em + 4*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="9" data-auto="600" style="left: calc(.6em + 3*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="10" data-auto="600" style="left: calc(.6em + 2*1.15em)"></span>
+            <span class="colhl fragment custom" data-fragment-index="11" data-auto="900" style="left: calc(.6em + 1*1.15em)"></span>
+            <span class="carry"></span><span class="fragment carry" data-fragment-index="10">1</span><span class="fragment carry" data-fragment-index="9">1</span><span class="fragment carry" data-fragment-index="8">1</span><span class="fragment carry" data-fragment-index="7">1</span><span class="fragment carry" data-fragment-index="6">1</span><span class="fragment carry" data-fragment-index="5">1</span><span class="fragment carry" data-fragment-index="4">1</span><span class="carry"></span>
+            <span class="op"></span><span class="dots">⋯</span><span>5</span><span>4</span><span>2</span><span>9</span><span>8</span><span>3</span><span>1</span>
+            <span class="op">+</span><span class="dots">⋯</span><span>4</span><span>5</span><span>7</span><span>0</span><span>1</span><span>6</span><span>9</span>
+            <div class="rule"></div>
+            <span class="op"></span><span class="fragment res dots" data-fragment-index="11">⋯</span><span class="fragment res" data-fragment-index="10">0</span><span class="fragment res" data-fragment-index="9">0</span><span class="fragment res" data-fragment-index="8">0</span><span class="fragment res" data-fragment-index="7">0</span><span class="fragment res" data-fragment-index="6">0</span><span class="fragment res" data-fragment-index="5">0</span><span class="fragment res" data-fragment-index="4">0</span>
+        </div>
+      </div>
+      <div class="callout question fragment neg-question" data-fragment-index="12">
+        <span class="label">Question</span>
+        <p>Can you see the shortcut for calculating the negative of a 10-adic number?</p>
+      </div>
+      <div class="callout fragment recall eq-side" data-fragment-index="1"><span class="label">Recall</span><p>$-1 = \ldots 99999$</p></div>
+      <div class="neg-steps">
+      \[\begin{aligned}
+        \htmlData{fragment-index=1}{-(\ldots 5429831)} &\htmlData{fragment-index=1}{{}= (-1)(\ldots 5429831)} \\
+        &\htmlData{fragment-index=2}{{}= (\ldots 99999)(\ldots 5429831)} \\
+        &\htmlData{fragment-index=3}{{}= \ldots 4570169}
+      \end{aligned}\]
+      </div>
+    </section>
+
+    <!-- ===================== Periodic numbers ===================== -->
+    <!-- ===================== Hidden fractions: x = ...090909 ===================== -->
+    <section data-eqsteps="elevenths" class="elevenths">
+      <h2>What other familiar numbers are hiding in $\ZZ_{10}$?</h2>
+      <p>Consider the following 10-adic number with repeating digits,</p>
+      <div class="eqstack"></div>
+      <p class="fragment trick" data-fragment-index="1">We can use the same trick we used on $\ldots 99999$ to solve for $x$.</p>
+      <span class="fragment eqstep" data-fragment-index="2" data-eqstep="1"></span>
+      <span class="fragment eqstep" data-fragment-index="3" data-eqstep="2"></span>
+      <span class="fragment eqstep" data-fragment-index="4" data-eqstep="3"></span>
+      <span class="fragment eqstep" data-fragment-index="5" data-eqstep="4"></span>
+      <span class="fragment eqstep" data-fragment-index="6" data-eqstep="5" data-auto="4600"></span>
+      <p class="fragment lead punch" data-fragment-index="7">So $-\tfrac{1}{11}$ is a 10-adic number.<br><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><b>Some fractions live in $\ZZ_{10}$ too!</b></p>
+      <div class="callout question fragment frac-question" data-fragment-index="7">
+        <span class="label">Question</span>
+        <p>For which 10-adic numbers $n$ is $\tfrac{1}{n}$ also 10-adic?</p>
+        <p class="hint hooked"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>I claim $\tfrac{1}{5}$ does <em>not</em> belong to $\ZZ_{10}$.</span></p>
+      </div>
+    </section>
+
+    <!-- ===================== Powers ===================== -->
+    <section class="powers">
+      <h2>Powers</h2>
+      <p>Some sequences of integers which obviously diverge in the real numbers $\RR$ turn out to converge in $\ZZ_{10}$.</p>
+      <div class="cols top">
+        <div>
+          <table id="powers-table"><thead><tr><th class="num">$2^{5^n}$</th><th class="n">$n$</th></tr></thead><tbody></tbody></table>
+          <span class="fragment powers-go" data-fragment-index="1" data-powers-go data-auto="6500"></span>
+        </div>
+        <div>
+          <p class="fragment" data-fragment-index="2">The digits are <span class="vas">stabilizing from the right</span>.</p>
+          <p class="fragment hooked" data-fragment-index="2"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>The sequence $2^{5^n}$ converges to a limit in $\ZZ_{10}$!</span></p>
+          <div class="callout question fragment" data-fragment-index="2">
+            <span class="label">Question</span>
+            <p>What is this limit $b = \lim_{n\to\infty} 2^{5^n}$?</p>
+          </div>
+          <div class="fragment limit-calc" data-fragment-index="3">
+            \[ b^5 = \Big(\lim_{n\to\infty} 2^{5^n}\Big)^5 \htmlData{fragment-index=4}{{}= \lim_{n\to\infty} 2^{5^{n+1}}} \htmlData{fragment-index=5}{{}= b,} \]
+            <div class="fragment concl" data-fragment-index="5">
+              <p>so $b = \ldots 879186432$ is a solution of the equation</p>
+              \[ \vas{x^5 = x}. \]
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Mysterious limit ===================== -->
+    <section data-eqsteps="mystery" class="mystery">
+      <h2>Mysterious limit</h2>
+      <div class="mys-cols">
+        <div class="mys-left">
+          <p>Recall that $b = \lim_{n\to\infty} 2^{5^n} = \ldots 879186432$ is a solution of</p>
+          <div class="eqstack"></div>
+          <span class="fragment eqstep" data-fragment-index="1" data-eqstep="1"></span>
+          <span class="fragment eqstep" data-fragment-index="2" data-eqstep="2"></span>
+          <span class="fragment eqstep" data-fragment-index="3" data-eqstep="3"></span>
+          <span class="fragment eqstep" data-fragment-index="4" data-eqstep="4"></span>
+          <p class="fragment" data-fragment-index="4">Thus $b$ must be a root of one of these factors.</p>
+          <p class="fragment hooked" data-fragment-index="5"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>$b \neq 0, \pm 1$, so $b$ must be a root of $x^2 + 1$.</span></p>
+          <div class="fragment b2" data-fragment-index="6">\[ \text{But } b^2 + 1 = \ldots 212890625 \neq 0 \]</div>
+          <p class="fragment huh" data-fragment-index="6">Huh?</p>
+        </div>
+        <div class="mys-right">
+          <p class="fragment" data-fragment-index="7">Consider the product $\,b(b^2 + 1)$.</p>
+          <div class="fragment bprod-wrap" data-fragment-index="7">
+            <div class="addition bprod" id="bprod" aria-label="Multiplying ...212890625 by ...879186432"></div>
+            <div class="bprod-after">\[ \begin{gathered} b(b^2 + 1) = 0 \\ b,\; b^2 + 1 \neq 0 \end{gathered} \]</div>
+          </div>
+          <span class="fragment bprod-go" data-fragment-index="8" data-bprod-go></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Powers II (hidden for now: remove data-visibility to bring it back) ===================== -->
+    <section data-visibility="hidden">
+      <h2>Powers</h2>
+      <div class="cols c-6-4 top">
+        <div>
+          <p>Let's look at the powers of $b = \ldots 879186432$.</p>
+          <div class="callout question fragment" data-fragment-index="1">
+            <span class="label">Question</span>
+            <p>What happens if we replace $2$ and $5$ by different numbers?</p>
+          </div>
+        </div>
+        <div>
+          <table id="bpowers-table"><thead><tr><th>$n$</th><th>$b^n$</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Zero divisors ===================== -->
+    <section>
+      <h2>Zero divisors</h2>
+      <div class="callout">
+        <span class="label">An important property of $\,\RR$</span>
+        <p>If $mn = 0$, then $m = 0$ or $n = 0$.</p>
+      </div>
+      <p class="fragment hooked" data-fragment-index="1"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>$\ZZ_{10}$ does <em>not</em> have this property!</span></p>
+      <div class="fragment huge-math" data-fragment-index="1">\[ b(b^2 + 1) = (\ldots 87918643\vas{2})\,(\ldots 21289062\vas{5}) = 0. \]</div>
+      <ul class="fragment" data-fragment-index="1">
+        <li>We call numbers with this strange property <span class="vas">zero divisors</span>. </li>
+        <li>Not obvious, but the existence of zero divisors in $\ZZ_{10}$ stems from the factorization <span class="nowrap">$10 = 2\cdot 5$</span>.
+        </li>
+      </ul>
+      <p class="fragment hooked as-bullet" data-fragment-index="1"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>In other words, $\ZZ_{10}$ has zero divisors because $10$ is not prime.</span></p>
+    </section>
+
+    <!-- ===================== b-adic / p-adic ===================== -->
+    <section class="tonp">
+      <h2>From $10$ to $n$ to $p$</h2>
+      <p>For any integer $n \geq 2$, positive integers can be written in <span class="vas">base $n$</span> using the digits $0, 1, \ldots, n-1$:</p>
+      \[ 7 = \vas{1}\cdot 2^2 + \vas{1}\cdot 2 + \vas{1} = \vas{111} \ \text{(Base 2)}, \qquad\quad 7 = \vas{1}\cdot 5 + \vas{2} = \vas{12} \ \text{(Base 5)}. \]
+      <div class="fragment" data-fragment-index="1">
+        <p>The <span class="vas">$n$-adic numbers</span> $\ZZ_n$ consist of all expressions of the form</p>
+        \[ \cdots + \vas{a_4}n^4 + \vas{a_3}n^3 + \vas{a_2}n^2 + \vas{a_1}n + \vas{a_0}, \qquad 0 \leq a_i \leq n-1. \]
+      </div>
+      <div class="callout fragment" data-fragment-index="2">
+        <span class="label">Primes to the rescue</span>
+        <p>If $n = p$ is a <span class="vas">prime number</span>, then there are no zero divisors in the $p$-adic numbers $\ZZ_p$.</p>
+      </div>
+      <p class="fragment" data-fragment-index="3">Just as every number $n$ factors into a product of primes, every $n$-adic number system decomposes into a product of $p$-adics according to the factorization of $n$.
+      \[
+        10 = 2 \cdot 5 \,\,\Longrightarrow\,\, \ZZ_{10} \cong \ZZ_2 \times \ZZ_5
+      \]
+      </p>
+      <p class="fragment hooked" data-fragment-index="3"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>This decomposition is (a fancy version of) the <span class="vas">Chinese Remainder Theorem</span>.</span></p>
+    </section>
+
+    <!-- ===================== Decomposing 10-adics ===================== -->
+    <section class="decomp">
+      <h2>Decomposing $10$-adics</h2>
+      <div class="cols top decomp-cols">
+        <div>
+          <div class="decomp-iso">\[ \ZZ_{10} \cong \ZZ_2 \times \ZZ_5 \]</div>
+          <p>Every $10$-adic number decomposes into a $2$-adic and $5$-adic number in a way that respects arithmetic.</p>
+          <table class="decomp-table">
+            <thead><tr><th>$\ZZ_{10}$</th><th>$\ZZ_2$</th><th>$\ZZ_5$</th></tr></thead>
+            <tbody>
+              <tr><td class="num">7</td><td class="num">111</td><td class="num">12</td></tr>
+              <tr><td class="num">100</td><td class="num">1100100</td><td class="num">400</td></tr>
+              <tr><td class="num"><span class="muted">…</span>830261947</td><td class="num"><span class="muted">…</span>010111011</td><td class="num"><span class="muted">…</span>021340242</td></tr>
+              <tr><td class="num"><span class="muted">…</span>999999999</td><td class="num"><span class="muted">…</span>111111111</td><td class="num"><span class="muted">…</span>444444444</td></tr>
+              <tr><td class="num"><span class="muted">…</span>666666667</td><td class="num"><span class="muted">…</span>010101011</td><td class="num"><span class="muted">…</span>131313132</td></tr>
+              <tr><td class="num"><span class="muted">…</span>909090909</td><td class="num"><span class="muted">…</span>001011101</td><td class="num"><span class="muted">…</span>211402114</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p class="fragment" data-fragment-index="1">Recall $b = \lim_{n\to\infty} 2^{5^n} = \ldots 879186432$.</p>
+          <ul>
+            <li class="fragment" data-fragment-index="1">Suppose $b$ decomposes as $b \mapsto (b_2, b_5)$.</li>
+            <li class="fragment" data-fragment-index="1">Since <span class="nowrap">$b(b^2 + 1) = 0$</span> in $\ZZ_{10}$, we must also have
+              \[\begin{aligned} b_2(b_2^2 + 1) &= 0 \ \text{ in } \ZZ_2, \\ b_5(b_5^2 + 1) &= 0 \ \text{ in } \ZZ_5. \end{aligned}\]
+            </li>
+            <li class="fragment" data-fragment-index="2">But $2$ and $5$ are prime, so $\ZZ_2$ and $\ZZ_5$ have no zero divisors. Hence <span class = "vas">$b_2$ and $b_5$ are forced to pick a factor</span>.</li>
+          </ul>
+          <table class="decomp-table fragment" data-fragment-index="2">
+            <thead><tr><th>$b$</th><th>$b_2$</th><th>$b_5$</th></tr></thead>
+            <tbody><tr><td class="num"><span class="muted">…</span>879186432</td><td class="num"><span class="muted">…</span>000000000</td><td class="num"><span class="muted">…</span>032431212</td></tr></tbody>
+          </table>
+          <div class="fragment b5sq" data-fragment-index="2">\[ b_5^2 = \ldots 444444444 = -1 \ \text{in } \ZZ_5 \]</div>
+          <p class="fragment hooked" data-fragment-index="2" data-hook-under=".b5sq"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>So $b_5 = \sqrt{-1}$ in $\ZZ_5$!</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== sqrt(-1) in Z_3? ===================== -->
+    <section class="sqrt3">
+      <h2>Does every $\ZZ_p$ have $\sqrt{-1}$?</h2>
+      <p>We saw that $\sqrt{-1} = \ldots 032431212$ in $\ZZ_5$. Does $\sqrt{-1}$ live in every $\ZZ_p$?</p>
+      <div class="cols top sqrt3-cols">
+        <div class="sqrt3-card">
+          <p>Suppose $(\ldots a_4 a_3 a_2 a_1 a_0)^2 = -1$ in $\ZZ_3$.</p>
+          <div class="addition sq3" aria-label="...a4 a3 a2 a1 a0 times itself equals ...22222">
+            <span class="colkeep fragment" data-fragment-index="1" style="left: calc(.6em + 6*1.45em)"></span>
+            <span class="op"></span><span class="dots">⋯</span><span>$a_4$</span><span>$a_3$</span><span>$a_2$</span><span>$a_1$</span><span>$a_0$</span>
+            <span class="op">×</span><span class="dots">⋯</span><span>$a_4$</span><span>$a_3$</span><span>$a_2$</span><span>$a_1$</span><span>$a_0$</span>
+            <div class="rule"></div>
+            <span class="op"></span><span class="res dots">⋯</span><span class="res">2</span><span class="res">2</span><span class="res">2</span><span class="res">2</span><span class="res">2</span>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li class="fragment" data-fragment-index="1">$a_0$ can only be $0$, $1$, or $2$ in base $3$.</li>
+            <li class="fragment" data-fragment-index="1">Squaring these digits in base $3$:
+              \[\begin{aligned}
+                \vas{0}^2 &= \vas{0} \\
+                \vas{1}^2 &= \vas{1} \\
+                \vas{2}^2 &= 4 = \vas{1} \cdot 3 + \vas{1} = \vas{11} \ \text{(base 3)}
+              \end{aligned}\]
+            </li>
+          </ul>
+          <p class="fragment hooked as-bullet" data-fragment-index="1"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>Hence we can never get a $2$ as the ones digit of a square.</span></p>
+          <p class="fragment hooked as-bullet" data-fragment-index="1"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>Thus $\ZZ_3$ cannot have a square root of $-1$!</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== When does Z_p contain sqrt(-1)? ===================== -->
+    <section class="sqrtp">
+      <h2>So when does $\ZZ_p$ contain $\sqrt{-1}$?</h2>
+      <div class="prime-chips" aria-label="Primes coloured by whether Z_p contains a square root of -1"><span class="chip no">2</span><span class="chip no">3</span><span class="chip yes">5</span><span class="chip no">7</span><span class="chip no">11</span><span class="chip yes">13</span><span class="chip yes">17</span><span class="chip no">19</span><span class="chip no">23</span><span class="chip yes">29</span><span class="chip no">31</span><span class="chip yes">37</span><span class="chip yes">41</span><span class="chip no">43</span><span class="chip no">47</span><span class="chip yes">53</span><span class="chip no">59</span><span class="chip yes">61</span><span class="chip no">67</span><span class="chip no">71</span><span class="chip yes">73</span><span class="chip no">79</span><span class="chip no">83</span><span class="chip yes">89</span><span class="chip yes">97</span><span class="chip more">⋯</span></div>
+      <div class="chip-legend">
+        <span><span class="swatch yes"></span><span>$\ZZ_p$ has $\sqrt{-1}$</span></span>
+        <span><span class="swatch no"></span><span>$\ZZ_p$ does not have $\sqrt{-1}$</span></span>
+      </div>
+      <div class="cols top sqrtp-cols">
+        <div class="sqrtp-left">
+          <p class="pattern-q">What is the pattern?</p>
+          <p class="fragment hooked" data-fragment-index="1"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>$\ZZ_p$ contains $\sqrt{-1}$ exactly when $p$ leaves a <span class="vas">remainder of $1$</span> when divided by $4$.</span></p>
+          <div class="fragment pattern-eq" data-fragment-index="1">\[ p \equiv 1 \bmod 4 \]</div>
+        </div>
+        <div class="sqrtp-right">
+          <p class="fragment pattern-q" data-fragment-index="1">How often is $p \equiv 1 \bmod 4$?</p>
+          <figure class="fragment prime-plot" data-fragment-index="2" data-prime-plot>
+            <figcaption>Percentage of the first $n$ primes with $p \equiv 1 \bmod 4$</figcaption>
+            <div id="prime-plot" role="img" aria-label="Line chart: the percentage of the first n primes that are 1 mod 4, for n up to 1000. It starts at 0, rises quickly, and hovers just below the dashed 50% line, reaching about 49.5% at n = 1000."></div>
+            <p class="cheb">Chebyshev's bias</p>
+          </figure>
+        </div>
+      </div>
+</section>
+
+    <!-- ===================== p-adics ===================== -->
+    <section class="prism-slide">
+      <h2>The $p$-adic prism</h2>
+      <p>Following the dubious identity $\ldots 999999 = -1$ down the rabbit hole led us to the wonderful world of <span class="nowrap">$p$-adic numbers</span>.</p>
+      <ul>
+        <li>Each $p$-adic number system is a parallel arithmetic universe to our familiar real numbers $\RR$.</li>
+      </ul>
+      <p class="hooked as-bullet"><svg class="hook" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5V15.5H19.5"/><path d="M14 10l5.5 5.5L14 21"/></svg><span>We only get a complete picture by considering $\RR$ together with all the $p$-adics.</span></p>
+      <img class="cutout rabbit pin-bottom" src="figs/rabbit.svg" alt="The White Rabbit, running with his pocket watch">
+      <div class="prism-fig" style="height:600px">
+        <svg viewBox="0 0 1740 600" aria-hidden="true">
+          <defs>
+            <filter id="beamglow" x="-10%" y="-200%" width="120%" height="500%"><feGaussianBlur stdDeviation="7"/></filter>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF5FC"/><stop offset="1" stop-color="#C9DCF2"/></linearGradient>
+            <linearGradient id="in0" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="873" y2="127"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E53935" stop-opacity=".6"/></linearGradient><linearGradient id="band0" gradientUnits="userSpaceOnUse" x1="873" y1="127" x2="1650" y2="201"><stop offset="0" stop-color="#E53935" stop-opacity=".6"/><stop offset="1" stop-color="#E53935" stop-opacity=".95"/></linearGradient><linearGradient id="in1" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="877" y2="133"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#FB8C00" stop-opacity=".6"/></linearGradient><linearGradient id="band1" gradientUnits="userSpaceOnUse" x1="877" y1="133" x2="1650" y2="259"><stop offset="0" stop-color="#FB8C00" stop-opacity=".6"/><stop offset="1" stop-color="#FB8C00" stop-opacity=".95"/></linearGradient><linearGradient id="in2" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="881" y2="140"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#FDD835" stop-opacity=".6"/></linearGradient><linearGradient id="band2" gradientUnits="userSpaceOnUse" x1="881" y1="140" x2="1650" y2="317"><stop offset="0" stop-color="#FDD835" stop-opacity=".6"/><stop offset="1" stop-color="#FDD835" stop-opacity=".95"/></linearGradient><linearGradient id="in3" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="885" y2="147"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#43A047" stop-opacity=".6"/></linearGradient><linearGradient id="band3" gradientUnits="userSpaceOnUse" x1="885" y1="147" x2="1650" y2="375"><stop offset="0" stop-color="#43A047" stop-opacity=".6"/><stop offset="1" stop-color="#43A047" stop-opacity=".95"/></linearGradient><linearGradient id="in4" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="889" y2="154"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#1E88E5" stop-opacity=".6"/></linearGradient><linearGradient id="band4" gradientUnits="userSpaceOnUse" x1="889" y1="154" x2="1650" y2="433"><stop offset="0" stop-color="#1E88E5" stop-opacity=".6"/><stop offset="1" stop-color="#1E88E5" stop-opacity=".95"/></linearGradient><linearGradient id="in5" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="893" y2="161"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#3949AB" stop-opacity=".6"/></linearGradient><linearGradient id="band5" gradientUnits="userSpaceOnUse" x1="893" y1="161" x2="1650" y2="491"><stop offset="0" stop-color="#3949AB" stop-opacity=".6"/><stop offset="1" stop-color="#3949AB" stop-opacity=".95"/></linearGradient><linearGradient id="in6" gradientUnits="userSpaceOnUse" x1="720" y1="128" x2="898" y2="169"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#8E24AA" stop-opacity=".6"/></linearGradient><linearGradient id="band6" gradientUnits="userSpaceOnUse" x1="898" y1="169" x2="1650" y2="549"><stop offset="0" stop-color="#8E24AA" stop-opacity=".6"/><stop offset="1" stop-color="#8E24AA" stop-opacity=".95"/></linearGradient>
+          </defs>
+          <polygon class="beam-shadow" points="178.0,118.0 731.9,118.0 720.3,138.0 178.0,138.0" filter="url(#beamglow)"/>
+          <polygon class="beam" points="178.0,118.0 731.9,118.0 720.3,138.0 178.0,138.0"/>
+          <polygon points="871.7,124.1 1650.0,171.7 1650.0,229.7 875.2,130.3" fill="url(#band0)"/><polygon points="875.2,130.3 1650.0,229.7 1650.0,287.7 878.9,136.7" fill="url(#band1)"/><polygon points="878.9,136.7 1650.0,287.7 1650.0,345.7 882.8,143.3" fill="url(#band2)"/><polygon points="882.8,143.3 1650.0,345.7 1650.0,403.7 886.8,150.3" fill="url(#band3)"/><polygon points="886.8,150.3 1650.0,403.7 1650.0,461.7 890.9,157.5" fill="url(#band4)"/><polygon points="890.9,157.5 1650.0,461.7 1650.0,519.7 895.3,165.0" fill="url(#band5)"/><polygon points="895.3,165.0 1650.0,519.7 1650.0,577.7 899.8,172.9" fill="url(#band6)"/>
+          <polygon class="prism-body" points="800.0,0.0 580.0,381.1 1020.0,381.1"/>
+          <polygon points="731.9,118.0 871.7,124.1 875.2,130.3 730.2,120.9" fill="url(#in0)"/><polygon points="730.2,120.9 875.2,130.3 878.9,136.7 728.6,123.7" fill="url(#in1)"/><polygon points="728.6,123.7 878.9,136.7 882.8,143.3 726.9,126.6" fill="url(#in2)"/><polygon points="726.9,126.6 882.8,143.3 886.8,150.3 725.3,129.4" fill="url(#in3)"/><polygon points="725.3,129.4 886.8,150.3 890.9,157.5 723.6,132.3" fill="url(#in4)"/><polygon points="723.6,132.3 890.9,157.5 895.3,165.0 722.0,135.1" fill="url(#in5)"/><polygon points="722.0,135.1 895.3,165.0 899.8,172.9 720.3,138.0" fill="url(#in6)"/>
+          <polygon class="prism-edge" points="800.0,0.0 580.0,381.1 1020.0,381.1"/>
+        </svg>
+        <div class="node root" style="left:110px; top:128px">$\ZZ$</div>
+        <div class="band-label" style="left:1675px; top:201px">$\RR$</div>
+        <div class="band-label" style="left:1675px; top:259px">$\ZZ_2$</div>
+        <div class="band-label" style="left:1675px; top:317px">$\ZZ_3$</div>
+        <div class="band-label" style="left:1675px; top:375px">$\ZZ_5$</div>
+        <div class="band-label" style="left:1675px; top:433px">$\ZZ_7$</div>
+        <div class="band-label" style="left:1675px; top:491px">$\ZZ_{11}$</div>
+        <div class="band-label" style="left:1675px; top:549px">$\ZZ_{13}$</div>
+        <div class="band-label more" style="left:1687px; top:607px">$\vdots$</div>
+      </div>
+    </section>
+
+    <!-- ===================== Prof. Fernando Gouvêa ===================== -->
+    <section class="gouvea" data-state="on-photo">
+      <h2>Homage</h2>
+      <img class="gouvea-photo pin-corner" src="figs/gouvea-photo.webp" alt="Prof. Fernando Gouvêa, smiling">
+      <div class="gouvea-side">
+        <p class="gouvea-text">This talk is an homage to a similar lecture I heard given by <span class="vas">Prof. Fernando Gouvêa</span> when I was a high school student.</p>
+        <img class="gouvea-book" src="figs/gouvea-book.webp" alt="Cover of p-adic Numbers: An Introduction, third edition, by Fernando Q. Gouvêa">
+      </div>
+    </section>
+
+    <!-- ===================== Thanks ===================== -->
+    <section>
+      <div class="vcenter">
+        <div class="thanks">Thanks!</div>
+        <div style="text-align:center"><img class="cutout tweedles" src="figs/tweedle.svg" alt="Tweedledum and Tweedledee"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes/notes.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/numberline.js"></script>
+<script src="assets/js/pi.js"></script>
+<script src="assets/js/eqsteps.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

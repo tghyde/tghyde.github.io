@@ -1,0 +1,532 @@
+/* ---------------------------------------------------------------
+   "Rabbit Hole" theme for reveal.js
+   Fraunces (display) + Source Sans 3 (text) + KaTeX (math)
+   --------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../vendor/fonts/fraunces-latin-full-normal.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../vendor/fonts/fraunces-latin-full-italic.woff2") format("woff2");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-700-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+
+:root {
+  /* palette: Alice's dress blue, Cheshire pink, the Hatter's teal, the pocket-watch gold */
+  --primary: #1F5A9E;       /* deep Alice blue: headings, accents */
+  --primary-deep: #143E70;
+  --primary-soft: #E3EDF8;
+  --ink: #1E2530;
+  --ink-soft: #4C5566;
+  --muted: #7C8494;
+  --cream: #FAF6EE;
+  --paper: #FFFDF8;
+  --line: #E6DFD3;
+  --alice: #3E8FD8;         /* lighter dress blue, for rules and glows */
+  --alice-soft: #E3EEF9;
+  --cheshire: #C2185B;      /* Cheshire stripes */
+  --cheshire-soft: #FBE1EC;
+  --teal: #1F8A70;          /* the Hatter's hat */
+  --teal-soft: #DDF2EB;
+  --gold: #D99A1E;          /* pocket watch */
+  --gold-soft: #FBEFD3;
+  --forest: #1F8A70;
+
+  --display: "Fraunces", Georgia, serif;
+  --text: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+
+  --r-background-color: var(--cream);
+  --r-main-font: var(--text);
+  --r-main-font-size: 40px;
+  --r-main-color: var(--ink);
+  --r-heading-font: var(--display);
+  --r-heading-color: var(--primary);
+  --r-link-color: var(--primary);
+  --r-selection-background-color: var(--cheshire-soft);
+}
+
+/* ---------- base ---------- */
+.reveal-viewport { background: var(--cream); }
+.reveal-viewport::before {           /* soft vignette */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, rgba(255,255,255,.55), rgba(31,90,158,.07) 100%);
+}
+.reveal { font-family: var(--text); font-size: var(--r-main-font-size); color: var(--ink); line-height: 1.4; font-weight: 400; }
+.reveal .slides { text-align: left; }
+.reveal .slides section { padding: 0 90px; box-sizing: border-box; height: 100%; }
+.reveal .vcenter { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+.reveal ::selection { background: var(--cheshire-soft); color: var(--ink); }
+.reveal a { color: var(--alice); text-decoration: none; }
+.reveal strong, .reveal b { font-weight: 600; }
+.reveal em { font-style: italic; }
+
+/* ---------- headings ---------- */
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--display); color: var(--primary); margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+  letter-spacing: -0.01em; text-transform: none; text-shadow: none;
+}
+.reveal h1 { font-size: 2.6em; font-weight: 700; line-height: 1.05; }
+.reveal h2 {               /* slide title */
+  font-size: 1.55em; font-weight: 600; line-height: 1.15;
+  padding: 70px 0 18px; margin-bottom: 36px;
+  position: relative;
+}
+.reveal h2::after {        /* short maroon rule */
+  content: ""; position: absolute; left: 0; bottom: 0; width: 140px; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--cheshire)); border-radius: 2px;
+}
+.reveal h3 { font-size: 1.3em; font-weight: 600; color: var(--ink); margin-bottom: .4em; }
+.reveal h2 .katex, .reveal h1 .katex { font-size: .95em; }
+
+/* ---------- text blocks ---------- */
+.reveal p { margin: 0 0 .7em; }
+.reveal ul, .reveal ol { display: block; margin: .3em 0 .7em 1.1em; }
+.reveal li { margin: .3em 0; padding-left: .2em; }
+.reveal ul { list-style: none; }
+.reveal ul > li { position: relative; padding-left: .9em; }
+.reveal ul > li::before { content: ""; position: absolute; left: 0; top: .55em; width: .38em; height: .38em; border-radius: 50%; background: var(--cheshire); }
+.reveal ol { list-style: none; counter-reset: item; }
+.reveal ol > li { position: relative; padding-left: 1.5em; counter-increment: item; }
+.reveal ol > li::before { content: counter(item); position: absolute; left: 0; top: .05em; font-family: var(--display); font-weight: 700; color: var(--primary); font-style: italic; }
+.reveal .small { font-size: .78em; }
+.reveal .muted { color: var(--muted); }
+.reveal .nowrap { white-space: nowrap; }
+.reveal .lead { font-size: 1.1em; }
+.reveal .tight > * { margin-bottom: .35em; }
+
+/* color helpers (also used by KaTeX \htmlClass) */
+.vas, .reveal .vas { color: var(--primary); }
+.pink, .reveal .pink { color: var(--cheshire); }
+.teal, .reveal .teal, .forest, .reveal .forest { color: var(--teal); }
+.gold, .reveal .gold { color: var(--gold); }
+.blue, .reveal .blue { color: var(--primary); }
+.reveal .katex .vas, .reveal .katex .pink, .reveal .katex .teal, .reveal .katex .forest, .reveal .katex .gold { font-weight: inherit; }
+
+/* ---------- math ---------- */
+.reveal .katex { font-size: 1.08em; }
+.reveal .katex-display { margin: .55em 0 .8em; }
+.reveal .katex-display > .katex { font-size: 1.18em; }
+.reveal .math-hero .katex-display > .katex { font-size: 1.6em; }
+
+/* ---------- layout helpers ---------- */
+.reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.reveal .cols.c-7-3 { grid-template-columns: 7fr 3fr; }
+.reveal .cols.c-6-4 { grid-template-columns: 6fr 4fr; }
+.reveal .cols.top { align-items: start; }
+.reveal .stack { display: flex; flex-direction: column; gap: 10px; }
+.reveal .row { display: flex; align-items: center; gap: 40px; }
+.reveal .center-text { text-align: center; }
+.reveal .right { text-align: right; }
+.reveal .spacer { height: 30px; }
+
+.reveal img { max-width: 100%; height: auto; margin: 0; border: 0; box-shadow: none; background: none; }
+.reveal img.photo { border-radius: 14px; box-shadow: 0 18px 50px rgba(42,31,35,.22); }
+.reveal img.cutout { filter: drop-shadow(0 16px 30px rgba(42,31,35,.25)); }
+.reveal figure { margin: 0; }
+.reveal figcaption { font-size: .6em; color: var(--muted); margin-top: .5em; font-family: var(--display); font-style: italic; }
+
+/* callout boxes: Key observation, Question, Fun fact ... */
+.reveal .callout {
+  position: relative; margin: .8em 0; padding: 22px 34px 22px 38px;
+  background: var(--paper); border-radius: 14px;
+  border-left: 7px solid var(--primary);
+  box-shadow: 0 8px 28px rgba(42,31,35,.08);
+}
+.reveal .callout > .label {
+  display: block; font-family: var(--display); font-style: italic; font-weight: 600;
+  color: var(--primary); font-size: .8em; letter-spacing: .01em; margin-bottom: .15em;
+}
+.reveal .callout p:last-child, .reveal .callout ul:last-child { margin-bottom: 0; }
+.reveal .callout.question { border-left-color: var(--gold); }
+.reveal .callout.question > .label { color: var(--gold); }
+.reveal .callout.fun { border-left-color: var(--cheshire); }
+.reveal .callout.fun > .label { color: var(--cheshire); }
+.reveal .callout.gold { border-left-color: var(--teal); }
+.reveal .callout.gold > .label { color: var(--teal); }
+
+/* big centered single word / phrase */
+.reveal .big-q {
+  font-family: var(--display); font-style: italic; font-weight: 600; color: var(--primary);
+  font-size: 2.4em; text-align: center; margin: .2em 0;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+.reveal .huge-math { text-align: center; }
+.reveal .huge-math .katex-display > .katex { font-size: 1.5em; }
+
+/* tables */
+.reveal table { border-collapse: collapse; margin: 0 auto; font-size: .9em; }
+.reveal table th, .reveal table td { padding: .18em .9em; border: 0; text-align: right; }
+.reveal table th { font-family: var(--display); font-weight: 600; color: var(--primary); border-bottom: 3px solid var(--primary); font-style: italic; }
+.reveal table tbody tr:nth-child(even) { background: rgba(31,90,158,.05); }
+.reveal table td.n { color: var(--muted); font-family: var(--display); font-style: italic; }
+.reveal table td.num { font-family: var(--text); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+/* ---------- title slide ---------- */
+.reveal .title-slide .title-text { position: absolute; left: 90px; top: 130px; z-index: 2; }
+.reveal .title-slide h1 { margin: 0; font-size: 3.4em; white-space: nowrap; line-height: 1; }
+.reveal .title-slide .sub { font-family: var(--display); font-size: 1.55em; font-weight: 500; color: var(--ink); font-style: italic; margin-top: .35em; white-space: nowrap; font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1; }
+.reveal .title-slide .byline { margin-top: 1.6em; }
+.reveal .title-slide .byline .name { font-family: var(--display); font-weight: 700; color: var(--primary); font-size: 1.25em; }
+.reveal .title-slide .byline .aff { color: var(--ink-soft); font-size: .8em; }
+.reveal .title-slide img.cat { position: absolute; left: 363px; bottom: 20px;   /* tail apex under the & of "Mathematics & Statistics" */ width: 1260px; max-width: none; transform: scaleX(-1); z-index: 1; }
+
+/* full-bleed photo slide */
+.reveal section.photo-slide { padding: 0; }
+.reveal section.photo-slide .overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 60px 90px; color: #fff;
+  background: linear-gradient(180deg, rgba(20,10,12,.78) 0%, rgba(20,10,12,.6) 26%, rgba(20,10,12,0) 40%);   /* text at the top, quick fade into the picture */
+}
+.reveal section.photo-slide h2, .reveal section.photo-slide h2::after { color: #fff; padding-top: 0; }
+.reveal section.photo-slide h2::after { background: #fff; }
+.reveal section.photo-slide ol > li::before { color: var(--gold); }
+
+/* "thanks" */
+.reveal .thanks { font-size: 3.2em; font-weight: 700; color: var(--primary); font-style: italic; text-align: center; margin-bottom: .2em; }
+.reveal img.tweedles { height: 840px; width: auto; max-width: none; max-height: none; }
+
+/* ---------- footer ---------- */
+.reveal .slide-number {
+  background: none; color: var(--primary); font-family: var(--display); font-style: italic;
+  font-size: 22px; left: 36px; right: auto; bottom: 26px; padding: 0;
+}
+.reveal .slide-number a { color: inherit; }
+.on-photo .slide-number, .on-photo .reveal .slide-number { color: #fff; }   /* readable on the full-bleed photo slide */
+.reveal .progress { height: 4px; color: var(--primary); }
+.reveal .progress span { background: linear-gradient(90deg, var(--primary), var(--cheshire)); }
+.reveal .controls { color: var(--primary); }
+
+/* ---------- fragments ---------- */
+.reveal .fragment.highlight-vas.visible { color: var(--primary); font-weight: 600; }
+
+/* ---------- addition walkthrough ---------- */
+.addition-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.addition-wrap .steps { order: -1; }   /* explanation on the left, the sum on the right */
+.addition {
+  position: relative; font-family: var(--text); font-variant-numeric: tabular-nums;
+  font-size: 2.1em; line-height: 1; display: inline-grid;
+  grid-template-columns: repeat(7, 1.15em); justify-content: center; row-gap: .12em;
+  padding: .4em .6em .5em; background: var(--paper); border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(42,31,35,.12);
+}
+.addition > span { text-align: center; height: 1.1em; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; }
+.addition .carry { font-size: .55em; color: var(--cheshire); font-weight: 700; height: 1.6em; }
+.addition .op { color: var(--muted); font-weight: 400; }
+.addition .dots { color: var(--muted); letter-spacing: .02em; }
+.addition .res { color: var(--primary); font-weight: 700; }
+.addition .rule { grid-column: 1 / -1; height: 4px; background: var(--ink); border-radius: 2px; margin: .1em .15em; position: relative; z-index: 2; }   /* above the column highlight */
+/* column highlight (custom fragment: visible only while current) */
+.reveal .slides section .addition > .fragment.custom.colhl {
+  position: absolute; z-index: 1; top: 0; bottom: 0; height: auto; width: 1.15em; border-radius: 14px;
+  background: var(--cheshire-soft); opacity: 0; transition: opacity .25s;
+}
+.reveal .slides section .addition > .fragment.custom.colhl.current-fragment { opacity: 1; }
+.addition .carry.fragment.visible { animation: dropin .35s ease-out; }
+.addition .res.fragment.visible { animation: popin .35s ease-out; }
+@keyframes dropin { from { transform: translateY(-.5em); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes popin { from { transform: scale(.5); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.steps { display: flex; flex-direction: column; gap: .8em; }
+.steps .intro { padding-bottom: .6em; border-bottom: 2px solid var(--line); }
+.steps .step-area { position: relative; min-height: 5em; }
+.steps .step {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-start; gap: .3em;
+}
+.reveal .slides section .steps .fragment.custom.step { opacity: 0; transition: opacity .25s; }
+.reveal .slides section .steps .fragment.custom.step.current-fragment { opacity: 1; }
+.reveal .slides section .steps .fragment.custom.step.visible:last-child { opacity: 1; }   /* the last step stays once the conclusion shows */
+.steps .step .what { font-family: var(--display); font-style: italic; color: var(--cheshire); font-size: .85em; }
+.steps .step .calc .katex-display > .katex { font-size: 1.4em; }
+.steps .step .calc .katex-display { margin: 0 0 .25em; }
+.addition-wrap { margin-top: 1.2em; }
+
+/* ---------- number line ---------- */
+.numberline { width: 1400px; margin: 0 auto; }
+.reveal .nl-eq { position: relative; height: 1.4em; text-align: center; font-size: 1.1em; margin-top: -.1em; }
+.reveal .nl-eq .eq { position: absolute; left: 0; right: 0; opacity: 0; transition: opacity .45s; }
+.reveal .nl-eq .eq.lim { transition: opacity 1.1s ease; }
+.reveal .nl-eq .eq.on { opacity: 1; }
+.reveal .nl-wrap { margin-top: .1em; }
+
+.numberline svg { width: 100%; height: auto; display: block; overflow: visible; }
+.numberline .axis { stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.numberline .tick { stroke: var(--ink-soft); stroke-width: 2.5; }
+.numberline .tick.minor { stroke: var(--line); stroke-width: 2; }
+.numberline .ticklabel { font-family: var(--text); font-size: 30px; fill: var(--ink-soft); text-anchor: middle; font-variant-numeric: tabular-nums; }
+.numberline .pt { fill: var(--cheshire); stroke: var(--paper); stroke-width: 4; }
+.numberline .pt.one { fill: var(--primary); }
+.numberline .pt.new { fill: var(--teal); }
+.numberline .ptlabel { font-family: var(--text); font-size: 34px; fill: var(--cheshire); text-anchor: middle; font-weight: 600; font-variant-numeric: tabular-nums; }
+.numberline .ptlabel.one { fill: var(--primary); font-weight: 700; font-size: 40px; }
+.numberline .ptlabel.new { fill: var(--teal); }
+.numberline .gap { stroke: var(--teal); stroke-width: 3.5; stroke-dasharray: 10 7; }
+.numberline .gaplabel { font-family: var(--display); font-style: italic; font-size: 32px; fill: var(--teal); text-anchor: middle; }
+.numberline .badge { font-family: var(--display); font-style: italic; font-size: 34px; fill: var(--primary); }
+.zoom-ctrl { opacity: 0; position: absolute; }  /* invisible fragments that drive the zoom */
+.reveal .numberline { position: relative; }
+.reveal .nl-limit { position: absolute; left: 78.31%; top: -14%; transform: translateX(-50%); white-space: nowrap; color: var(--primary); font-size: 1.15em; font-weight: 700; }   /* above the point 1, which sits at the same x at every zoom, and above the point labels */
+.reveal .nl-limit::after { content: ""; position: absolute; left: 50%; top: 100%; width: 3px; height: 112px; margin-left: -1.5px; background: var(--primary); opacity: .55; border-radius: 2px; transform-origin: top; transform: scaleY(0); transition: transform .8s ease .6s; }   /* stem down to the point 1 */
+.reveal .slides section .nl-limit.fragment { transform: translate(-50%, -14px); transition: opacity 1.1s ease, transform 1.1s ease, visibility 0s; }   /* the limit settles in gently */
+.reveal .slides section .nl-limit.fragment.visible { transform: translate(-50%, 0); }
+.reveal .nl-limit.visible::after { transform: scaleY(1); }
+.reveal .nl-limit .katex { color: var(--primary); }
+.reveal .nl-wrap:has(.nl-limit.visible) .nl-eq .eq { opacity: 0; transition: opacity 1.1s ease; }                      /* in the limit, the caption gains its ellipses */
+.reveal .nl-wrap:has(.nl-limit.visible) .nl-eq .eq.lim { opacity: 1; }
+
+/* ---------- p-adic universes: Z through a prism ---------- */
+.prism-fig { position: relative; width: 1740px; margin: .5em auto 0; }   /* height set by scripts/prism.py */
+.prism-fig svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.prism-fig .beam { fill: #fff; }
+.prism-fig .beam-shadow { fill: #B9AE9A; opacity: .55; }
+.prism-fig .prism-body { fill: url(#glass); opacity: .75; }
+.prism-fig .prism-edge { fill: none; stroke: var(--primary); stroke-width: 4; stroke-linejoin: round; }
+.prism-fig .node { position: absolute; transform: translate(-50%, -50%); border-radius: 16px; padding: .1em .55em; box-shadow: 0 8px 24px rgba(42,31,35,.12); font-size: 1.5em; }
+.prism-fig .node.root { background: var(--primary); color: #fff; }
+.prism-fig .node.root .katex { color: #fff; }
+.prism-fig .band-label { position: absolute; transform: translateY(-50%); font-size: 1.05em; line-height: 1; }   /* a column just past the cutoff */
+.prism-fig .band-label.more { color: var(--muted); }
+.reveal p.prism-after { position: absolute; left: 90px; bottom: 60px; max-width: 1080px; margin: 0; }   /* bottom-left, under the prism and clear of the bands */
+
+/* ---------- print ---------- */
+
+
+/* ---------- pi digit expansion (slide 2) ---------- */
+.reveal .slides section[data-pi-slide] { overflow: hidden; }       /* pi and its sum run off the right edge */
+.pi-expand { position: relative; margin-right: -90px; padding-left: 110px; -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent 99%); mask-image: linear-gradient(90deg, #000 82%, transparent 99%); }
+.pi-expand .katex-display, .pi-expand .katex-display > .katex { text-align: left; }
+.pi-expand .katex-display > .katex > .katex-html { display: inline-block; }
+.pi-expand .katex-display { margin: .3em 0 .6em; }
+.pi-expand .katex-display > .katex { font-size: 1.32em; }
+.pi-expand .line2 { transition: opacity .3s; }
+.pi-expand.hidden2 .line2 { opacity: 0; }
+.pi-expand .pi-clone { position: absolute; font-family: KaTeX_Main, "Times New Roman", serif; line-height: 1; pointer-events: none; z-index: 5; will-change: transform; }
+.reveal .slide2-rest { margin-top: .4em; }
+
+/* ---------- slide 3: animated derivation ---------- */
+.reveal .eqstack { position: relative; height: 450px; margin-top: .3em; }
+.reveal .eqrow {
+  position: absolute; left: 0; top: 0; height: 96px;
+  display: flex; align-items: baseline; white-space: nowrap;
+  font-size: 2em; line-height: 1; color: var(--ink);
+  transition: left .5s cubic-bezier(.4,0,.2,1), opacity .6s, color .6s;
+}
+.reveal .eqrow.past { opacity: .5; }
+.reveal .eqrow.final .tok { color: var(--primary); }
+.reveal .tok { font-family: KaTeX_Main, "Times New Roman", serif; display: inline-block; white-space: pre; position: relative; }
+.reveal .tok.var { font-family: KaTeX_Math, "Times New Roman", serif; font-style: italic; }
+.reveal .tok.rel { margin: 0 .28em; }
+.reveal .tok.bin { margin: 0 .22em; }
+.reveal .tok.neg { margin: 0 .03em 0 .08em; }   /* unary minus hugs its number */
+.reveal .tok.mul { margin-right: .16em; }
+.reveal .tok.ell { margin-left: .06em; }
+.reveal .tok.ellL { margin-right: .06em; }
+.reveal .tok.cancel { color: var(--cheshire); }
+.reveal .tok.cancel::after { content: ""; position: absolute; left: -.08em; right: -.08em; top: 50%; height: .07em; background: var(--cheshire); transform: rotate(-20deg); }
+.reveal .tok.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: .7em; line-height: 1.15; top: -.66em; margin-left: .04em; }   /* stacked fraction, bar on the math axis */
+.reveal .tok.frac .num { border-bottom: .07em solid currentColor; padding: 0 .1em .02em; }
+.reveal .tok.frac .den { padding: .02em .1em 0; }
+.reveal .tok.sup { font-size: .7em; top: -.59em; margin-left: .03em; }   /* exponent: KaTeX's size and 0.413em shift */
+.eqstep { position: absolute; opacity: 0; }
+
+/* a small ↳ arrow leading into a follow-on line */
+.reveal .hook { width: .95em; height: .95em; vertical-align: -.14em; margin: 0 .18em 0 .08em; fill: none; stroke: var(--primary); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.reveal p.hooked { display: grid; grid-template-columns: auto 1fr; column-gap: .1em; align-items: start; }
+.reveal p.hooked .hook { margin-top: .22em; }
+.reveal p.hooked.as-bullet { display: block; position: relative; margin-left: 1.1em; padding-left: 1.18em; }   /* indented like a list item */
+.reveal p.hooked.as-bullet .hook { position: absolute; left: -.05em; top: .2em; margin: 0; }                    /* the arrow's vertical stem sits under the bullets above */
+
+/* ---------- slide 13: ...090909 = -1/11 ---------- */
+.reveal .elevenths .trick { position: absolute; right: 90px; top: 305px; width: 920px; margin: 0; font-family: var(--display); font-style: italic; color: var(--teal); font-size: .85em; text-align: right; }   /* beside the first row */
+.reveal .elevenths .punch { position: absolute; left: 90px; top: 775px; margin: 0; white-space: nowrap; }   /* just under the calculation */
+.reveal .elevenths .frac-question { position: absolute; right: 90px; bottom: 182px; width: max-content; max-width: 1100px; margin: 0; box-sizing: border-box; }
+.reveal .elevenths .frac-question p { white-space: nowrap; }
+.reveal .elevenths .frac-question .hint { color: var(--ink); font-size: .85em; margin-top: .3em; }
+
+/* ---------- powers slide: 2^(5^n) table ---------- */
+.reveal .powers table { width: 100%; table-layout: fixed; margin: 0; }
+.reveal .powers th.n, .reveal .powers td.n { width: 70px; text-align: right; }
+.reveal .powers td.n { font-family: KaTeX_Main, "Times New Roman", serif; font-style: normal; }   /* upright math digits: the italic display digits overhang unevenly, so 0 looked out of line */
+.reveal .powers th.num, .reveal .powers td.num { text-align: right; overflow: hidden; white-space: nowrap; }
+.reveal .powers td.num .d { display: inline-block; padding: 0 .02em; transition: background-color .3s; }   /* one span per digit */
+.reveal .powers td.num .d.lit { background: #A9C9EF; }                                    /* stabilized digits: a soft blue band */
+.reveal .powers td.num .d.lit.start { border-radius: 8px 0 0 8px; }
+.reveal .powers td.num .d.lit.end { border-radius: 0 8px 8px 0; }
+.reveal .powers td.num .d.lit.start.end { border-radius: 8px; }
+.reveal .powers .cols > div:last-child > p:first-child { margin-top: 5px; }   /* lines up with the table header row */
+.reveal .powers .powers-go { position: absolute; opacity: 0; }
+.reveal .powers .limit-calc .katex-display { margin: .3em 0 .4em; }
+.reveal .powers .limit-calc .katex-display > .katex { font-size: .95em; }
+.reveal .powers .limit-calc .concl p { white-space: nowrap; font-size: .94em; margin: 0; }
+.reveal .powers .limit-calc .concl .katex-display { margin: .35em 0 0; }
+.reveal .powers .limit-calc .concl .katex-display > .katex { font-size: 1.3em; }
+
+/* ---------- mysterious limit ---------- */
+.reveal .mystery .mys-cols { display: grid; grid-template-columns: max-content 1fr; column-gap: 90px; align-items: start; }   /* left column as wide as its first sentence */
+.reveal .mystery .eqstack { height: 336px; margin: .1em 0 .2em; }
+.reveal .mystery .mys-right > p { margin-bottom: .5em; }
+.reveal .mystery .bprod-go { position: absolute; opacity: 0; }
+.reveal .mystery .bprod-wrap { display: inline-flex; flex-direction: column; align-items: center; }
+.reveal .mystery .bprod-after { opacity: 0; margin-top: .65em; text-align: center; }
+.reveal .mystery .bprod-after.on { opacity: 1; }
+.reveal .mystery .bprod-after .katex-display { margin: 0; }
+.reveal .mystery .bprod-after .katex-display > .katex { font-size: 1.3em; }   /* same size as the b^2 + 1 line */
+.addition.bprod { font-size: .92em; grid-template-columns: repeat(11, 1.15em); row-gap: .06em; padding: .35em .6em .45em; }
+.addition.bprod > span { height: 1.12em; }
+.addition.bprod .carry { height: .72em; align-items: flex-end; color: var(--teal); }
+.addition.bprod .anim { opacity: 0; }
+.addition.bprod .anim.on { opacity: 1; }
+.addition.bprod > .hl { position: absolute; z-index: 1; border-radius: 10px; opacity: 0; transition: opacity .2s, left .2s, top .2s; }
+.addition.bprod > .hl.on { opacity: 1; }
+.addition.bprod > .hl.digit { background: var(--teal-soft); }
+.addition.bprod > .hl.col { background: var(--cheshire-soft); }
+.reveal .mystery .eqrow { font-size: 1.4em; height: 78px; }
+.reveal .mystery .b2 .katex-display { margin: .2em 0 .1em; }
+.reveal .mystery .b2 .katex-display > .katex { font-size: 1.3em; }
+.reveal .mystery .huh { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 3em; line-height: 1; color: var(--cheshire); text-align: center; margin: .25em 0 0; }
+
+/* ---------- decomposing 10-adics ---------- */
+.reveal .decomp .decomp-cols { grid-template-columns: 8fr 11fr; gap: 70px; }
+.reveal .decomp .decomp-iso .katex-display { margin: 0 0 .3em; }
+.reveal .decomp .decomp-iso .katex-display > .katex { font-size: 1.4em; }
+.reveal .decomp table.decomp-table { width: 100%; table-layout: fixed; margin: .3em 0 .6em; }
+.reveal .decomp table.decomp-table th, .reveal .decomp table.decomp-table td { text-align: center; white-space: nowrap; padding-left: .25em; padding-right: .25em; }
+.reveal .decomp ul { margin-top: .2em; }
+.reveal .decomp .b5sq .katex-display { margin: .2em 0 .3em; }
+
+/* ---------- does every Z_p have sqrt(-1)? ---------- */
+.reveal .sqrt3 .sqrt3-cols { grid-template-columns: 5fr 7fr; gap: 70px; margin-top: .4em; }
+.reveal .sqrt3 .sqrt3-card > p { margin-bottom: .5em; }
+.reveal .sqrt3 li .katex-display { margin: .3em 0 .2em; text-align: left; }
+.reveal .sqrt3 li .katex-display > .katex { text-align: left; }
+.addition.sq3 { font-size: 1.7em; row-gap: .1em; grid-template-columns: repeat(7, 1.45em); }   /* wider columns: a_i is wider than a digit */
+.reveal .slides section .addition.sq3 > .colkeep { width: 1.45em; }
+.addition.sq3 > span { height: 1.25em; }
+.reveal .slides section .addition > .colkeep { position: absolute; z-index: 1; top: .25em; bottom: .25em; height: auto; width: 1.15em; border-radius: 14px; background: var(--cheshire-soft); }   /* stays lit once shown */
+.reveal .sqrt3 ul { margin-top: .3em; }
+
+/* ---------- when does Z_p contain sqrt(-1)? ---------- */
+.reveal .sqrtp .prime-chips { display: grid; grid-template-columns: repeat(13, 1fr); gap: 20px 22px; margin: .9em 0 .7em; }   /* 25 primes + the ellipsis = two even rows */
+.reveal .sqrtp .chip { height: 84px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.3em; font-weight: 600; font-variant-numeric: tabular-nums; color: #fff; box-shadow: 0 6px 16px rgba(42,31,35,.12); }
+.reveal .sqrtp .chip.yes { background: var(--primary); }
+.reveal .sqrtp .chip.no { background: var(--cheshire); }
+.reveal .sqrtp .chip.more { background: none; box-shadow: none; color: var(--muted); }
+.reveal .sqrtp .chip-legend { display: flex; justify-content: center; gap: 80px; font-size: .9em; color: var(--muted); margin-bottom: 1em; }
+.reveal .sqrtp .chip-legend > span { display: inline-flex; align-items: center; gap: 14px; }
+.reveal .sqrtp .swatch { width: 30px; height: 30px; border-radius: 8px; display: inline-block; }
+.reveal .sqrtp .swatch.yes { background: var(--primary); }
+.reveal .sqrtp .swatch.no { background: var(--cheshire); }
+.reveal .sqrtp .sqrtp-cols { gap: 80px; margin-top: .2em; }
+.reveal .sqrtp .pattern-q { font-family: var(--display); font-style: italic; color: var(--primary); font-size: 1.05em; margin: 0 0 .5em; }
+.reveal .sqrtp .pattern-eq .katex-display { margin: .5em 0 0; }
+.reveal .sqrtp .pattern-eq .katex-display > .katex { font-size: 1.5em; }
+.reveal .sqrtp .cheb { margin: .3em 0 0; text-align: center; font-family: var(--display); font-style: italic; font-size: 1.15em; color: var(--cheshire); opacity: 0; transition: opacity .8s; }
+.reveal .sqrtp .cheb.on { opacity: 1; }
+.reveal .sqrtp .sqrtp-cards { align-items: stretch; }
+.reveal .sqrtp .sqrtp-cards .callout { margin: 0; }
+.reveal .sqrtp figure.prime-plot { margin: .2em 0 0; }
+.reveal .sqrtp figure.prime-plot figcaption { margin: 0 0 .2em 96px; font-size: .62em; text-align: left; }
+.reveal .sqrtp #prime-plot svg { display: block; overflow: visible; }
+.reveal .sqrtp #prime-plot .grid { stroke: var(--line); stroke-width: 1.5; }
+.reveal .sqrtp #prime-plot .axis { stroke: var(--muted); stroke-width: 2; }
+.reveal .sqrtp #prime-plot .tick { fill: var(--muted); font-family: var(--text); font-size: 28px; }
+.reveal .sqrtp #prime-plot .axis-title { font-style: italic; font-family: KaTeX_Math, serif; font-size: 32px; }
+.reveal .sqrtp #prime-plot .half { stroke: var(--muted); stroke-width: 2.5; stroke-dasharray: 12 9; }
+.reveal .sqrtp #prime-plot .half-label { fill: var(--muted); font-family: var(--text); font-size: 30px; font-weight: 600; }
+.reveal .sqrtp #prime-plot .lead { fill: var(--primary); stroke: var(--paper); stroke-width: 3; }
+.reveal .sqrtp #prime-plot .share { fill: none; stroke: var(--primary); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+
+/* ---------- Prof. Fernando Gouvêa ---------- */
+.reveal .slides section.gouvea { overflow: visible; }                         /* the photo runs to the screen's corner */
+.reveal .gouvea img.gouvea-photo { position: absolute; left: 0; bottom: 0; height: 960px; width: auto; max-width: none; max-height: none; margin: 0; }   /* main.js pins it to the screen corner */
+.reveal .gouvea .gouvea-side { position: absolute; left: 760px; right: 90px; top: 200px; text-align: center; }   /* second column: text above the book */
+.reveal .gouvea .gouvea-text { font-size: 1.05em; text-align: left; margin: 0 0 1em; }
+.reveal .gouvea img.gouvea-book { height: 600px; width: auto; max-height: none; margin: 0; border-radius: 6px; box-shadow: 0 22px 60px rgba(42,31,35,.22), 0 4px 12px rgba(42,31,35,.12); }
+
+/* ---------- the p-adic prism: the White Rabbit runs in under the beam ---------- */
+.reveal .slides section.prism-slide { overflow: visible; }
+.reveal .prism-slide img.rabbit { position: absolute; left: 196px; bottom: 0; height: 385px; width: auto; max-width: none; max-height: none; margin: 0; z-index: 3; }   /* main.js pins it to the screen's bottom edge */
+.reveal .prism-slide .prism-fig { margin-top: 0; transform: scale(.8); transform-origin: 50% 0; }   /* the longer text above leaves less room */
+
+.reveal .tonp .katex-display { margin: .45em 0; }
+
+/* ---------- slide 4: through the looking glass ---------- */
+.reveal .slides section.looking-glass { overflow: visible; }                 /* Alice spills past the slide; the viewport clips her */
+.reveal .looking-glass .lg-text { max-width: 1080px; }
+.reveal .looking-glass img.alice { position: absolute; right: 70px; top: 210px; height: 1020px; max-width: none; }   /* top anchored; main.js stretches her to the window's bottom */
+
+/* ---------- slide 5: what is ...99999? ---------- */
+.reveal .slides section.tenadic { overflow: visible; }                      /* the Hatter spills past the slide; the viewport clips him */
+.reveal .tenadic .conclusion { max-width: 1250px; margin-top: .3em; }
+.reveal .tenadic .conclusion .katex-display > .katex { font-size: 1.6em; }
+.reveal .tenadic img.hatter { position: absolute; right: 40px; top: 425px; height: 900px; max-width: none; transform: scaleX(-1); }   /* top anchored; main.js stretches him to the window's bottom */
+
+.reveal .after-sum { margin-top: 1.1em; grid-column: 1 / -1; }   /* spans both columns of the addition layout */
+
+/* ---------- slide 7: long multiplication ---------- */
+.reveal .mul-wrap { display: grid; grid-template-columns: 1fr auto; gap: 50px; align-items: start; margin-top: .3em; }
+.reveal .mul-wrap .steps { padding-top: .2em; }
+.reveal .mul-wrap .step-area { min-height: 6.5em; }
+.reveal .after-mul { margin-top: .4em; }
+.addition.mul { font-size: 1.3em; row-gap: .08em; }
+.addition.mul > span { height: 1.12em; }
+.addition.mul .vdots { color: var(--muted); }
+.addition.mul .carry { height: .72em; align-items: flex-end; padding-bottom: 0; }   /* carries sit just above the digits */
+.addition.mul .stack2 { position: relative; height: .72em; }
+.addition.mul .stack2 > .carry { position: absolute; inset: 0; height: auto; }
+/* highlights for the multiplying phases: the multiplier digit (teal, stays for its pass) and the
+   first-number digit with its carry (pink, per step). Row metrics: pad .4em, carries .72em, rows 1.12em, gaps .08em */
+.addition.mul > .mulhl { position: absolute; z-index: 1; width: 1.15em; border-radius: 12px; opacity: 0; transition: opacity .25s; }
+.addition.mul > .mulhl.digit { top: .36em; height: 1.96em; background: var(--cheshire-soft); }
+.addition.mul > .mulhl.mult { top: 2.4em; height: 1.12em; background: var(--teal-soft); }
+.reveal .slides section .addition.mul > .fragment.custom.mulhl.digit.current-fragment { opacity: 1; }
+.reveal .slides section .addition.mul > .fragment.custom.mulhl.mult.visible { opacity: 1; }
+.reveal .slides section .addition.mul:has(.ppB.visible) > .fragment.custom.mulhl.multA.visible { opacity: 0; }
+.reveal .slides section .addition.mul:has(~ .mulrows-go.visible) > .fragment.custom.mulhl.multB.visible { opacity: 0; }
+.addition.mul .carryS { color: var(--teal); }
+.addition.mul .carryA, .addition.mul .carryB { transition: opacity .3s; }
+.addition.mul:has(.ppB.visible) .carryA.visible { opacity: 0; }     /* the first row's carries clear when the second row starts */
+.addition.mul:has(~ .mulrows-go.visible) .carryB.visible { opacity: 0; }   /* ...and the second row's when the pattern is laid out */
+.addition.mul .rule.fragment { transition: opacity .3s; }
+.addition.mul .mrow, .addition.mul .mrule { opacity: 0; }   /* the pattern rows, filled in by main.js */
+.addition.mul .mrow.on, .addition.mul .mrule.on { opacity: 1; }
+.addition.mul > .mulhl.live { transition: opacity .2s, left .2s; }
+.addition.mul > .mulhl.live.on { opacity: 1; }
+.reveal .mulrows-go { position: absolute; opacity: 0; }
+.reveal .slides section .addition.mul > .fragment.custom.colhl { top: var(--sum-top, 0px); }   /* the addition's column highlight starts at the carry row below the factors */
+
+/* ---------- slide 8 ---------- */
+.reveal .going-on p.lead { margin: .2em 0 .4em; }
+.reveal .going-on img { margin: .2em 0; }
+
+/* ---------- slide 10: Hensel ---------- */
+.reveal figure.hensel { justify-self: stretch; text-align: center; }
+.reveal figure.hensel img { height: 790px; width: auto; max-width: 100%; object-fit: contain; }   /* as large as the column allows, uncropped */
+
+/* ---------- slide 11: worked examples ---------- */
+.reveal .ex-wrap { display: flex; justify-content: center; gap: 80px; margin-top: .5em; }
+.addition.ex { font-size: 1.15em; grid-template-columns: repeat(8, 1.15em); row-gap: .1em; padding: .35em .6em .4em; }
+
+/* ---------- slide 12: negatives ---------- */
+.reveal li.with-card { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.reveal .callout.recall { margin: 0; padding: 10px 26px 10px 28px; flex: 0 0 auto; white-space: nowrap; }
+.reveal .callout.recall p { display: inline; margin: 0 0 0 .5em; }
+.reveal .callout.recall .label { display: inline; }
+.reveal .callout.recall.eq-side { position: absolute; right: 60px; top: 418px; }   /* level with the first equation line */
+.reveal .neg-check { position: absolute; left: 440px; bottom: 36px; text-align: center; }   /* bottom, left of the question card */
+.reveal .chk-label { font-family: var(--display); font-style: italic; color: var(--teal); font-size: .8em; margin-bottom: .4em; }
+.addition.chk { font-size: 1.25em; grid-template-columns: repeat(9, 1.15em); row-gap: .08em; }
+.addition.chk .carry { height: .8em; align-items: flex-end; padding-bottom: 0; }
+.reveal .neg-steps .katex-display { margin: .2em 0 0; }
+
+.reveal .neg-question { position: absolute; right: 60px; bottom: 36px; width: 600px; margin: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }   /* main.js matches its height to the check card */

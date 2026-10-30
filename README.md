@@ -10,6 +10,7 @@ Plain HTML and CSS, no build step. Edit a page, push to `main`, and it is live w
 | `research/` | Publications, thesis, invited talks |
 | `teaching/` | Courses taught |
 | `resources/` | Math graduate school resources for students |
+| `notes/` | Notes page: slides and expository notes. `notes/p-adic-numbers/` is the p-adic talk deck, copied from its own repo (see below) |
 | `cv/` | Curriculum vitae: HTML version (`index.html`), LaTeX source (`CV.tex`), and PDF (`CV.pdf`) |
 | `assets/` | Stylesheet and photo |
 
@@ -24,3 +25,13 @@ commits a fresh `cv/CV.pdf`. If you edit in Overleaf, pull that commit back into
 
 The HTML version at `cv/index.html` is maintained by hand. After changing the LaTeX, make the same
 change there, or ask Claude to reconcile the two.
+
+## Updating the p-adic slides
+
+`notes/p-adic-numbers/` is a copy of the runtime files of the reveal.js deck in the private repo
+`tghyde/p-adic-number-slides` (locally `~/Documents/Claude/Slides/p-adic-number-slides`). Edit the deck
+there, then re-copy it here and commit:
+
+```bash
+sh scripts/sync-p-adic-slides.sh
+```
