@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Ricochet Solitaire: the yellow robot (body, eyes, and shadow as drawn in the game) -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 30 31">
-  <ellipse cx="0" cy="11" rx="13" ry="4.5" fill="rgba(0,0,0,0.25)"/>
-  <path d="M -13 10 L -13 -1 A 13 13 0 0 1 13 -1 L 13 10 Z" fill="#eebd2a"/>
-  <circle cx="-4.5" cy="-3" r="3" fill="rgba(255,255,255,0.85)"/>
-  <circle cx="4.5" cy="-3" r="3" fill="rgba(255,255,255,0.85)"/>
-</svg>
