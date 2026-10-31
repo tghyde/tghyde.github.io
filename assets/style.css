@@ -241,14 +241,26 @@ ol.pubs .refs a { margin-right: 0.8rem; }
   font-family: var(--sans);
   font-size: .8rem;
 }
-.note .math-figure { justify-self: center; font-size: 1.45rem; color: var(--fg); }
+.note .math-figure { justify-self: center; font-size: 1.3rem; color: var(--fg); }
 .note .math-figure .pivot { color: var(--accent); font-weight: 600; }
-.note .body img.figure-sm { width: 7.5rem; justify-self: center; }
-.note .body img.qr { border-radius: 4px; }
+.note .body .figure-md { width: 11rem; justify-self: center; }
+.note .body .figure-sm { width: 7.5rem; justify-self: end; }   /* sits under the buttons */
+.note .body svg.qr { display: block; width: 6.5rem; height: auto; color: var(--fg); margin: .5rem 0; }
+/* light and dark versions of one picture, swapped with the site theme */
+.note .body .themed-img img { display: block; width: 100%; height: auto; }
+.themed-img .on-dark { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .themed-img .on-light { display: none !important; }
+  :root:not([data-theme="light"]) .themed-img .on-dark { display: block !important; }
+}
+:root[data-theme="dark"] .themed-img .on-light { display: none !important; }
+:root[data-theme="dark"] .themed-img .on-dark { display: block !important; }
 @media (max-width: 560px) {
   .note .body { grid-template-columns: 1fr; gap: 0.9rem; }
-  .note .body img, .note .placeholder { width: 12rem; justify-self: center; }
-  .note .body img.figure-sm { width: 7rem; }
+  .note .body img, .note .placeholder, .note .body .themed-img { width: 12rem; justify-self: center; }
+  .note .body .figure-md { width: 10.5rem; }
+  .note .body .figure-sm { width: 7rem; justify-self: center; }
+  .note .body svg.qr { width: 6rem; }
 }
 
 /* Resources */
