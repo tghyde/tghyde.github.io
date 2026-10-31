@@ -12,7 +12,7 @@
 </head>
 <body>
 <button id="themetoggle" aria-label="Toggle light or dark theme" title="Toggle light/dark"></button>
-<div class="wrap">
+<div class="wrap" id="top">
 <header class="site">
   <a class="brand" href="/">Trevor Hyde</a>
   <nav class="main">
@@ -22,13 +22,23 @@
     <a href="/notes/">Notes</a>
     <a href="/resources/">Resources</a>
     <a href="/cv/">CV</a>
+    <button type="button" class="sb-toc nav-toc" aria-controls="toc" aria-expanded="false">Contents</button>
   </nav>
 </header>
 
+<div class="scrollbar" id="scrollnav"><a href="/">← Home</a><span class="sb-label">Teaching</span><button type="button" class="sb-toc" aria-controls="toc" aria-expanded="false">Contents</button><a class="sb-top" href="#top" aria-label="Back to top">↑ Top</a></div>
+<nav class="toc" id="toc" aria-label="Table of contents">
+<p class="toc-title">Contents</p>
+<ul>
+<li class="toc-l1"><a href="#vassar">Vassar College</a></li>
+<li class="toc-l1"><a href="#chicago">University of Chicago</a></li>
+<li class="toc-l1"><a href="#michigan">University of Michigan</a></li>
+</ul>
+</nav>
 <main>
 <h1>Teaching</h1>
 
-<h2>Vassar College</h2>
+<h2 id="vassar">Vassar College</h2>
 <p>I started teaching as an Assistant Professor of Mathematics and Statistics at Vassar College in the Fall of 2023.</p>
 <ul class="courses">
   <li><span class="c">Math 221 Linear Algebra</span><span class="s">Spring 2024; Fall 2026 (two sections)</span></li>
@@ -40,7 +50,7 @@
 </ul>
 <p class="muted small">On sabbatical leave, Spring 2026.</p>
 
-<h2>University of Chicago</h2>
+<h2 id="chicago">University of Chicago</h2>
 <p>As a postdoc at the University of Chicago I taught a variety of major-focused courses. In 2022 I received the <a href="https://college.uchicago.edu/news/faculty-stories/college-announces-2022-winners-glenn-and-claire-swogger-award-exemplary">Glen and Claire Swogger Award for Exemplary Classroom Teaching</a>.</p>
 <ul class="courses">
   <li><span class="c">Math 161/162 Honors Calculus (IBL)</span><span class="s">Fall 2019; Winter 2020; Spring 2020</span></li>
@@ -50,7 +60,7 @@
   <li><span class="c">Math 255 Rings and Fields</span><span class="s">Winter 2022; Spring 2023</span></li>
 </ul>
 
-<h2>University of Michigan</h2>
+<h2 id="michigan">University of Michigan</h2>
 <p>I taught calculus throughout my time as a graduate student at the University of Michigan. I received the Department of Mathematics Outstanding Teaching Award in 2017 and the university-wide <a href="http://www.rackham.umich.edu/faculty-staff/awards/outstanding-graduate-student-instructor-awards">Rackham Outstanding Graduate Student Instructor Award</a> in 2018.</p>
 <ul class="courses">
   <li><span class="c">Math 115 Introduction to Calculus</span><span class="s">Fall 2013</span></li>

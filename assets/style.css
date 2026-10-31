@@ -87,6 +87,25 @@ header.site {
   margin-bottom: 2rem;
 }
 @media (max-width: 52rem) { header.site { padding-right: 2.75rem; } }
+/* Desktop: the header stays pinned while scrolling and replaces the slide-in bar */
+@media (min-width: 48rem) {
+  header.site { position: sticky; top: 0; z-index: 45; background: var(--bg); }
+  body .scrollbar { display: none; }
+  [id] { scroll-margin-top: 5.5rem; }
+}
+header.site .nav-toc {
+  display: none;
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  padding: .1rem .4rem;
+}
+header.site .nav-toc:hover { background: var(--hover-bg); color: var(--accent); }
+header.site .nav-toc::after { content: " ▾"; }
+header.site .nav-toc[aria-expanded="true"]::after { content: " ▴"; }
+@media (min-width: 48rem) and (max-width: 77.99rem) { header.site .nav-toc { display: inline-block; } }
 header.site .brand { font-weight: 600; font-size: 1.1rem; color: var(--fg); padding: 0 .2rem; margin: 0 -.2rem; }
 header.site .brand:hover { background: var(--hover-bg); }
 nav.main { font-family: var(--sans); font-size: 0.88rem; display: flex; flex-wrap: wrap; gap: .2rem .5rem; }
@@ -153,12 +172,14 @@ footer.site a:hover { background: var(--hover-bg); }
 .contact li { margin-bottom: 0.3rem; }
 .contact .k { display: inline-block; min-width: 4.2rem; color: var(--muted); }
 .hero .aside { display: flex; flex-direction: column; gap: .9rem; }
+.hero .credit { margin: -.6rem 0 0; font-family: var(--sans); font-size: .72rem; color: var(--muted); opacity: .8; text-align: right; }
 .hero .aside .links { flex-direction: column; align-items: stretch; margin: 0; }
 .hero .aside .links a { display: flex; width: 100%; justify-content: center; padding: .35rem 1.1rem; }
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; }
   .hero .aside { display: contents; }
   .hero .photo { width: 180px; order: -1; }
+  .hero .credit { order: -1; width: 180px; margin-top: -1.55rem; }
   .hero .aside .links { order: 1; flex-direction: row; margin-top: .25rem; }
   .hero .aside .links a { display: inline-flex; width: auto; }
 }

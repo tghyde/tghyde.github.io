@@ -12,7 +12,7 @@
 </head>
 <body>
 <button id="themetoggle" aria-label="Toggle light or dark theme" title="Toggle light/dark"></button>
-<div class="wrap">
+<div class="wrap" id="top">
 <header class="site">
   <a class="brand" href="/">Trevor Hyde</a>
   <nav class="main">
@@ -22,9 +22,19 @@
     <a href="/notes/">Notes</a>
     <a href="/resources/">Resources</a>
     <a href="/cv/">CV</a>
+    <button type="button" class="sb-toc nav-toc" aria-controls="toc" aria-expanded="false">Contents</button>
   </nav>
 </header>
 
+<div class="scrollbar" id="scrollnav"><a href="/">← Home</a><span class="sb-label">Research</span><button type="button" class="sb-toc" aria-controls="toc" aria-expanded="false">Contents</button><a class="sb-top" href="#top" aria-label="Back to top">↑ Top</a></div>
+<nav class="toc" id="toc" aria-label="Table of contents">
+<p class="toc-title">Contents</p>
+<ul>
+<li class="toc-l1"><a href="#publications">Publications</a></li>
+<li class="toc-l1"><a href="#thesis">Doctoral Thesis</a></li>
+<li class="toc-l1"><a href="#talks">Invited Talks</a></li>
+</ul>
+</nav>
 <main>
 <h1>Research</h1>
 <p>My research interests include arithmetic dynamics, arithmetic statistics, geometry of configuration spaces, Galois theory, and algebraic combinatorics.</p>

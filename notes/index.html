@@ -12,7 +12,7 @@
 </head>
 <body>
 <button id="themetoggle" aria-label="Toggle light or dark theme" title="Toggle light/dark"></button>
-<div class="wrap">
+<div class="wrap" id="top">
 <header class="site">
   <a class="brand" href="/">Trevor Hyde</a>
   <nav class="main">
@@ -22,9 +22,26 @@
     <a href="/notes/" aria-current="page">Notes</a>
     <a href="/resources/">Resources</a>
     <a href="/cv/">CV</a>
+    <button type="button" class="sb-toc nav-toc" aria-controls="toc" aria-expanded="false">Contents</button>
   </nav>
 </header>
 
+<div class="scrollbar" id="scrollnav"><a href="/">← Home</a><span class="sb-label">Notes</span><button type="button" class="sb-toc" aria-controls="toc" aria-expanded="false">Contents</button><a class="sb-top" href="#top" aria-label="Back to top">↑ Top</a></div>
+<nav class="toc" id="toc" aria-label="Table of contents">
+<p class="toc-title">Contents</p>
+<ul>
+<li class="toc-l1"><a href="#slides">Slides</a></li>
+<li class="toc-l2"><a href="#p-adic-numbers">Down the Rabbit Hole</a></li>
+<li class="toc-l1"><a href="#interactive">Interactive</a></li>
+<li class="toc-l2"><a href="#portalz">Portalz</a></li>
+<li class="toc-l2"><a href="#math-timeline">Timeline of Mathematics</a></li>
+<li class="toc-l2"><a href="#row-reducer">Row Reducer</a></li>
+<li class="toc-l2"><a href="#linear-maps">Linear Map Visualizer</a></li>
+<li class="toc-l2"><a href="#group-determinant">The Group Determinant</a></li>
+<li class="toc-l2"><a href="#f3-lines">Lines in 𝔽<sub>3</sub><sup>2</sup></a></li>
+<li class="toc-l2"><a href="#ricochet-solitaire">Ricochet Solitaire</a></li>
+</ul>
+</nav>
 <main>
 <h1>Notes</h1>
 <p>Expository notes on mathematics and slides from my talks.</p>

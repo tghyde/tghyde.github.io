@@ -1,4 +1,4 @@
-/* Theme toggle, sticky bar, and table-of-contents behaviour (after hwGenie). */
+/* Theme toggle, slide-in bar (phones), and table-of-contents behaviour (after hwGenie). */
 
 // Light/dark toggle. A saved choice is applied before first paint by the
 // inline script in <head>; without one the CSS follows the system setting.
@@ -47,28 +47,36 @@
 })();
 
 // Table of contents: open/close on narrow screens, scroll-spy highlighting.
+// On desktop widths the pinned header carries the Contents button and the
+// dropdown hangs below it; on phones the slide-in bar does.
 (function () {
   var toc = document.getElementById("toc");
   if (!toc) return;
   var bar = document.getElementById("scrollnav");
-  var btn = bar ? bar.querySelector(".sb-toc") : null;
+  var header = document.querySelector("header.site");
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".sb-toc"));
   var wide = window.matchMedia ? matchMedia("(min-width: 78rem)") : null;
+  var pinned = window.matchMedia ? matchMedia("(min-width: 48rem)") : null;
   var links = Array.prototype.slice.call(toc.querySelectorAll("a[href^='#']"));
   var targets = links.map(function (a) {
     return document.getElementById(a.getAttribute("href").slice(1));
   });
 
+  function anchorBottom() {
+    var el = pinned && pinned.matches ? header : bar;
+    return el ? Math.max(0, el.getBoundingClientRect().bottom) : 0;
+  }
   function setOpen(want) {
     toc.classList.toggle("open", want);
-    if (btn) btn.setAttribute("aria-expanded", want ? "true" : "false");
-    if (want && bar) toc.style.top = bar.offsetHeight + "px";
+    btns.forEach(function (b) { b.setAttribute("aria-expanded", want ? "true" : "false"); });
+    if (want) toc.style.top = anchorBottom() + "px";
   }
-  if (btn) {
+  btns.forEach(function (btn) {
     btn.addEventListener("click", function (ev) {
       ev.stopPropagation();
       setOpen(!toc.classList.contains("open"));
     });
-  }
+  });
   toc.addEventListener("click", function (ev) {
     if (ev.target.closest("a")) setOpen(false);
   });
@@ -82,8 +90,9 @@
 
   var current = -1;
   function spy() {
-    if (bar && toc.classList.contains("open") && !bar.classList.contains("visible")) {
-      setOpen(false);
+    if (toc.classList.contains("open")) {
+      if (pinned && pinned.matches) toc.style.top = anchorBottom() + "px";
+      else if (bar && !bar.classList.contains("visible")) setOpen(false);
     }
     var limit = 90, idx = -1;
     for (var i = 0; i < targets.length; i++) {
