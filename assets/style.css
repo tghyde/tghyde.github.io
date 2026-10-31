@@ -245,7 +245,27 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note .math-figure .pivot { color: var(--accent); font-weight: 600; }
 .note .body .figure-md { width: 11rem; justify-self: center; }
 .note .body .figure-sm { width: 7.5rem; justify-self: end; }   /* sits under the buttons */
+.note .body img[src$="hourglass.svg"] { width: 5rem; }
 .note .body svg.qr { display: block; width: 6.5rem; height: auto; color: var(--fg); margin: .5rem 0; }
+.note .math-figure-sm { font-size: 1.05rem; }
+/* Lines in F_3^2: point and line colors from the tool itself, light and dark */
+.f3-fig {
+  --pt-0: #4a1c5c; --pt-1: #a8468a; --pt-2: #eeb9be;
+  --pt-3: #d490bf; --pt-4: #9c3f58; --pt-5: #7a3a90;
+  --pt-6: #d47c8d; --pt-7: #b98cc9; --pt-8: #7d2d66;
+  --line-0: #243B70; --line-1: #E1B84E;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .f3-fig {
+    --pt-0: #7a3f94; --pt-1: #b85a9a; --pt-4: #c25a74; --pt-5: #9a5ab0;
+    --pt-7: #c9a0d8; --pt-8: #a3458c; --line-0: #8DB1EA;
+  }
+}
+:root[data-theme="dark"] .f3-fig {
+  --pt-0: #7a3f94; --pt-1: #b85a9a; --pt-4: #c25a74; --pt-5: #9a5ab0;
+  --pt-7: #c9a0d8; --pt-8: #a3458c; --line-0: #8DB1EA;
+}
+.note .body svg.f3-fig { display: block; height: auto; }
 /* light and dark versions of one picture, swapped with the site theme */
 .note .body .themed-img img { display: block; width: 100%; height: auto; }
 .themed-img .on-dark { display: none !important; }
