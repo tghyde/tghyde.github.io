@@ -35,3 +35,9 @@ there, then re-copy it here and commit:
 ```bash
 sh scripts/sync-p-adic-slides.sh
 ```
+
+## Cache busting
+
+GitHub Pages lets browsers cache files for 10 minutes. Every page links the stylesheet and script with a
+version query (`/assets/style.css?v=…`, `/assets/site.js?v=…`); bump that value on all pages whenever
+`assets/style.css` or `assets/site.js` changes so visitors get the new copy right away.

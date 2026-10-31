@@ -87,17 +87,19 @@ header.site {
   margin-bottom: 2rem;
 }
 @media (max-width: 52rem) { header.site { padding-right: 2.75rem; } }
-/* Desktop: the header stays pinned while scrolling and replaces the slide-in bar */
-@media (min-width: 48rem) {
-  header.site { position: sticky; top: 0; z-index: 45; background: var(--bg); }
-  body .scrollbar { display: none; }
-  [id] { scroll-margin-top: 5.5rem; }
-}
+/* The header stays pinned at the top while scrolling, at every width */
+header.site { position: sticky; top: 0; z-index: 45; background: var(--bg); }
+[id] { scroll-margin-top: 5.5rem; }
+header.site .brand { order: 1; }
+nav.main { order: 2; margin-left: auto; }
 header.site .nav-toc {
+  order: 3;
   display: none;
   background: none;
   border: none;
   font: inherit;
+  font-family: var(--sans);
+  font-size: 0.88rem;
   color: var(--muted);
   cursor: pointer;
   padding: .1rem .4rem;
@@ -105,7 +107,25 @@ header.site .nav-toc {
 header.site .nav-toc:hover { background: var(--hover-bg); color: var(--accent); }
 header.site .nav-toc::after { content: " ▾"; }
 header.site .nav-toc[aria-expanded="true"]::after { content: " ▴"; }
-@media (min-width: 48rem) and (max-width: 77.99rem) { header.site .nav-toc { display: inline-block; } }
+@media (max-width: 77.99rem) { header.site .nav-toc { display: inline-block; } }
+/* Phones: a compact header so the pinned bar stays short. Name and Contents
+   on the first line, all the page links on one line below. */
+@media (max-width: 47.99rem) {
+  header.site { padding-top: .7rem; padding-bottom: .5rem; margin-bottom: 1.5rem; row-gap: .3rem; align-items: center; }
+  header.site .nav-toc { order: 2; margin-left: auto; }
+  header.site nav.main {
+    order: 3;
+    flex: 0 0 calc(100% + 2.75rem + .25rem);  /* run under the theme toggle's column */
+    margin: 0 -2.75rem 0 -.25rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  header.site nav.main::-webkit-scrollbar { display: none; }
+  header.site nav.main a { padding: .1rem .25rem; white-space: nowrap; }
+}
 header.site .brand { font-weight: 600; font-size: 1.1rem; color: var(--fg); padding: 0 .2rem; margin: 0 -.2rem; }
 header.site .brand:hover { background: var(--hover-bg); }
 nav.main { font-family: var(--sans); font-size: 0.88rem; display: flex; flex-wrap: wrap; gap: .2rem .5rem; }
@@ -256,42 +276,6 @@ table.cv td.note { padding-left: 1.5rem; }
 .cv ul.dash li::before { content: "\25AA"; color: var(--muted); font-size: .7em; position: relative; top: -.1em; margin-right: .55em; }
 .cv .ug { color: var(--accent); }
 
-/* Sticky bar that slides in after scrolling (hwGenie "scrollbar") */
-.scrollbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: .9rem;
-  padding: .45rem 3.4rem .45rem .9rem;
-  background: var(--card-bg);
-  box-shadow: 0 1px 10px rgba(0, 0, 0, .14);
-  font-family: var(--sans);
-  font-size: .85rem;
-  overflow-x: auto;
-  transform: translateY(-100%);
-  transition: transform .18s ease;
-  white-space: nowrap;
-}
-.scrollbar.visible { transform: translateY(0); }
-.scrollbar a { color: var(--accent); padding: .1rem .3rem; }
-.scrollbar a:hover { background: var(--hover-bg); }
-.scrollbar .sb-label { color: var(--muted); }
-.scrollbar .sb-top { margin-left: auto; }
-.scrollbar .sb-toc {
-  background: none;
-  border: none;
-  font: inherit;
-  color: var(--accent);
-  cursor: pointer;
-  padding: .1rem .3rem;
-}
-.scrollbar .sb-toc:hover { background: var(--hover-bg); }
-.scrollbar .sb-toc::after { content: " ▾"; }
-.scrollbar .sb-toc[aria-expanded="true"]::after { content: " ▴"; }
-@media (max-width: 30rem) { .scrollbar { gap: .55rem; padding-left: .7rem; } }
-
 /* Table of contents: fixed in the left gutter when the viewport can hold one
    beside the 46rem column; otherwise a dropdown under the sticky bar. */
 nav.toc { font-family: var(--sans); font-size: .82rem; line-height: 1.4; }
@@ -319,13 +303,12 @@ nav.toc li.toc-l2 a { padding-left: 1.5rem; }
     overflow-y: auto;
     z-index: 40;
   }
-  .scrollbar .sb-toc { display: none; }
 }
 @media (max-width: 77.99rem) {
   nav.toc {
     position: fixed;
     left: 0; right: 0;
-    top: 0;                      /* moved below the sticky bar by script */
+    top: 0;                      /* moved below the pinned header by script */
     z-index: 49;
     display: none;
     background: var(--card-bg);
@@ -342,7 +325,7 @@ nav.toc li.toc-l2 a { padding-left: 1.5rem; }
   :root { --bg: #fff; --fg: #000; --muted: #444; --border: #999; --accent: #24589f; --card-bg: #fff; --hover-bg: #fff; }
   body { font-size: 10.5pt; line-height: 1.35; }
   .wrap { max-width: none; padding: 0; }
-  header.site, footer.site, .cv .actions, nav.toc, .scrollbar, #themetoggle { display: none; }
+  header.site, footer.site, .cv .actions, nav.toc, #themetoggle { display: none; }
   h2 { margin: 12pt 0 5pt; page-break-after: avoid; }
   h3 { page-break-after: avoid; }
   table.cv tr, li { page-break-inside: avoid; }

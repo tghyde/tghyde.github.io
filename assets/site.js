@@ -1,4 +1,4 @@
-/* Theme toggle, slide-in bar (phones), and table-of-contents behaviour (after hwGenie). */
+/* Theme toggle and table-of-contents behaviour (after hwGenie). */
 
 // Light/dark toggle. A saved choice is applied before first paint by the
 // inline script in <head>; without one the CSS follows the system setting.
@@ -24,47 +24,21 @@
   icon();
 })();
 
-// Sticky bar that slides in once the reader has scrolled past the header.
-(function () {
-  var bar = document.getElementById("scrollnav");
-  if (!bar) return;
-  var shown = false;
-  window.addEventListener("scroll", function () {
-    var want = window.scrollY > 350;
-    if (want !== shown) {
-      shown = want;
-      bar.classList.toggle("visible", want);
-    }
-  }, { passive: true });
-  bar.addEventListener("click", function (ev) {
-    var a = ev.target.closest("a");
-    if (!a) return;
-    if (a.getAttribute("href") === "#top") {
-      ev.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
-})();
-
-// Table of contents: open/close on narrow screens, scroll-spy highlighting.
-// On desktop widths the pinned header carries the Contents button and the
-// dropdown hangs below it; on phones the slide-in bar does.
+// Table of contents: a fixed sidebar on wide screens; below that, a dropdown
+// opened by the Contents button in the pinned header. Scroll-spy highlighting.
 (function () {
   var toc = document.getElementById("toc");
   if (!toc) return;
-  var bar = document.getElementById("scrollnav");
   var header = document.querySelector("header.site");
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".sb-toc"));
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".nav-toc"));
   var wide = window.matchMedia ? matchMedia("(min-width: 78rem)") : null;
-  var pinned = window.matchMedia ? matchMedia("(min-width: 48rem)") : null;
   var links = Array.prototype.slice.call(toc.querySelectorAll("a[href^='#']"));
   var targets = links.map(function (a) {
     return document.getElementById(a.getAttribute("href").slice(1));
   });
 
   function anchorBottom() {
-    var el = pinned && pinned.matches ? header : bar;
-    return el ? Math.max(0, el.getBoundingClientRect().bottom) : 0;
+    return header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
   }
   function setOpen(want) {
     toc.classList.toggle("open", want);
@@ -90,10 +64,7 @@
 
   var current = -1;
   function spy() {
-    if (toc.classList.contains("open")) {
-      if (pinned && pinned.matches) toc.style.top = anchorBottom() + "px";
-      else if (bar && !bar.classList.contains("visible")) setOpen(false);
-    }
+    if (toc.classList.contains("open")) toc.style.top = anchorBottom() + "px";
     var limit = 90, idx = -1;
     for (var i = 0; i < targets.length; i++) {
       if (targets[i] && targets[i].getBoundingClientRect().top <= limit) idx = i;
