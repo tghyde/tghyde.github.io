@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notes · Trevor Hyde</title>
 <meta name="description" content="Expository notes, talk slides, and interactive mathematics tools by Trevor Hyde: p-adic numbers, branched covers, linear algebra, representation theory, and more.">
-<link rel="stylesheet" href="/assets/style.css?v=20261031b">
+<link rel="stylesheet" href="/assets/style.css?v=20261031c">
+<link rel="stylesheet" href="/assets/katex/katex.min.css">
 <link rel="icon" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <script>(function(){try{var t=localStorage.getItem('th-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -39,6 +40,7 @@
 <li class="toc-l2"><a href="#group-determinant">The Group Determinant</a></li>
 <li class="toc-l2"><a href="#f3-lines">Lines in 𝔽<sub>3</sub><sup>2</sup></a></li>
 <li class="toc-l2"><a href="#ricochet-solitaire">Ricochet Solitaire</a></li>
+<li class="toc-l2"><a href="#qr-generator">QR Code Generator</a></li>
 </ul>
 </nav>
 <main>
@@ -101,7 +103,9 @@
   </div>
   <div class="body">
     <p>Practice row reduction one elementary row operation at a time, with exact rational arithmetic. Start from a matrix or a linear system, watch each operation animate, and see when you reach row echelon and reduced row echelon form. Work can be shared by link or exported to LaTeX. Inspired by the row reduction demo in Margalit and Rabinoff’s <a href="https://textbooks.math.gatech.edu/ila/"><em>Interactive Linear Algebra</em></a>.</p>
-    <div class="placeholder" aria-hidden="true">Image to come</div>
+    <div class="math-figure" role="img" aria-label="A 3 by 4 integer matrix in row echelon form, with pivots 1, 2, and 3"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:3.6em;vertical-align:-1.55em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.6em" viewBox="0 0 667 3600"><path d="M403 1759 V84 H666 V0 H319 V1759 v0 v1759 v84 h347 v-84
+H403z M403 1759 V0 H319 V1759 v0 v1759 v84 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="enclosing pivot"><span class="mord">1</span></span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">2</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="enclosing pivot"><span class="mord">2</span></span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">1</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">5</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="enclosing pivot"><span class="mord">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.6em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.6em" viewBox="0 0 667 3600"><path d="M347 1759 V0 H0 V84 H263 V1759 v0 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v0 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span></span></span></span></div>
   </div>
 </article>
 
@@ -115,7 +119,7 @@
   </div>
   <div class="body">
     <p>See what a matrix does to space. Enter a 2&thinsp;×&thinsp;2, 2&thinsp;×&thinsp;3, 3&thinsp;×&thinsp;2, or 3&thinsp;×&thinsp;3 matrix and watch it carry a figure, the unit circle or sphere, and a lattice from the domain to the codomain, drawn side by side in two or three dimensions.</p>
-    <div class="placeholder" aria-hidden="true">Image to come</div>
+    <img src="/notes/linearmaps-house.svg" alt="A small 3D house sheared by a linear map, its walls leaning and its base tilted" width="136" height="89">
   </div>
 </article>
 
@@ -158,7 +162,21 @@
   </div>
   <div class="body">
     <p>A solitaire version of the board game Ricochet Robots. Robots slide until they hit a wall or another robot; find a short route to the target, then compare your solution with an exhaustive solver that always finds an optimal one.</p>
-    <div class="placeholder" aria-hidden="true">Image to come</div>
+    <img class="figure-sm" src="/notes/ricochet-robot.svg" alt="The yellow robot from Ricochet Solitaire" width="30" height="31">
+  </div>
+</article>
+
+<article class="note" id="qr-generator">
+  <div class="head">
+    <h3>QR Code Generator</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/qr_gen/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/qr_gen">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>A simple generator for static QR codes. Paste a link or some text, pick foreground and background colors (the presets come from Vassar’s official palette) and a border width, then copy or download the code as a PNG. The codes are static, so they never expire. Scan the one here to open the generator.</p>
+    <img class="figure-sm qr" src="/notes/qr-gen.svg" alt="QR code linking to the QR Code Generator at tghyde.github.io/qr_gen" width="37" height="37">
   </div>
 </article>
 </main>

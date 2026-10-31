@@ -241,9 +241,14 @@ ol.pubs .refs a { margin-right: 0.8rem; }
   font-family: var(--sans);
   font-size: .8rem;
 }
+.note .math-figure { justify-self: center; font-size: 1.45rem; color: var(--fg); }
+.note .math-figure .pivot { color: var(--accent); font-weight: 600; }
+.note .body img.figure-sm { width: 7.5rem; justify-self: center; }
+.note .body img.qr { border-radius: 4px; }
 @media (max-width: 560px) {
   .note .body { grid-template-columns: 1fr; gap: 0.9rem; }
   .note .body img, .note .placeholder { width: 12rem; justify-self: center; }
+  .note .body img.figure-sm { width: 7rem; }
 }
 
 /* Resources */
