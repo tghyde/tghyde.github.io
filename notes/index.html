@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notes · Trevor Hyde</title>
-<meta name="description" content="Slides and expository notes by Trevor Hyde, including an introduction to the p-adic numbers.">
+<meta name="description" content="Expository notes, talk slides, and interactive mathematics tools by Trevor Hyde: p-adic numbers, branched covers, linear algebra, representation theory, and more.">
 <link rel="stylesheet" href="/assets/style.css">
 <link rel="icon" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -29,15 +29,120 @@
 <h1>Notes</h1>
 <p>Expository notes on mathematics and slides from my talks.</p>
 
+<h2 id="slides">Slides</h2>
 <article class="note" id="p-adic-numbers">
   <div class="head">
-    <h2>Down the Rabbit Hole: An Introduction to <em>p</em>-adic Numbers</h2>
-    <a class="btn" href="/notes/p-adic-numbers/">Slides</a>
+    <h3>Down the Rabbit Hole: An Introduction to <em>p</em>-adic Numbers</h3>
+    <div class="actions">
+      <a class="btn" href="/notes/p-adic-numbers/">Slides</a>
+    </div>
   </div>
   <p class="meta">Math Day keynote address, Colorado State University &middot; November 2026</p>
   <div class="body">
     <p>It’s a curious fact that 1 = 0.999… where the 9s repeat forever to the right. An even curiouser fact is that −1 = …999 where the 9s repeat forever to the left. Now that may seem crazy, but in this talk I will explain the twisted logic behind it which leads us down a rabbit hole to the strange world of <em>p</em>-adic numbers.</p>
     <img src="/notes/cheshire-cat.png" alt="The Cheshire Cat, fading away to a grin" width="712" height="436">
+  </div>
+</article>
+
+<h2 id="interactive">Interactive</h2>
+<p>Interactive tools and visualizations, mostly built for my courses. Each one runs in the browser.</p>
+
+<article class="note" id="portalz">
+  <div class="head">
+    <h3>Portalz</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/Portalz/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/Portalz">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>Walk around inside 3-manifolds built as branched covers. Simple rooms are stitched together along invisible membranes and explored seamlessly in first person. In the knot hall a trefoil, figure-eight knot, or Hopf link floats overhead, and looking through the knot shows you the other sheets of the cover, like the colored rooms of the S<sub>3</sub> cover of the trefoil pictured here.</p>
+    <img src="/notes/portalz-trefoil.png" alt="A black trefoil knot with blue, green, and red rooms visible through its loops" width="900" height="518">
+  </div>
+</article>
+
+<article class="note" id="math-timeline">
+  <div class="head">
+    <h3>Timeline of Mathematics</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/math_timeline/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/math_timeline">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>A tool for visualizing the history of mathematics. Choose mathematicians and events from a list to add them to the timeline, then click any of them for a short description and an image. I made it to give historical context in my classes, so the current selection reflects the occasions where I have used it.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
+  </div>
+</article>
+
+<article class="note" id="row-reducer">
+  <div class="head">
+    <h3>Row Reducer</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/rowreducer/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/rowreducer">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>Practice row reduction one elementary row operation at a time, with exact rational arithmetic. Start from a matrix or a linear system, watch each operation animate, and see when you reach row echelon and reduced row echelon form. Work can be shared by link or exported to LaTeX. Inspired by the row reduction demo in Margalit and Rabinoff’s <a href="https://textbooks.math.gatech.edu/ila/"><em>Interactive Linear Algebra</em></a>.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
+  </div>
+</article>
+
+<article class="note" id="linear-maps">
+  <div class="head">
+    <h3>Linear Map Visualizer</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/linearmaps/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/linearmaps">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>See what a matrix does to space. Enter a 2&thinsp;×&thinsp;2, 2&thinsp;×&thinsp;3, 3&thinsp;×&thinsp;2, or 3&thinsp;×&thinsp;3 matrix and watch it carry a figure, the unit circle or sphere, and a lattice from the domain to the codomain, drawn side by side in two or three dimensions.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
+  </div>
+</article>
+
+<article class="note" id="group-determinant">
+  <div class="head">
+    <h3>The Group Determinant</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/group-determinant/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/group-determinant">GitHub</a>
+    </div>
+  </div>
+  <p class="meta">Math 301 Representation Theory &middot; Fall 2026</p>
+  <div class="body">
+    <p>Explore Frobenius’s group determinant. Choose a finite group to see its presentation, its multiplication table, the matrix (<i>x<sub>gh</sub></i>), and the factorization of det(<i>x<sub>gh</sub></i>) into irreducible polynomials: one factor for each irreducible representation, raised to the power of its degree.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
+  </div>
+</article>
+
+<article class="note" id="f3-lines">
+  <div class="head">
+    <h3>Lines in 𝔽<sub>3</sub><sup>2</sup></h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/math301-fall2026/f3-lines.html">Open</a>
+    </div>
+  </div>
+  <p class="meta">Math 301 Representation Theory &middot; Fall 2026</p>
+  <div class="body">
+    <p>Draw affine lines over the field with three elements and watch what an element of the affine group Aff<sub>2</sub>(𝔽<sub>3</sub>) does to them. Points can be shown on a 3&thinsp;×&thinsp;3 grid or on the integer lattice, where each line of 𝔽<sub>3</sub><sup>2</sup> appears together with all of its translates.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
+  </div>
+</article>
+
+<article class="note" id="ricochet-solitaire">
+  <div class="head">
+    <h3>Ricochet Solitaire</h3>
+    <div class="actions">
+      <a class="btn" href="https://tghyde.github.io/ricochet-solitaire/">Open</a>
+      <a class="btn" href="https://github.com/tghyde/ricochet-solitaire">GitHub</a>
+    </div>
+  </div>
+  <div class="body">
+    <p>A solitaire version of the board game Ricochet Robots. Robots slide until they hit a wall or another robot; find a short route to the target, then compare your solution with an exhaustive solver that always finds an optimal one.</p>
+    <div class="placeholder" aria-hidden="true">Image to come</div>
   </div>
 </article>
 </main>

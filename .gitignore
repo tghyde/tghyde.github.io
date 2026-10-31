@@ -9,3 +9,6 @@
 *.toc
 *.bbl
 *.blg
+
+# Local Claude Code settings
+.claude/
