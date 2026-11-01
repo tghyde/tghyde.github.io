@@ -243,15 +243,13 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note .math-figure { justify-self: center; font-size: 1.3rem; color: var(--fg); }
 .note .math-figure .pivot { color: var(--accent); font-weight: 600; }
 .note .body .figure-md { width: 11rem; justify-self: center; }
-/* Small figures sit under the buttons, all centered on one vertical axis: each is right-aligned
-   in the column, then pushed left by half of how much narrower it is than the widest (7.5rem). */
-.note .body .figure-sm { width: 7.5rem; justify-self: end; margin-right: 0; }
+.note .body .figure-sm { width: 7.5rem; justify-self: center; }
 .note .body .course-icon { width: 9rem; justify-self: center; border-radius: 10px; }
 .office-hours { margin: 0 0 1.5rem; }
-.note .body img[src$="hourglass.svg"] { width: 5rem; margin-right: 1.25rem; }
+.note .body img[src$="hourglass.svg"] { width: 5rem; }
 .note .body svg.robot { display: block; height: auto; }
 .note .body svg.robot .shadow { fill: var(--fg); opacity: .2; }   /* dark by day, light at night */
-.note .body svg.qr { display: block; width: 6.5rem; height: auto; color: var(--fg); margin: .5rem .5rem .5rem 0; }
+.note .body svg.qr { display: block; width: 6.5rem; height: auto; color: var(--fg); margin: .5rem 0; }
 .note .math-figure-sm { font-size: 1.05rem; }
 /* Lines in F_3^2: point and line colors from the tool itself, light and dark */
 .f3-fig {
@@ -284,7 +282,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
   .note .body { grid-template-columns: 1fr; gap: 0.9rem; }
   .note .body img, .note .placeholder, .note .body .themed-img { width: 12rem; justify-self: center; }
   .note .body .figure-md { width: 10.5rem; }
-  .note .body .figure-sm { width: 7rem; justify-self: center; margin-right: 0 !important; }
+  .note .body .figure-sm { width: 7rem; }
   .note .body .course-icon { width: 8rem; }
   .note .body svg.qr { width: 6rem; }
   .note .body img[src$="hourglass.svg"] { width: 4.75rem; }
