@@ -227,7 +227,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note h3 { margin: 0 0 .55rem; font-size: 1.15rem; }
 .note .actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
 .note .meta { font-family: var(--sans); font-size: 0.88rem; color: var(--muted); margin: -0.2rem 0 0.8rem; }
-.note .body { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: 1.5rem; align-items: center; }
+.note .body { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: 1.5rem; align-items: start; }
 .note .body p { margin: 0; }
 .note .body img { width: 100%; height: auto; }
 .note .placeholder {
