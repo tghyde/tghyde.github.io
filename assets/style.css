@@ -247,6 +247,8 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 /* Small figures sit under the buttons, all centered on one vertical axis: each is right-aligned
    in the column, then pushed left by half of how much narrower it is than the widest (7.5rem). */
 .note .body .figure-sm { width: 7.5rem; justify-self: end; margin-right: 0; }
+.note .body .course-icon { width: 9rem; justify-self: center; border-radius: 10px; }
+.office-hours { margin: 0 0 1.5rem; }
 .note .body img[src$="hourglass.svg"] { width: 5rem; margin-right: 1.25rem; }
 .note .body svg.robot { display: block; height: auto; }
 .note .body svg.robot .shadow { fill: var(--fg); opacity: .2; }   /* dark by day, light at night */
@@ -284,6 +286,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
   .note .body img, .note .placeholder, .note .body .themed-img { width: 12rem; justify-self: center; }
   .note .body .figure-md { width: 10.5rem; }
   .note .body .figure-sm { width: 7rem; justify-self: center; margin-right: 0 !important; }
+  .note .body .course-icon { width: 8rem; }
   .note .body svg.qr { width: 6rem; }
   .note .body img[src$="hourglass.svg"] { width: 4.75rem; }
 }
