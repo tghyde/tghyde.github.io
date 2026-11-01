@@ -249,6 +249,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note .body .figure-sm { width: 7.5rem; justify-self: end; margin-right: 0; }
 .note .body .course-icon { width: 9rem; justify-self: center; border-radius: 10px; }
 .office-hours { margin: 0 0 1.5rem; }
+.note.course .actions { width: 13rem; justify-content: center; }   /* centered over the icon column */
 .note .body img[src$="hourglass.svg"] { width: 5rem; margin-right: 1.25rem; }
 .note .body svg.robot { display: block; height: auto; }
 .note .body svg.robot .shadow { fill: var(--fg); opacity: .2; }   /* dark by day, light at night */
@@ -287,6 +288,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
   .note .body .figure-md { width: 10.5rem; }
   .note .body .figure-sm { width: 7rem; justify-self: center; margin-right: 0 !important; }
   .note .body .course-icon { width: 8rem; }
+  .note.course .actions { width: auto; }
   .note .body svg.qr { width: 6rem; }
   .note .body img[src$="hourglass.svg"] { width: 4.75rem; }
 }
