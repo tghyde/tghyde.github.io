@@ -10,7 +10,7 @@ Plain HTML and CSS, no build step. Edit a page, push to `main`, and it is live w
 | `research/` | Publications, thesis, invited talks |
 | `teaching/` | Courses taught |
 | `resources/` | Math graduate school resources for students |
-| `notes/` | Notes page: slides and expository notes. `notes/p-adic-numbers/` is the p-adic talk deck, copied from its own repo (see below) |
+| `notes/` | Notes page: slides and expository notes. `notes/expository/` holds PDFs of expository notes and `notes/p-adic-numbers/` is the p-adic talk deck, both copied from private repos (see below) |
 | `cv/` | Curriculum vitae: HTML version (`index.html`), LaTeX source (`CV.tex`), and PDF (`CV.pdf`) |
 | `assets/` | Stylesheet and photo |
 
@@ -35,6 +35,19 @@ there, then re-copy it here and commit:
 ```bash
 sh scripts/sync-p-adic-slides.sh
 ```
+
+## Updating the expository notes
+
+`notes/expository/` holds PDFs of notes whose TeX sources live in the private repo `tghyde/math-notes`
+(locally `~/Documents/Claude/math-notes`). Edit a note there, then rebuild the PDFs here and commit:
+
+```bash
+sh scripts/sync-expository-notes.sh
+```
+
+The script compiles each note in a temporary copy with `\hwhidelabel` added, so the published PDFs
+carry no "working draft" label; the math-notes repo is not changed. To publish another note, add its
+name to `NOTES` in the script and an entry to the Expository Notes section of `notes/index.html`.
 
 ## Cache busting
 

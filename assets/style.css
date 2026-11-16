@@ -228,6 +228,7 @@ ol.pubs .refs a { margin-right: 0.8rem; }
 .note .actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
 .note .meta { font-family: var(--sans); font-size: 0.88rem; color: var(--muted); margin: -0.2rem 0 0.8rem; }
 .note .body { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: 1.5rem; align-items: start; }
+.note .body.text-only { grid-template-columns: minmax(0, 1fr); }
 .note .body p { margin: 0; }
 .note .body img { width: 100%; height: auto; }
 .note .placeholder {
