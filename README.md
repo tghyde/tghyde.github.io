@@ -47,8 +47,10 @@ sh scripts/sync-expository-notes.sh
 
 The script builds each note in a temporary copy of math-notes (which it does not change): it adds
 `\hwhidelabel` so neither version carries the "working draft" label, and the HTML is math-notes'
-self-contained share page (math pre-rendered, fonts embedded) with a "← Notes" link back to this site.
-It needs the math-notes venv (`make setup` there), Node, and latexmk. To publish another note, add its
+self-contained share page (math pre-rendered, fonts embedded) with a "← Notes" link back to this site,
+plus ArithFlow's hover previews of footnotes, citations and references (copied from
+`~/Documents/Claude/Arithflow`). It needs the math-notes venv (`make setup` there), Node, latexmk, and
+the ArithFlow repo. To publish another note, add its
 name to `NOTES` in the script and an entry to the Expository Notes section of `notes/index.html`.
 
 ## Cache busting

@@ -818,6 +818,37 @@ details.remark > :last-child { margin-bottom: 0; }
 .bibitem .bib-text > :last-child { margin-bottom: 0; }
 .bibitem:target { background: var(--remark-bg); }
 </style>
+<style>
+/* Reference previews (peek.js).  Colours are the page's own. */
+.af-peek {
+  position: absolute;
+  z-index: 74;
+  overflow: hidden;
+  border: 1px solid var(--border, #dcdad0);
+  border-radius: 6px;
+  background: var(--bg, #faf9f6);
+  color: var(--fg, #20242a);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, .22);
+  pointer-events: none;
+}
+.af-peek-in { padding: .7rem 1.1rem; font-size: .95em; }
+.af-peek-in > * { margin-top: 0 !important; margin-bottom: 0 !important; }
+.af-peek-in > div > :first-child { margin-top: 0; }
+.af-peek-in > div > :last-child { margin-bottom: 0; }
+.af-peek .bibitem { margin: 0; }
+.af-peek li { list-style: none; }
+/* Too long to show whole: fade the end rather than cut a line in half. */
+.af-peek-cut::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2.6rem;
+  background: linear-gradient(to bottom, transparent, var(--bg, #faf9f6));
+}
+@media print { .af-peek { display: none; } }
+</style>
 </head>
 <body>
 <button id="themetoggle" aria-label="Toggle light or dark theme" title="Toggle light/dark"></button>
@@ -925,7 +956,7 @@ The definition makes sense with “set” replaced by “object of <span class="
 <div class="center">
 <div class="tikz-figure"><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='width:220.81px;max-width:100%;height:auto' viewBox='0 -77.970959 165.607073 77.970959'>
 <defs/>
-<g id='tzbab4ea54p1-page1'>
+<g id='tz614b03b3p1-page1'>
 <g stroke-miterlimit='10' transform='matrix(.996264 0 0 -.996264 34.324758 -12.004133)' fill='currentColor' stroke='currentColor' stroke-width='0.4'>
 <g transform='matrix(1.00375 0 0 -1.00375 -58.882186 35.768662)' stroke='none' fill='currentColor'>
 <path d='M35.764666-18.713372V-18.333415L36.414592-18.283421L36.514581-18.133438L35.444702-12.584067L35.28472-12.444083L34.644793-12.38409V-12.004133H37.074517V-12.38409L36.43459-12.444083L36.314604-12.584067L36.834545-15.283761H40.084176L39.574234-12.584067L39.424251-12.444083L38.774325-12.38409V-12.004133H41.19405V-12.38409L40.554123-12.444083L40.454134-12.584067L41.514014-18.133438L41.673996-18.283421L42.333921-18.333415V-18.713372H39.894198V-18.333415L40.534125-18.283421L40.654111-18.133438L40.184165-15.743709H36.924534L37.394481-18.133438L37.544464-18.283421L38.204389-18.333415V-18.713372H35.764666Z'/>
@@ -1282,7 +1313,7 @@ A homomorphism <span class="katex"><span class="katex-mathml"><math xmlns="http:
 <div class="center">
 <div class="tikz-figure"><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='width:278.59px;max-width:100%;height:auto' viewBox='0 -84.078067 208.939587 84.078067'>
 <defs/>
-<g id='tzbab4ea54p2-page2'>
+<g id='tz614b03b3p2-page2'>
 <g stroke-miterlimit='10' transform='matrix(.996264 0 0 -.996264 40.283887 -16.208368)' fill='currentColor' stroke='currentColor' stroke-width='0.4'>
 <g transform='matrix(1.00375 0 0 -1.00375 -64.138252 31.534321)' stroke='none' fill='currentColor'>
 <path d='M41.471059-22.917607V-22.537651L42.110987-22.477657L42.210975-22.337673L41.141097-16.778304L40.981115-16.63832L40.351186-16.588325V-16.208368H42.860902V-16.608323L42.160981-16.658317L42.020997-16.8083L42.510941-19.358011H43.920782L44.040768-19.208028L44.000772-18.48811H44.430724L44.860675-20.68786H44.420725L44.190751-19.967942L44.010771-19.817959H42.600931L43.100875-22.45766H45.120645L45.220634-22.297678V-21.347785H45.70058L46.010545-22.917607H41.471059Z'/>
@@ -2014,6 +2045,105 @@ It would be interesting to work out what the subtoposes of <span class="katex"><
     matchMedia("(prefers-color-scheme: dark)").addEventListener("change", icon);
   }
   icon();
+})();
+</script>
+<script>
+// Reference previews.  Loaded by ArithFlow's pages and copied into the
+// files it shares, so it depends on nothing else of ArithFlow's.
+(function () {
+  "use strict";
+  const root = document.querySelector("main") || document.body;
+
+  // Resting the pointer on a reference to a theorem, an equation, a
+  // bibliography entry or a footnote shows what it refers to, in a box
+  // above the line (below when there is no room above), so the line being
+  // read is never covered.
+  let peek = null, peekTimer = null, peekLink = null;
+
+  function closePeek() {
+    clearTimeout(peekTimer);
+    peekTimer = null;
+    peekLink = null;
+    if (peek) peek.remove();
+    peek = null;
+  }
+
+  function peekTarget(link) {
+    const href = link.getAttribute("href") || "";
+    if (href.charAt(0) !== "#" || href.length < 2 || link.classList.contains("fn-back")) return null;
+    let el = null;
+    try { el = document.getElementById(decodeURIComponent(href.slice(1))); } catch (err) {}
+    if (!el || !root.contains(el) || el.contains(link)) return null;
+    // A heading says little by itself: show it with what follows it.
+    if (/^H[1-6]$/.test(el.tagName)) {
+      const box = document.createElement("div");
+      box.appendChild(el.cloneNode(true));
+      let next = el.nextElementSibling;
+      if (next && !/^H[1-6]$/.test(next.tagName)) box.appendChild(next.cloneNode(true));
+      return box;
+    }
+    return el.cloneNode(true);
+  }
+
+  function openPeek(link) {
+    const copy = peekTarget(link);
+    if (!copy) return;
+    // The copy must not answer to the original's name or carry its marks.
+    [copy].concat(Array.from(copy.querySelectorAll("*"))).forEach(function (n) {
+      n.removeAttribute("id");
+      n.classList.remove("af-u", "af-block", "af-c", "af-c-user", "af-c-agent",
+        "af-c-sent", "af-c-queued", "af-c-addressed", "af-hot", "af-editing", "af-flash");
+    });
+    copy.querySelectorAll(".af-cmark, .af-editor, .fn-back").forEach((n) => n.remove());
+    copy.querySelectorAll("details").forEach((d) => { d.open = true; });
+    peek = document.createElement("div");
+    peek.className = "af-peek";
+    peek.setAttribute("role", "tooltip");
+    const inner = document.createElement("div");
+    inner.className = "af-peek-in";
+    inner.appendChild(copy);
+    peek.appendChild(inner);
+    document.body.appendChild(peek);
+
+    // The line the reference is on: the piece of the link under the pointer.
+    const rects = link.getClientRects();
+    const line = rects.length ? rects[0] : link.getBoundingClientRect();
+    const col = root.getBoundingClientRect();
+    const width = Math.min(col.width, window.innerWidth - 16);
+    peek.style.width = width + "px";
+    const left = Math.max(8, Math.min(col.left, window.innerWidth - width - 8));
+    const gap = 8, above = line.top - gap - 8, below = window.innerHeight - line.bottom - gap - 8;
+    const want = peek.offsetHeight;
+    const up = want <= above || above >= below;
+    const room = Math.max(80, up ? above : below);
+    if (want > room) {
+      peek.style.maxHeight = room + "px";
+      peek.classList.add("af-peek-cut");
+    }
+    const top = up ? line.top - gap - peek.offsetHeight : line.bottom + gap;
+    peek.style.left = (left + window.scrollX) + "px";
+    peek.style.top = (top + window.scrollY) + "px";
+    peek.classList.add(up ? "af-peek-up" : "af-peek-down");
+  }
+
+  document.addEventListener("mouseover", function (ev) {
+    const link = ev.target.closest && ev.target.closest("a[href^='#']");
+    if (!link || !root.contains(link) || link === peekLink) return;
+    closePeek();
+    if (ev.metaKey || link.closest(".af-editor")) return;
+    peekLink = link;
+    peekTimer = setTimeout(function () { if (peekLink === link) openPeek(link); }, 350);
+  });
+  document.addEventListener("mouseout", function (ev) {
+    if (!peekLink) return;
+    const to = ev.relatedTarget;
+    if (to && peekLink.contains(to)) return;
+    closePeek();
+  });
+  ["scroll", "mousedown", "keydown"].forEach(function (name) {
+    window.addEventListener(name, closePeek, { passive: true, capture: true });
+  });
+  document.addEventListener("arithflow:patched", closePeek);
 })();
 </script>
 </body>
