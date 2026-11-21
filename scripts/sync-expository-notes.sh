@@ -10,7 +10,7 @@
 # Needs the math-notes venv (make setup there), Node, and latexmk.
 #   usage: sh scripts/sync-expository-notes.sh [path-to-math-notes-repo]
 set -e
-NOTES="kummer-dedekind frobenius-density los-theorem simplicity-of-psln galois-index-p"
+NOTES="kummer-dedekind frobenius-density los-theorem simplicity-of-psln galois-index-p classifying-topos-groups"
 SRC="${1:-$HOME/Documents/Claude/math-notes}"
 DST="$(cd "$(dirname "$0")/.." && pwd)/notes/expository"
 PY="$SRC/.venv/bin/python"
