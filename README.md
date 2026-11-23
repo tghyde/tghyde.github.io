@@ -36,6 +36,13 @@ there, then re-copy it here and commit:
 sh scripts/sync-p-adic-slides.sh
 ```
 
+`notes/riemann-hypothesis/` is the same kind of copy of the deck in
+`~/Documents/Claude/Slides/riemann-hypothesis-slides`:
+
+```bash
+sh scripts/sync-riemann-slides.sh
+```
+
 ## Updating the expository notes
 
 `notes/expository/` holds HTML and PDF versions of notes whose TeX sources live in the private repo `tghyde/math-notes`

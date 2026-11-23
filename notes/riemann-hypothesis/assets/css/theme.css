@@ -1,0 +1,330 @@
+/* ---------------------------------------------------------------
+   "Critical line" theme for reveal.js
+   Night sky, parchment and gold: the palette of the zeta plot itself.
+   Fraunces (display) + Source Sans 3 (text) + KaTeX (math), as in the
+   p-adic deck.
+   --------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../vendor/fonts/fraunces-latin-full-normal.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../vendor/fonts/fraunces-latin-full-italic.woff2") format("woff2");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans 3"; src: url("../../vendor/fonts/source-sans-3-latin-700-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+
+:root {
+  /* the colour wheel of the zeta plot (scripts/zeta_domain.py), on night */
+  --night: #0C1020;         /* slide background */
+  --night-2: #141A30;       /* panels */
+  --night-3: #1E2644;       /* raised panels, rules */
+  --ink: #F1E9D8;           /* parchment: text */
+  --ink-soft: #CFC6B2;
+  --muted: #8F8C86;
+  --line: rgba(241, 233, 216, .16);
+  --gold: #E5B550;          /* arg 0: headings' rule, the main term */
+  --gold-soft: rgba(229, 181, 80, .16);
+  --vermilion: #E0654A;
+  --plum: #B56AA6;
+  --indigo: #6F6AD8;
+  --azure: #5FA4EA;         /* the zeros' terms */
+  --teal: #3DB8A6;
+
+  --display: "Fraunces", Georgia, serif;
+  --text: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+
+  --r-background-color: var(--night);
+  --r-main-font: var(--text);
+  --r-main-font-size: 40px;
+  --r-main-color: var(--ink);
+  --r-heading-font: var(--display);
+  --r-heading-color: var(--ink);
+  --r-link-color: var(--gold);
+  --r-selection-background-color: rgba(229, 181, 80, .35);
+}
+
+/* ---------- base ---------- */
+html, body { background: var(--night); }
+.reveal-viewport { background: var(--night); }
+.reveal-viewport::before {           /* a faint glow from the upper left, darker at the edges */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(110% 90% at 28% 22%, rgba(95, 164, 234, .10), rgba(12, 16, 32, 0) 55%),
+              radial-gradient(120% 100% at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .35) 100%);
+}
+.reveal { font-family: var(--text); font-size: var(--r-main-font-size); color: var(--ink); line-height: 1.4; font-weight: 400; }
+.reveal .slides { text-align: left; }
+.reveal .slides section { padding: 0 90px; box-sizing: border-box; height: 100%; }
+.reveal ::selection { background: rgba(229, 181, 80, .35); color: #fff; }
+.reveal a { color: var(--gold); text-decoration: none; }
+.reveal strong, .reveal b { font-weight: 600; color: #FFF8E8; }
+.reveal em { font-style: italic; }
+
+/* ---------- headings ---------- */
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--display); color: var(--ink); margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+  letter-spacing: -0.01em; text-transform: none; text-shadow: none;
+}
+.reveal h1 { font-size: 2.6em; font-weight: 600; line-height: 1.05; }
+.reveal h2 {               /* slide title */
+  font-size: 1.55em; font-weight: 600; line-height: 1.15;
+  padding: 70px 0 18px; margin-bottom: 36px;
+  position: relative;
+}
+.reveal h2::after {        /* short rule: gold running into vermilion */
+  content: ""; position: absolute; left: 0; bottom: 0; width: 140px; height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--vermilion)); border-radius: 2px;
+}
+.reveal h2 .katex, .reveal h1 .katex { font-size: .95em; }
+
+/* ---------- text blocks ---------- */
+.reveal p { margin: 0 0 .7em; }
+.reveal ul { display: block; margin: .3em 0 .7em .2em; list-style: none; }
+.reveal li { margin: .45em 0; }
+.reveal ul > li { position: relative; padding-left: .9em; }
+.reveal ul > li::before { content: ""; position: absolute; left: 0; top: .55em; width: .36em; height: .36em; border-radius: 50%; background: var(--gold); }
+/* a consequence hanging off the item above it:  ↳ */
+.reveal ul > li.hook, .reveal p.hook { padding-left: 2.1em; margin-top: .2em; color: var(--ink-soft); position: relative; }
+.reveal ul > li.hook::before, .reveal p.hook::before {
+  content: "↳"; left: .85em; top: -.02em; width: auto; height: auto; border-radius: 0; background: none;
+  position: absolute; color: var(--gold); font-weight: 600;
+}
+.reveal .small { font-size: .78em; }
+.reveal .muted { color: var(--muted); }
+.reveal .nowrap { white-space: nowrap; }
+
+/* colour helpers (also used by KaTeX \htmlClass) */
+.gold, .reveal .gold { color: var(--gold); }
+.azure, .reveal .azure { color: var(--azure); }
+.verm, .reveal .verm { color: var(--vermilion); }
+.teal, .reveal .teal { color: var(--teal); }
+.plum, .reveal .plum { color: var(--plum); }
+
+/* ---------- math ---------- */
+.reveal .katex { font-size: 1.08em; }
+.reveal .katex-display { margin: .55em 0 .8em; }
+.reveal .katex-display > .katex { font-size: 1.18em; }
+.reveal .huge-math { text-align: center; }
+.reveal .huge-math .katex-display > .katex { font-size: 1.5em; }
+
+/* ---------- layout helpers ---------- */
+.reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.reveal .cols.c-7-3 { grid-template-columns: 7fr 3fr; }
+.reveal .cols.c-6-4 { grid-template-columns: 6fr 4fr; }
+.reveal .cols.c-4-6 { grid-template-columns: 4fr 6fr; }
+.reveal .cols.top { align-items: start; }
+.reveal img { max-width: 100%; height: auto; margin: 0; border: 0; box-shadow: none; background: none; }
+.reveal figure { margin: 0; }
+.reveal figcaption { font-size: .6em; color: var(--ink-soft); margin-top: .45em; font-family: var(--display); font-style: italic; text-align: center; }
+.reveal figcaption .years { color: var(--muted); font-style: normal; font-family: var(--text); }
+
+/* a framed photograph or page */
+.reveal img.photo {
+  border-radius: 6px; border: 1px solid rgba(241, 233, 216, .35);
+  box-shadow: 0 0 0 7px rgba(241, 233, 216, .05), 0 22px 50px rgba(0, 0, 0, .55);
+  filter: sepia(.18) contrast(1.03);
+}
+/* where a picture still has to go */
+.reveal .ph {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  border: 2px dashed rgba(241, 233, 216, .35); border-radius: 8px; color: var(--muted);
+  font-family: var(--display); font-style: italic; font-size: .62em; line-height: 1.3; padding: 0 1em;
+  background: rgba(241, 233, 216, .03);
+}
+
+/* panels: quotations and boxed statements */
+.reveal .panel {
+  position: relative; padding: 26px 38px 26px 42px;
+  background: linear-gradient(180deg, rgba(30, 38, 68, .92), rgba(20, 26, 48, .92));
+  border: 1px solid var(--line); border-left: 6px solid var(--gold); border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+}
+.reveal .panel p:last-child { margin-bottom: 0; }
+/* cards: boxed text that is not a quotation (no gold bar) */
+.reveal .card {
+  position: relative; padding: 26px 38px;
+  background: linear-gradient(180deg, rgba(30, 38, 68, .92), rgba(20, 26, 48, .92));
+  border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+}
+.reveal .card p:last-child { margin-bottom: 0; }
+.reveal .panel .label {
+  display: block; font-family: var(--display); font-style: normal; font-weight: 400;
+  color: var(--gold); font-size: 1.05em; letter-spacing: .01em; line-height: 1.2;
+  padding-bottom: .3em; margin-bottom: .45em; border-bottom: 1px solid rgba(229, 181, 80, .45);
+}
+.reveal blockquote {
+  width: auto; margin: 0; padding: 0; background: none; box-shadow: none; border: 0;
+  font-family: var(--display); font-style: italic; font-weight: 400; line-height: 1.38;
+  font-variation-settings: "opsz" 40, "SOFT" 50;
+}
+.reveal blockquote .who { display: block; margin-top: .45em; font-family: var(--text); font-style: normal; font-size: .82em; color: var(--ink-soft); text-align: right; }
+.reveal mark { background: none; color: var(--gold); font-weight: 600; }
+
+/* ---------- fragments ---------- */
+.reveal .fragment { transition: opacity .35s ease, visibility .35s ease; }
+.reveal .fragment.ctrl { display: none; }      /* a step that only drives a figure */
+
+/* ---------- slide number, progress ---------- */
+.reveal .slide-number { background: none; color: var(--muted); font-family: var(--text); font-size: 18px; right: 22px; bottom: 16px; }
+.reveal .progress { color: var(--gold); height: 3px; background: rgba(241, 233, 216, .08); }
+
+/* ---------- the zeta plot as a full-slide backdrop (title; the hypothesis) ---------- */
+.reveal section.zeta-bg { padding: 0; }
+.reveal .zeta-bg .backdrop { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; max-width: none; max-height: none; }
+.reveal .zeta-bg svg.marks { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.reveal .zeta-bg .scrim { position: absolute; inset: 0; }
+.reveal svg.marks .crit { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 2 9; stroke-linecap: round; opacity: .95; }
+.reveal svg.marks .axis { stroke: var(--ink); stroke-width: 1.5; opacity: .45; }
+.reveal svg.marks .zero { fill: var(--night); stroke: var(--ink); stroke-width: 3; }
+.reveal svg.marks .zero.trivial { stroke-width: 2.5; }
+.reveal svg.marks .pole { fill: none; stroke: var(--ink); stroke-width: 3; }
+.reveal svg.marks text { fill: var(--ink); font-family: var(--text); font-size: 22px; font-weight: 600; paint-order: stroke; stroke: rgba(12, 16, 32, .8); stroke-width: 5px; }
+.reveal svg.marks text.it { font-family: var(--display); font-style: italic; font-size: 26px; }
+
+/* ---------- title slide ---------- */
+.reveal .title-slide .scrim {
+  /* a long, eased fade (no edge under the title) */
+  background: linear-gradient(90deg, rgba(12, 16, 32, .86) 0%, rgba(12, 16, 32, .80) 18%, rgba(12, 16, 32, .68) 34%, rgba(12, 16, 32, .50) 48%, rgba(12, 16, 32, .30) 62%, rgba(12, 16, 32, .13) 75%, rgba(12, 16, 32, .03) 86%, rgba(12, 16, 32, 0) 94%);
+}
+.reveal .title-slide .title-text { position: absolute; left: 110px; top: 200px; z-index: 2; }
+.reveal .title-slide h1 { font-size: 3.5em; white-space: nowrap; line-height: 1; color: #FFF8E8; }
+/* "in Brief" is the second line of the title, not a subtitle: same size, told apart by gold italic */
+.reveal .title-slide .sub { font-family: var(--display); font-size: 3.5em; font-weight: 500; line-height: 1; letter-spacing: -0.01em; color: var(--gold); font-style: italic; margin-top: .14em; font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1; }
+.reveal .title-slide .rule { width: 180px; height: 4px; margin: 54px 0 46px; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--vermilion)); }
+.reveal .title-slide .byline .name { font-family: var(--display); font-weight: 600; color: var(--ink); font-size: 1.3em; }
+.reveal .title-slide .byline .aff { color: var(--ink-soft); font-size: .82em; line-height: 1.45; margin-top: .25em; }
+.reveal .amp { font-family: var(--display); font-style: italic; }
+
+/* ---------- slide 2: the problem ---------- */
+.reveal .problem .cols { grid-template-columns: 1180px 1fr; gap: 70px; align-items: start; }
+.reveal .problem .portraits { display: flex; flex-direction: column; align-items: center; gap: 26px; margin-top: -165px; }
+.reveal .problem .portraits img { height: 430px; width: auto; }
+.reveal .problem .portraits figcaption { font-family: var(--text); font-style: normal; }
+.reveal .problem .panel { margin-top: 34px; }
+.reveal .problem blockquote { font-size: .86em; font-family: var(--text); font-style: normal; font-variation-settings: normal; }
+
+/* ---------- slide 3: the paper ---------- */
+.reveal .paper h2 { font-size: 1.42em; }
+.reveal .paper .cols { grid-template-columns: 1fr 580px; gap: 60px; align-items: start; }
+.reveal .paper img.page { width: 580px; height: auto; margin-top: -20px; filter: none; }
+.reveal .paper .panel { margin-top: 1em; }
+.reveal .paper li.gap { margin-top: .6em; }
+.reveal .paper .german { font-family: var(--display); font-style: italic; color: #FFF8E8; }
+
+/* ---------- plots ---------- */
+.reveal .plot { position: relative; }
+.reveal .plot canvas { display: block; width: 100%; height: 100%; }
+.reveal .plot .cap { position: absolute; font-size: .62em; color: var(--ink-soft); font-family: var(--display); font-style: italic; }
+
+/* ---------- slide 4: distribution of primes ---------- */
+.reveal .paper .list-of-primes { font-size: 1.15em; letter-spacing: .02em; margin: .4em 0 0 .96em; color: #FFF8E8; font-variant-numeric: tabular-nums; }
+.reveal .primes .lower { display: grid; grid-template-columns: 730px 1fr; gap: 30px; align-items: center; margin-top: 6px; }
+.reveal .primes .defs .katex-display { margin: .2em 0 .6em; text-align: left; }
+.reveal .primes .defs .katex-display > .katex { text-align: left; font-size: 1.08em; }
+.reveal .primes .defs p { margin-bottom: .25em; white-space: nowrap; }
+.reveal .primes .defs { align-self: start; }
+/* the pi(x) box sits right of the top bullets, its left edge over the plot's y-axis
+   (730px column + 30px gap + the plot's 112px left margin in plots.js); it is centred
+   vertically on the two bullet lines (the .4em bottom margin offsets the list's larger bottom margin) */
+.reveal .primes .upper { display: grid; grid-template-columns: 872px 1fr; align-items: start; }
+.reveal .primes .upper li { white-space: nowrap; }
+.reveal .primes .pi-def {
+  justify-self: center; align-self: center; margin: 0 0 .4em; padding: .2em .9em; white-space: nowrap;
+  border: 2px solid #FFFFFF; border-radius: 0; background: rgba(255, 255, 255, .04);
+}
+.reveal .primes .plot { height: 345px; }
+.reveal .primes .defs ul { margin: .9em 0 .25em; }
+/* the exact formula sits under R(x), set the same way; the two highlight notes sit under the plot */
+.reveal .primes .explicit { display: grid; grid-template-columns: 730px 1fr; gap: 30px; align-items: start; }
+.reveal .primes .explicit .exact ul { margin: .5em 0 .1em; }
+.reveal .primes .defs li, .reveal .primes .explicit li { margin: 0; }
+.reveal .primes .explicit .katex-display { margin: .2em 0 .4em; text-align: left; }
+.reveal .primes .explicit .katex-display > .katex { text-align: left; font-size: 1.08em; }
+.reveal .primes .explicit p { margin: 0; white-space: nowrap; }
+
+/* ---------- slide 5: Riemann's formula ---------- */
+.reveal .formula h2 { margin-bottom: 8px; }
+.reveal .formula .explicit { position: relative; height: 215px; }
+.reveal .formula .explicit .katex-display { margin: 0; }
+.reveal .formula .explicit .katex-display > .katex { font-size: 1.75em; }
+.reveal .primes .t-main, .reveal .primes .t-zeros { transition: color .35s ease, text-shadow .35s ease; }
+.reveal .primes:has([data-hl="main"].visible) .t-main { color: var(--gold); text-shadow: 0 0 26px rgba(229, 181, 80, .45); }
+.reveal .primes:has([data-hl="zeros"].visible) .t-zeros { color: var(--azure); text-shadow: 0 0 26px rgba(95, 164, 234, .5); }
+/* the notes' bullets line up with the plot's y-axis (its 112px left margin in plots.js) */
+.reveal .primes .notes { font-size: .74em; line-height: 1.3; margin: 1.2em 0 0 112px; }
+.reveal .primes .notes li + li { margin-top: .6em; }
+.reveal .primes .notes .n-main { color: var(--gold); }
+.reveal .primes .notes .n-zeros { color: var(--azure); }
+.reveal .primes .notes .n-zeros::before { background: var(--azure); }
+/* a hook inside the blue item: stays blue, arrow under the item's text */
+.reveal .primes .notes .n-zeros .hook { color: inherit; margin: .2em 0 0; padding-left: 1.2em; white-space: normal; }
+.reveal .primes .notes .n-zeros .hook::before { left: 0; color: var(--azure); }
+.reveal .formula .where { position: absolute; right: 0; top: 14px; font-size: .62em; color: var(--ink-soft); text-align: left; }
+.reveal .formula .where .katex-display { margin: 0; }
+.reveal .formula .where .katex-display > .katex { font-size: 1.05em; }
+.reveal .formula .zeta { display: grid; grid-template-columns: 560px 1fr; gap: 40px; align-items: start; margin-top: 18px; border-top: 1px solid var(--line); padding-top: 18px; }
+.reveal .formula .zeta .caption { color: var(--ink-soft); font-size: .8em; text-align: center; margin: .3em 0 0; }
+.reveal .formula .zeta .plot { height: 400px; }
+.reveal .formula .zeta .series .katex-display { margin: .1em 0 .2em; text-align: left; }
+.reveal .formula .zeta .series .katex-display > .katex { font-size: 1.02em; text-align: left; }
+.reveal .formula .zeta .right { position: relative; height: 470px; }
+.reveal .formula .zeta img.surface { position: absolute; right: 130px; top: 235px; width: 880px; max-width: none; }
+.reveal .formula .zeta .series { position: relative; z-index: 2; }
+
+/* ---------- slide 6: the hypothesis ---------- */
+.reveal .hypothesis .scrim {
+  background: linear-gradient(90deg, rgba(12, 16, 32, .80) 0%, rgba(12, 16, 32, .62) 50%, rgba(12, 16, 32, .12) 72%, rgba(12, 16, 32, 0) 80%);
+}
+.reveal .hypothesis h2 { position: absolute; left: 90px; top: 0; padding-top: 56px; margin: 0; color: #FFF8E8; }
+.reveal .hypothesis .panel, .reveal .hypothesis .card { position: absolute; left: 90px; width: 1230px; background: linear-gradient(180deg, rgba(24, 30, 56, .95), rgba(14, 19, 38, .95)); }
+.reveal .hypothesis .panel.english { top: 162px; }
+.reveal .hypothesis .card.translation { top: 610px; }
+.reveal .hypothesis blockquote { font-size: .76em; font-family: var(--text); font-style: normal; font-variation-settings: normal; }
+.reveal .hypothesis .gloss { color: var(--ink-soft); margin: 0; line-height: 1.35; }
+
+/* ---------- slide 7: music / noise of the primes ---------- */
+.reveal .music { font-size: 38px; }
+.reveal .music h2 { font-size: 62px; margin-bottom: 22px; }
+.reveal .music h2 .old { transition: color .4s ease; text-decoration: line-through; text-decoration-color: transparent; text-decoration-thickness: 5px; }
+.reveal .music h2:has(.new.visible) .old { color: var(--muted); text-decoration-color: var(--vermilion); }
+.reveal .music h2 .new { color: var(--vermilion); font-style: italic; margin-right: .1em; }
+.reveal .music h2 .new:not(.visible) { display: none; }
+.reveal .music .plots { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 14px; }
+.reveal .music .plot { height: 440px; }
+/* under the right plot: pi(x) - R(x) and the terms of the blue curve, one more each step */
+.reveal .music .wave-sum { display: flex; flex-wrap: wrap; column-gap: .3em; margin: .3em 0 0 78px; font-size: .74em; line-height: 1.5; }
+/* terms of the sum shown by the wave plot as it reaches their stage (plots.js) */
+.reveal .music .wave-sum [data-wave-term] { opacity: 0; visibility: hidden; transition: opacity .4s ease, visibility .4s; }
+.reveal .music .wave-sum [data-wave-term].reached { opacity: 1; visibility: inherit; }
+.reveal .music ul { margin-bottom: .2em; }
+.reveal .music li { margin: .22em 0; }
+.reveal .digits { display: grid; grid-template-columns: auto auto; justify-content: start; column-gap: .5em; row-gap: 0; margin: .1em 0 0 2.1em; font-variant-numeric: tabular-nums; letter-spacing: .03em; font-size: 1.02em; line-height: 1.3; }
+.reveal .digits .same { color: var(--gold); font-weight: 600; }
+/* "as random as coin flips" and the digits it describes share the vermilion of "Noise" */
+.reveal .music .noise, .reveal .digits .diff { color: var(--vermilion); font-weight: 600; }
+
+/* ---------- slide 8: proposed solutions ---------- */
+.reveal .solutions .who { font-family: var(--display); font-weight: 600; color: #FFF8E8; }
+.reveal .solutions .cols { grid-template-columns: 1fr 740px; gap: 50px; align-items: start; }
+.reveal .solutions ul { font-size: .85em; margin-top: 0; margin-bottom: 0; }
+.reveal .solutions .text ul + ul { margin-top: .5em; }
+.reveal .solutions .side { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: -150px; }
+.reveal .solutions figure { display: flex; flex-direction: column; align-items: center; }
+.reveal .solutions figure + figure { margin-top: 48px; }   /* excerpt's caption on the baseline of the left column's last line */
+.reveal .solutions figcaption { font-family: var(--text); font-style: normal; white-space: nowrap; }
+.reveal .solutions img.person { width: 340px; height: auto; filter: none; }
+.reveal .solutions img.excerpt { width: 740px; max-width: none; height: auto; filter: none; }   /* as large as the slide allows */
+.reveal .solutions q { font-style: italic; quotes: "“" "”"; }
+
+/* ---------- print ---------- */
+@media print { .reveal-viewport::before { display: none; } }
