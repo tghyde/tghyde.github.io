@@ -271,6 +271,8 @@ html, body { background: var(--night); }
 /* a hook inside the blue item: stays blue, arrow under the item's text */
 .reveal .primes .notes .n-zeros .hook { color: inherit; margin: .2em 0 0; padding-left: 1.2em; white-space: normal; }
 .reveal .primes .notes .n-zeros .hook::before { left: 0; color: var(--azure); }
+/* the footnote to the starred exact formula, at the foot of the slide on the right */
+.reveal .primes .caveat { position: absolute; right: 90px; bottom: 34px; font-size: .6em; color: var(--muted); }
 .reveal .formula .where { position: absolute; right: 0; top: 14px; font-size: .62em; color: var(--ink-soft); text-align: left; }
 .reveal .formula .where .katex-display { margin: 0; }
 .reveal .formula .where .katex-display > .katex { font-size: 1.05em; }
@@ -292,7 +294,7 @@ html, body { background: var(--night); }
 .reveal .hypothesis .panel.english { top: 162px; }
 .reveal .hypothesis .card.translation { top: 610px; }
 .reveal .hypothesis blockquote { font-size: .76em; font-family: var(--text); font-style: normal; font-variation-settings: normal; }
-.reveal .hypothesis .ref { width: 1230px; max-width: none; box-sizing: border-box; padding: .7em 1.1em; border-radius: 10px; background: rgba(14, 19, 38, .9); color: var(--ink-soft); }
+.reveal .hypothesis .ref { width: max-content; max-width: 1230px; box-sizing: border-box; padding: .7em 1.1em; border-radius: 10px; background: rgba(14, 19, 38, .9); color: var(--ink-soft); }
 .reveal .hypothesis .gloss { color: var(--ink-soft); margin: 0; line-height: 1.35; }
 
 /* ---------- slide 7: music / noise of the primes ---------- */

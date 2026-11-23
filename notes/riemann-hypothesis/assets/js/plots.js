@@ -131,9 +131,10 @@ const Plots = (() => {
       }
       ctx.stroke();
       ctx.restore();
-      // The key sits at the bottom right over pi and R; for the difference it moves to the top left, which the curve leaves clear.
+      // The key sits at the bottom right over pi and R; for the difference it moves to the top left, raised into the
+      // top margin so that it stays above the curve (which reaches 3.7 below x = 3,000; the key's bottom is near 4.4).
       if (diff < .5) legend(ctx, W - m.r - 16, H - m.b - 20, shown * (1 - 2 * diff), false);
-      else legend(ctx, m.l + 16, m.t + 12, shown * (2 * diff - 1), true);
+      else legend(ctx, m.l + 16, m.t - 18, shown * (2 * diff - 1), true);
       ctx.globalAlpha = 1;
     }
     // The key, anchored at its bottom-right corner (or, for the difference, its top-left corner);
