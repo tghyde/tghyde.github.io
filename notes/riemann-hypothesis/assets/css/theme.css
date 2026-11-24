@@ -77,9 +77,9 @@ html.day {
   --bright: #0B0D1A;
   --ink-rgb: 31, 34, 51;
   --night-rgb: 251, 246, 234;
-  --gold: #99610A;
-  --gold-rgb: 153, 97, 10;
-  --vermilion: #C23E22;
+  --gold: #861F41;          /* Vassar burgundy, for the highlights (a darkened gold read as brown on cream) */
+  --gold-rgb: 134, 31, 65;
+  --vermilion: #D2571B;     /* pushed towards orange, to stay distinct from the burgundy */
   --plum: #8E3F80;
   --indigo: #4B45B8;
   --azure: #1B66B8;
@@ -334,12 +334,8 @@ html, body { background: var(--night); }
   background: linear-gradient(90deg, rgba(var(--night-rgb), .80) 0%, rgba(var(--night-rgb), .62) 50%, rgba(var(--night-rgb), .12) 72%, rgba(var(--night-rgb), 0) 80%);
 }
 .reveal .hypothesis h2 { position: absolute; left: 90px; top: 0; padding-top: 56px; margin: 0; color: var(--bright); }
-.reveal .hypothesis .panel, .reveal .hypothesis .card { position: absolute; left: 90px; width: 1230px; background: var(--panel-bg-solid); }
-.reveal .hypothesis .panel.english { top: 162px; }
-.reveal .hypothesis .card.translation { top: 610px; }
-.reveal .hypothesis blockquote { font-size: .76em; font-family: var(--text); font-style: normal; font-variation-settings: normal; }
-.reveal .hypothesis .ref { width: max-content; max-width: 1230px; box-sizing: border-box; padding: .7em 1.1em; border-radius: 10px; background: rgba(var(--night-rgb), .9); color: var(--ink-soft); }
-.reveal .hypothesis .gloss { color: var(--ink-soft); margin: 0; line-height: 1.35; }
+.reveal .hypothesis .card { position: absolute; left: 90px; width: fit-content; max-width: 1230px; background: var(--panel-bg-solid); }
+.reveal .hypothesis .card.statement { top: 162px; }
 
 /* ---------- slide 7: music / noise of the primes ---------- */
 .reveal .music { font-size: 38px; }
