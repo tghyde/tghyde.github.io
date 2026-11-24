@@ -1,9 +1,10 @@
 #!/bin/sh
 # Copies the runtime files of the Riemann Hypothesis talk deck (a reveal.js site kept in its own repo)
 # into notes/riemann-hypothesis/, so the slides are served from this site. Re-run after editing the deck.
+# The source is the short version of the deck (riemann-hypothesis-slides-short); pass the full deck's path to publish that instead.
 #   usage: sh scripts/sync-riemann-slides.sh [path-to-deck-repo]
 set -e
-SRC="${1:-$HOME/Documents/Claude/Slides/riemann-hypothesis-slides}"
+SRC="${1:-$HOME/Documents/Claude/Slides/riemann-hypothesis-slides-short}"
 DST="$(cd "$(dirname "$0")/.." && pwd)/notes/riemann-hypothesis"
 [ -f "$SRC/index.html" ] || { echo "deck not found at $SRC" >&2; exit 1; }
 mkdir -p "$DST/figs"

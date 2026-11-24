@@ -37,7 +37,7 @@ sh scripts/sync-p-adic-slides.sh
 ```
 
 `notes/riemann-hypothesis/` is the same kind of copy of the deck in
-`~/Documents/Claude/Slides/riemann-hypothesis-slides`:
+`~/Documents/Claude/Slides/riemann-hypothesis-slides-short` (the short version of the talk):
 
 ```bash
 sh scripts/sync-riemann-slides.sh
