@@ -1,6 +1,10 @@
 /* ---------------------------------------------------------------
    "Critical line" theme for reveal.js
    Night sky, parchment and gold: the palette of the zeta plot itself.
+   A second palette, "day" (ink on cream, for bright rooms and weak projectors),
+   applies when <html> has the class "day"; the button in the corner switches
+   between them (main.js).  Colours are variables throughout, so the day
+   palette only has to redefine them.
    Fraunces (display) + Source Sans 3 (text) + KaTeX (math), as in the
    p-adic deck.
    --------------------------------------------------------------- */
@@ -30,9 +34,19 @@
   --ink: #F1E9D8;           /* parchment: text */
   --ink-soft: #CFC6B2;
   --muted: #8F8C86;
-  --line: rgba(241, 233, 216, .16);
+  --bright: #FFF8E8;        /* emphasis: brighter than the text */
+  --ink-rgb: 241, 233, 216;  /* --ink and --night again, for rgba(var(--ink-rgb), alpha) */
+  --night-rgb: 12, 16, 32;
+  --gold-rgb: 229, 181, 80;
+  --azure-rgb: 95, 164, 234;
+  --line: rgba(var(--ink-rgb), .16);
+  --panel-bg: linear-gradient(180deg, rgba(30, 38, 68, .92), rgba(20, 26, 48, .92));
+  --panel-bg-solid: linear-gradient(180deg, rgba(24, 30, 56, .95), rgba(14, 19, 38, .95));   /* over the zeta backdrop */
+  --shadow: rgba(0, 0, 0, .45);
+  --glow: radial-gradient(110% 90% at 28% 22%, rgba(95, 164, 234, .10), rgba(12, 16, 32, 0) 55%),
+          radial-gradient(120% 100% at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .35) 100%);
   --gold: #E5B550;          /* arg 0: headings' rule, the main term */
-  --gold-soft: rgba(229, 181, 80, .16);
+  --gold-soft: rgba(var(--gold-rgb), .16);
   --vermilion: #E0654A;
   --plum: #B56AA6;
   --indigo: #6F6AD8;
@@ -49,7 +63,32 @@
   --r-heading-font: var(--display);
   --r-heading-color: var(--ink);
   --r-link-color: var(--gold);
-  --r-selection-background-color: rgba(229, 181, 80, .35);
+  --r-selection-background-color: rgba(var(--gold-rgb), .35);
+}
+
+/* the day palette: ink on cream, the accents darkened until they read as text */
+html.day {
+  --night: #FBF6EA;         /* cream: slide background */
+  --night-2: #F4EDDB;
+  --night-3: #E9E0CA;
+  --ink: #1F2233;           /* ink: text */
+  --ink-soft: #454759;
+  --muted: #767268;
+  --bright: #0B0D1A;
+  --ink-rgb: 31, 34, 51;
+  --night-rgb: 251, 246, 234;
+  --gold: #99610A;
+  --gold-rgb: 153, 97, 10;
+  --vermilion: #C23E22;
+  --plum: #8E3F80;
+  --indigo: #4B45B8;
+  --azure: #1B66B8;
+  --azure-rgb: 27, 102, 184;
+  --teal: #0F7868;
+  --panel-bg: linear-gradient(180deg, #FFFDF7, #F6F0E0);
+  --panel-bg-solid: linear-gradient(180deg, rgba(255, 253, 247, .96), rgba(248, 242, 228, .96));
+  --shadow: rgba(70, 52, 14, .18);
+  --glow: radial-gradient(120% 100% at 50% 50%, rgba(0, 0, 0, 0) 62%, rgba(120, 92, 30, .10) 100%);
 }
 
 /* ---------- base ---------- */
@@ -57,15 +96,14 @@ html, body { background: var(--night); }
 .reveal-viewport { background: var(--night); }
 .reveal-viewport::before {           /* a faint glow from the upper left, darker at the edges */
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(110% 90% at 28% 22%, rgba(95, 164, 234, .10), rgba(12, 16, 32, 0) 55%),
-              radial-gradient(120% 100% at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .35) 100%);
+  background: var(--glow);
 }
 .reveal { font-family: var(--text); font-size: var(--r-main-font-size); color: var(--ink); line-height: 1.4; font-weight: 400; }
 .reveal .slides { text-align: left; }
 .reveal .slides section { padding: 0 90px; box-sizing: border-box; height: 100%; }
-.reveal ::selection { background: rgba(229, 181, 80, .35); color: #fff; }
+.reveal ::selection { background: rgba(var(--gold-rgb), .35); color: var(--bright); }
 .reveal a { color: var(--gold); text-decoration: none; }
-.reveal strong, .reveal b { font-weight: 600; color: #FFF8E8; }
+.reveal strong, .reveal b { font-weight: 600; color: var(--bright); }
 .reveal em { font-style: italic; }
 
 /* ---------- headings ---------- */
@@ -106,6 +144,8 @@ html, body { background: var(--night); }
 .reveal .ref p { position: relative; margin: 0; padding-left: 1.1em; font-size: 1em; line-height: inherit; }
 .reveal .ref p + p { margin-top: .25em; }
 .reveal .ref p::before { content: "•"; position: absolute; left: .1em; color: var(--gold); }
+.reveal .ref a { color: inherit; text-decoration: underline; text-decoration-color: rgba(var(--ink-rgb), .35); text-underline-offset: .18em; }
+.reveal .ref a:hover { color: var(--gold); text-decoration-color: currentColor; }
 .reveal .nowrap { white-space: nowrap; }
 
 /* colour helpers (also used by KaTeX \htmlClass) */
@@ -135,38 +175,38 @@ html, body { background: var(--night); }
 
 /* a framed photograph or page */
 .reveal img.photo {
-  border-radius: 6px; border: 1px solid rgba(241, 233, 216, .35);
-  box-shadow: 0 0 0 7px rgba(241, 233, 216, .05), 0 22px 50px rgba(0, 0, 0, .55);
+  border-radius: 6px; border: 1px solid rgba(var(--ink-rgb), .35);
+  box-shadow: 0 0 0 7px rgba(var(--ink-rgb), .05), 0 22px 50px var(--shadow);
   filter: sepia(.18) contrast(1.03);
 }
 /* where a picture still has to go */
 .reveal .ph {
   display: flex; align-items: center; justify-content: center; text-align: center;
-  border: 2px dashed rgba(241, 233, 216, .35); border-radius: 8px; color: var(--muted);
+  border: 2px dashed rgba(var(--ink-rgb), .35); border-radius: 8px; color: var(--muted);
   font-family: var(--display); font-style: italic; font-size: .62em; line-height: 1.3; padding: 0 1em;
-  background: rgba(241, 233, 216, .03);
+  background: rgba(var(--ink-rgb), .03);
 }
 
 /* panels: quotations and boxed statements */
 .reveal .panel {
   position: relative; padding: 26px 38px 26px 42px;
-  background: linear-gradient(180deg, rgba(30, 38, 68, .92), rgba(20, 26, 48, .92));
+  background: var(--panel-bg);
   border: 1px solid var(--line); border-left: 6px solid var(--gold); border-radius: 10px;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+  box-shadow: 0 18px 44px var(--shadow);
 }
 .reveal .panel p:last-child { margin-bottom: 0; }
 /* cards: boxed text that is not a quotation (no gold bar) */
 .reveal .card {
   position: relative; padding: 26px 38px;
-  background: linear-gradient(180deg, rgba(30, 38, 68, .92), rgba(20, 26, 48, .92));
+  background: var(--panel-bg);
   border: 1px solid var(--line); border-radius: 10px;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+  box-shadow: 0 18px 44px var(--shadow);
 }
 .reveal .card p:last-child { margin-bottom: 0; }
 .reveal .panel .label {
   display: block; font-family: var(--display); font-style: normal; font-weight: 400;
   color: var(--gold); font-size: 1.05em; letter-spacing: .01em; line-height: 1.2;
-  padding-bottom: .3em; margin-bottom: .45em; border-bottom: 1px solid rgba(229, 181, 80, .45);
+  padding-bottom: .3em; margin-bottom: .45em; border-bottom: 1px solid rgba(var(--gold-rgb), .45);
 }
 .reveal blockquote {
   width: auto; margin: 0; padding: 0; background: none; box-shadow: none; border: 0;
@@ -182,7 +222,7 @@ html, body { background: var(--night); }
 
 /* ---------- slide number, progress ---------- */
 .reveal .slide-number { background: none; color: var(--muted); font-family: var(--text); font-size: 18px; right: 22px; bottom: 16px; }
-.reveal .progress { color: var(--gold); height: 3px; background: rgba(241, 233, 216, .08); }
+.reveal .progress { color: var(--gold); height: 3px; background: rgba(var(--ink-rgb), .08); }
 
 /* ---------- the zeta plot as a full-slide backdrop (title; the hypothesis) ---------- */
 .reveal section.zeta-bg { padding: 0; }
@@ -194,16 +234,16 @@ html, body { background: var(--night); }
 .reveal svg.marks .zero { fill: var(--night); stroke: var(--ink); stroke-width: 3; }
 .reveal svg.marks .zero.trivial { stroke-width: 2.5; }
 .reveal svg.marks .pole { fill: none; stroke: var(--ink); stroke-width: 3; }
-.reveal svg.marks text { fill: var(--ink); font-family: var(--text); font-size: 22px; font-weight: 600; paint-order: stroke; stroke: rgba(12, 16, 32, .8); stroke-width: 5px; }
+.reveal svg.marks text { fill: var(--ink); font-family: var(--text); font-size: 22px; font-weight: 600; paint-order: stroke; stroke: rgba(var(--night-rgb), .8); stroke-width: 5px; }
 .reveal svg.marks text.it { font-family: var(--display); font-style: italic; font-size: 26px; }
 
 /* ---------- title slide ---------- */
 .reveal .title-slide .scrim {
   /* a long, eased fade (no edge under the title) */
-  background: linear-gradient(90deg, rgba(12, 16, 32, .86) 0%, rgba(12, 16, 32, .80) 18%, rgba(12, 16, 32, .68) 34%, rgba(12, 16, 32, .50) 48%, rgba(12, 16, 32, .30) 62%, rgba(12, 16, 32, .13) 75%, rgba(12, 16, 32, .03) 86%, rgba(12, 16, 32, 0) 94%);
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .86) 0%, rgba(var(--night-rgb), .80) 18%, rgba(var(--night-rgb), .68) 34%, rgba(var(--night-rgb), .50) 48%, rgba(var(--night-rgb), .30) 62%, rgba(var(--night-rgb), .13) 75%, rgba(var(--night-rgb), .03) 86%, rgba(var(--night-rgb), 0) 94%);
 }
 .reveal .title-slide .title-text { position: absolute; left: 110px; top: 200px; z-index: 2; }
-.reveal .title-slide h1 { font-size: 3.5em; white-space: nowrap; line-height: 1; color: #FFF8E8; }
+.reveal .title-slide h1 { font-size: 3.5em; white-space: nowrap; line-height: 1; color: var(--bright); }
 /* "in Brief" is the second line of the title, not a subtitle: same size, told apart by gold italic */
 .reveal .title-slide .sub { font-family: var(--display); font-size: 3.5em; font-weight: 500; line-height: 1; letter-spacing: -0.01em; color: var(--gold); font-style: italic; margin-top: .14em; font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1; }
 .reveal .title-slide .rule { width: 180px; height: 4px; margin: 54px 0 46px; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--vermilion)); }
@@ -225,7 +265,7 @@ html, body { background: var(--night); }
 .reveal .paper img.page { width: 580px; height: auto; margin-top: -20px; filter: none; }
 .reveal .paper .panel { margin-top: 1em; }
 .reveal .paper li.gap { margin-top: .6em; }
-.reveal .paper .german { font-family: var(--display); font-style: italic; color: #FFF8E8; }
+.reveal .paper .german { font-family: var(--display); font-style: italic; color: var(--bright); }
 
 /* ---------- plots ---------- */
 .reveal .plot { position: relative; }
@@ -233,7 +273,7 @@ html, body { background: var(--night); }
 .reveal .plot .cap { position: absolute; font-size: .62em; color: var(--ink-soft); font-family: var(--display); font-style: italic; }
 
 /* ---------- slide 4: distribution of primes ---------- */
-.reveal .paper .list-of-primes { font-size: 1.15em; letter-spacing: .02em; margin: .4em 0 0 .96em; color: #FFF8E8; font-variant-numeric: tabular-nums; }
+.reveal .paper .list-of-primes { font-size: 1.15em; letter-spacing: .02em; margin: .4em 0 0 .96em; color: var(--bright); font-variant-numeric: tabular-nums; }
 .reveal .primes .lower { display: grid; grid-template-columns: 730px 1fr; gap: 30px; align-items: center; margin-top: 6px; }
 .reveal .primes .defs .katex-display { margin: .2em 0 .6em; text-align: left; }
 .reveal .primes .defs .katex-display > .katex { text-align: left; font-size: 1.08em; }
@@ -246,7 +286,7 @@ html, body { background: var(--night); }
 .reveal .primes .upper li { white-space: nowrap; }
 .reveal .primes .pi-def {
   justify-self: center; align-self: center; margin: 0 0 .4em; padding: .2em .9em; white-space: nowrap;
-  border: 2px solid #FFFFFF; border-radius: 0; background: rgba(255, 255, 255, .04);
+  border: 2px solid var(--bright); border-radius: 0; background: rgba(var(--ink-rgb), .04);
 }
 .reveal .primes .plot { height: 345px; }
 .reveal .primes .defs ul { margin: .9em 0 .25em; }
@@ -264,8 +304,8 @@ html, body { background: var(--night); }
 .reveal .formula .explicit .katex-display { margin: 0; }
 .reveal .formula .explicit .katex-display > .katex { font-size: 1.75em; }
 .reveal .primes .t-main, .reveal .primes .t-zeros { transition: color .35s ease, text-shadow .35s ease; }
-.reveal .primes:has([data-hl="main"].visible) .t-main { color: var(--gold); text-shadow: 0 0 26px rgba(229, 181, 80, .45); }
-.reveal .primes:has([data-hl="zeros"].visible) .t-zeros { color: var(--azure); text-shadow: 0 0 26px rgba(95, 164, 234, .5); }
+.reveal .primes:has([data-hl="main"].visible) .t-main { color: var(--gold); text-shadow: 0 0 26px rgba(var(--gold-rgb), .45); }
+.reveal .primes:has([data-hl="zeros"].visible) .t-zeros { color: var(--azure); text-shadow: 0 0 26px rgba(var(--azure-rgb), .5); }
 /* the notes' bullets line up with the plot's y-axis (its 112px left margin in plots.js) */
 .reveal .primes .notes { font-size: .74em; line-height: 1.3; margin: 1.2em 0 0 112px; }
 .reveal .primes .notes li + li { margin-top: .6em; }
@@ -291,14 +331,14 @@ html, body { background: var(--night); }
 
 /* ---------- slide 6: the hypothesis ---------- */
 .reveal .hypothesis .scrim {
-  background: linear-gradient(90deg, rgba(12, 16, 32, .80) 0%, rgba(12, 16, 32, .62) 50%, rgba(12, 16, 32, .12) 72%, rgba(12, 16, 32, 0) 80%);
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .80) 0%, rgba(var(--night-rgb), .62) 50%, rgba(var(--night-rgb), .12) 72%, rgba(var(--night-rgb), 0) 80%);
 }
-.reveal .hypothesis h2 { position: absolute; left: 90px; top: 0; padding-top: 56px; margin: 0; color: #FFF8E8; }
-.reveal .hypothesis .panel, .reveal .hypothesis .card { position: absolute; left: 90px; width: 1230px; background: linear-gradient(180deg, rgba(24, 30, 56, .95), rgba(14, 19, 38, .95)); }
+.reveal .hypothesis h2 { position: absolute; left: 90px; top: 0; padding-top: 56px; margin: 0; color: var(--bright); }
+.reveal .hypothesis .panel, .reveal .hypothesis .card { position: absolute; left: 90px; width: 1230px; background: var(--panel-bg-solid); }
 .reveal .hypothesis .panel.english { top: 162px; }
 .reveal .hypothesis .card.translation { top: 610px; }
 .reveal .hypothesis blockquote { font-size: .76em; font-family: var(--text); font-style: normal; font-variation-settings: normal; }
-.reveal .hypothesis .ref { width: max-content; max-width: 1230px; box-sizing: border-box; padding: .7em 1.1em; border-radius: 10px; background: rgba(14, 19, 38, .9); color: var(--ink-soft); }
+.reveal .hypothesis .ref { width: max-content; max-width: 1230px; box-sizing: border-box; padding: .7em 1.1em; border-radius: 10px; background: rgba(var(--night-rgb), .9); color: var(--ink-soft); }
 .reveal .hypothesis .gloss { color: var(--ink-soft); margin: 0; line-height: 1.35; }
 
 /* ---------- slide 7: music / noise of the primes ---------- */
@@ -323,7 +363,7 @@ html, body { background: var(--night); }
 .reveal .music .noise, .reveal .digits .diff { color: var(--vermilion); font-weight: 600; }
 
 /* ---------- slide 8: proposed solutions ---------- */
-.reveal .solutions .who { font-family: var(--display); font-weight: 600; color: #FFF8E8; }
+.reveal .solutions .who { font-family: var(--display); font-weight: 600; color: var(--bright); }
 .reveal .solutions .cols { grid-template-columns: 1fr 740px; gap: 50px; align-items: start; }
 .reveal .solutions ul { font-size: .85em; margin-top: 0; margin-bottom: 0; }
 .reveal .solutions .text ul + ul { margin-top: .5em; }
@@ -335,5 +375,34 @@ html, body { background: var(--night); }
 .reveal .solutions img.excerpt { width: 740px; max-width: none; height: auto; filter: none; }   /* as large as the slide allows */
 .reveal .solutions q { font-style: italic; quotes: "“" "”"; }
 
+/* ---------- day: what the variables alone do not cover ---------- */
+html.day .reveal img.photo { border-color: rgba(var(--ink-rgb), .3); box-shadow: 0 0 0 7px rgba(var(--ink-rgb), .04), 0 18px 40px var(--shadow); }
+html.day .reveal .primes:has([data-hl="main"].visible) .t-main,
+html.day .reveal .primes:has([data-hl="zeros"].visible) .t-zeros { text-shadow: none; }
+/* over the zeta backdrop the cream scrim has to be heavier than the night one for ink to read on it */
+html.day .reveal .title-slide .scrim {
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .94) 0%, rgba(var(--night-rgb), .92) 30%, rgba(var(--night-rgb), .86) 48%, rgba(var(--night-rgb), .70) 60%, rgba(var(--night-rgb), .42) 72%, rgba(var(--night-rgb), .14) 84%, rgba(var(--night-rgb), 0) 94%);
+}
+html.day .reveal .hypothesis .scrim {
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .88) 0%, rgba(var(--night-rgb), .74) 50%, rgba(var(--night-rgb), .16) 72%, rgba(var(--night-rgb), 0) 80%);
+}
+/* the marks turn to ink with the text; a little heavier, as dark lines read thinner on the plot than light ones */
+html.day .reveal svg.marks { --ink: #0B0D1A; }
+html.day .reveal svg.marks .axis { opacity: .7; }
+html.day .reveal svg.marks .zero { fill: #FFFDF7; }
+
+/* ---------- the night / day switch, in the top right corner (main.js; also the D key) ---------- */
+.theme-toggle {
+  position: fixed; right: 16px; top: 14px; z-index: 40; width: 40px; height: 40px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(var(--ink-rgb), .3); border-radius: 50%; background: rgba(var(--night-rgb), .6); color: var(--ink);
+  cursor: pointer; opacity: .4; transition: opacity .2s ease, background .2s ease;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible { opacity: 1; background: rgba(var(--night-rgb), .95); outline: none; }
+.theme-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle .moon, html.day .theme-toggle .sun { display: none; }
+html.day .theme-toggle .moon { display: block; }
+
 /* ---------- print ---------- */
+@media print { .theme-toggle { display: none; } }
 @media print { .reveal-viewport::before { display: none; } }

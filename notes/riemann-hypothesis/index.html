@@ -8,8 +8,20 @@
   <link rel="stylesheet" href="vendor/reveal/reveal.css">
   <link rel="stylesheet" href="vendor/katex/katex.min.css">
   <link rel="stylesheet" href="assets/css/theme.css">
+  <!-- night or day theme, chosen before the first paint (see "night / day" in assets/js/main.js) -->
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      try { if (t === 'day' || t === 'night') localStorage.setItem('rh-theme', t); else t = localStorage.getItem('rh-theme'); } catch (e) {}
+      if (t === 'day') document.documentElement.classList.add('day');
+    })();
+  </script>
 </head>
 <body>
+<button class="theme-toggle" type="button">
+  <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+  <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+</button>
 <div class="reveal">
   <div class="slides">
 
@@ -60,7 +72,7 @@
           </figure>
         </div>
       </div>
-      <p class="ref">“Quotations by David Hilbert”, <em>MacTutor History of Mathematics Archive</em>,<br>University of St Andrews, mathshistory.st-andrews.ac.uk/Biographies/Hilbert/quotations/</p>
+      <p class="ref">“Quotations by David Hilbert”, <em>MacTutor History of Mathematics Archive</em>,<br>University of St Andrews, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Hilbert/quotations/" target="_blank" rel="noopener">mathshistory.st-andrews.ac.uk/Biographies/Hilbert/quotations/</a></p>
     </section>
 
     <!-- ===================== The paper ===================== -->
@@ -150,7 +162,7 @@
             <div class="eq">\[ \zeta(s) \;=\; \sum_{n=1}^{\infty} \frac{1}{n^s} \;=\; \frac{1}{1^s} + \frac{1}{2^s} + \frac{1}{3^s} + \frac{1}{4^s} + \frac{1}{5^s} + \cdots \]</div>
             <div class="eq">\[ \phantom{\zeta(s)} \;=\; \prod_{p} \frac{1}{1 - \frac{1}{p^s}} \;=\; \bigg(\frac{1}{1 - \frac{1}{2^s}}\bigg) \bigg(\frac{1}{1 - \frac{1}{3^s}}\bigg) \bigg(\frac{1}{1 - \frac{1}{5^s}}\bigg) \cdots \]</div>
           </div>
-          <img class="surface fragment" data-fragment-index="3" src="figs/zeta-surface.png" alt="The surface |zeta(s)| over the strip 0 ≤ Re s ≤ 4, coloured by arg zeta(s), with the pole at s = 1 rising out of it">
+          <img class="surface fragment" data-fragment-index="3" src="figs/zeta-surface.png" data-day-src="figs/zeta-surface-day.png" alt="The surface |zeta(s)| over the strip 0 ≤ Re s ≤ 4, coloured by arg zeta(s), with the pole at s = 1 rising out of it">
         </div>
       </div>
     </section>
@@ -170,7 +182,7 @@
       <div class="card translation">
         <p class="gloss">Riemann's variable is $t$, with $s = \tfrac12 + it$: a real root $t$ is a zero of $\zeta(s)$ on the line $\operatorname{Re} s = \tfrac12$. So “all roots are real” says every zero of $\zeta(s)$ off the real axis lies on the $\operatorname{Re} s = \tfrac12$ line.</p>
       </div>
-      <p class="ref">B. Riemann, “On the Number of Prime Numbers less than a Given Quantity” (1859),<br>translated by David R. Wilkins, 1998, maths.tcd.ie/pub/HistMath/People/Riemann/Zeta/EZeta.pdf</p>
+      <p class="ref">B. Riemann, “On the Number of Prime Numbers less than a Given Quantity” (1859),<br>translated by David R. Wilkins, 1998, <a href="https://maths.tcd.ie/pub/HistMath/People/Riemann/Zeta/EZeta.pdf" target="_blank" rel="noopener">maths.tcd.ie/pub/HistMath/People/Riemann/Zeta/EZeta.pdf</a></p>
     </section>
 
     <!-- ===================== Music of the primes ===================== -->
@@ -241,8 +253,8 @@
         </div>
       </div>
       <div class="ref">
-        <p>L. Alpöge, “Remark”, alpo.ge/remark.pdf</p>
-        <p>R. Vakil, “Hurried Announcement: Alessandro Masullo GRH”,<br>math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/</p>
+        <p>L. Alpöge, “Remark”, <a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener">alpo.ge/remark.pdf</a></p>
+        <p>R. Vakil, “Hurried Announcement: Alessandro Masullo GRH”,<br><a href="https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/" target="_blank" rel="noopener">math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/</a></p>
       </div>
     </section>
 

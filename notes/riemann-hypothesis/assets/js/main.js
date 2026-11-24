@@ -67,6 +67,31 @@ Reveal.initialize({
   plugins: [RevealNotes],
 });
 
+/* ---------- night / day ----------
+   <html class="day"> selects the day palette in theme.css.  The choice is kept in localStorage
+   (the script in the <head> of index.html applies it before the first paint); ?theme=day or
+   ?theme=night in the address sets it too.  The corner button and the D key switch.
+   An <img data-day-src="..."> shows that file instead in the day theme. */
+const Theme = (() => {
+  const root = document.documentElement, button = document.querySelector('.theme-toggle');
+  document.querySelectorAll('img[data-day-src]').forEach(img => { img.dataset.nightSrc = img.getAttribute('src'); });
+  function apply() {
+    const day = root.classList.contains('day');
+    document.querySelectorAll('img[data-day-src]').forEach(img => img.setAttribute('src', day ? img.dataset.daySrc : img.dataset.nightSrc));
+    if (button) { const label = day ? 'Switch to the night theme' : 'Switch to the day theme'; button.title = label + ' (D)'; button.setAttribute('aria-label', label); }
+    Plots.retheme();
+  }
+  function toggle() {
+    const day = root.classList.toggle('day');
+    try { localStorage.setItem('rh-theme', day ? 'day' : 'night'); } catch (e) { /* private window: the choice lasts for this page only */ }
+    apply(); syncPlots(false);
+  }
+  if (button) button.addEventListener('click', () => { toggle(); button.blur(); });
+  Reveal.addKeyBinding({ keyCode: 68, key: 'D', description: 'Night / day theme' }, toggle);
+  apply();
+  return { toggle };
+})();
+
 /* ---------- plots follow the fragments ----------
    A plot's step is the largest data-<name>-step among the fragments now visible on its slide;
    if the fragment giving that step also has data-<name>-sweep, the plot is told to sweep to it. */

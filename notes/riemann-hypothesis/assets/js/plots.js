@@ -3,7 +3,13 @@
    visible fragments on its slide; draw() is safe to call at any time. */
 const Plots = (() => {
   const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const C = { ink: css('--ink'), soft: css('--ink-soft'), muted: css('--muted'), gold: css('--gold'), azure: css('--azure'), verm: css('--vermilion') };
+  // The theme's colours, read again by retheme() when the deck switches between night and day.
+  const C = {};
+  const ink = alpha => `rgba(${C.inkRGB},${alpha})`;      // the text colour, faded
+  function retheme() {
+    Object.assign(C, { ink: css('--ink'), soft: css('--ink-soft'), muted: css('--muted'), gold: css('--gold'), azure: css('--azure'), verm: css('--vermilion'), inkRGB: css('--ink-rgb') });
+  }
+  retheme();
   const SANS = '"Source Sans 3", "Helvetica Neue", Arial, sans-serif', SERIF = 'Fraunces, Georgia, serif';
   const fmt = v => Math.round(v).toLocaleString('en-US');
   const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -55,12 +61,12 @@ const Plots = (() => {
     const { ctx, W, H } = s, X = x => m.l + (x - x0) / (x1 - x0) * (W - m.l - m.r);
     const Y = ylog ? y => H - m.b - Math.log(y / y0) / Math.log(y1 / y0) * (H - m.t - m.b)
                    : y => H - m.b - (y - y0) / (y1 - y0) * (H - m.t - m.b);
-    ctx.font = `400 25px ${SANS}`; ctx.fillStyle = C.soft; ctx.strokeStyle = 'rgba(241,233,216,.13)'; ctx.lineWidth = 1;
+    ctx.font = `400 25px ${SANS}`; ctx.fillStyle = C.soft; ctx.strokeStyle = ink(.13); ctx.lineWidth = 1;
     ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
     (yticks || ticks(y0, y1, 4)).forEach(v => { ctx.beginPath(); ctx.moveTo(m.l, Y(v)); ctx.lineTo(W - m.r, Y(v)); ctx.stroke(); ctx.fillText(yfmt(v), m.l - 12, Y(v)); });
     ctx.textAlign = 'center'; ctx.textBaseline = 'top';
     (xticks || ticks(x0, x1, 5)).forEach(v => { if (v === x0 && x0 === 0 && y0 === 0) return; ctx.fillText(xfmt(v), X(v), H - m.b + 9); });
-    ctx.strokeStyle = 'rgba(241,233,216,.55)'; ctx.lineWidth = 1.5;
+    ctx.strokeStyle = ink(.55); ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(m.l, m.t); ctx.lineTo(m.l, H - m.b); ctx.lineTo(W - m.r, H - m.b); ctx.stroke();
     if (zeroLine) { ctx.beginPath(); ctx.moveTo(m.l, Y(0)); ctx.lineTo(W - m.r, Y(0)); ctx.stroke(); }
     return { X, Y };
@@ -142,7 +148,7 @@ const Plots = (() => {
     function legend(ctx, x, y, alpha, isDiff) {
       const row = 46, w = isDiff ? 290 : 190, pad = 16, rows = isDiff ? 1 : 1 + rAlpha, h = pad * 2 + row * rows - 10;
       const left = isDiff ? x : x - w, top = isDiff ? y : y - h;
-      ctx.globalAlpha = alpha; ctx.fillStyle = css('--night'); ctx.strokeStyle = 'rgba(241,233,216,.3)'; ctx.lineWidth = 1;
+      ctx.globalAlpha = alpha; ctx.fillStyle = css('--night'); ctx.strokeStyle = ink(.3); ctx.lineWidth = 1;
       ctx.beginPath(); ctx.rect(left, top, w, h); ctx.fill(); ctx.stroke();
       const entry = (y, colour, width, text) => {
         ctx.strokeStyle = colour; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(left + pad, y - 11); ctx.lineTo(left + pad + 56, y - 11); ctx.stroke();
@@ -175,7 +181,7 @@ const Plots = (() => {
       const { X, Y } = frame(s, { x0: 0, x1: 6, y0: 0, y1: 5, m, xticks: [1, 2, 3, 4, 5, 6], yticks: [1, 2, 3, 4, 5], xfmt: String, yfmt: String });
       ctx.setLineDash([7, 8]); ctx.strokeStyle = C.soft; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(X(1), Y(0)); ctx.lineTo(X(1), Y(5)); ctx.stroke();       // the pole at s = 1
-      ctx.strokeStyle = 'rgba(241,233,216,.4)'; ctx.beginPath(); ctx.moveTo(X(1), Y(1)); ctx.lineTo(X(6), Y(1)); ctx.stroke();
+      ctx.strokeStyle = ink(.4); ctx.beginPath(); ctx.moveTo(X(1), Y(1)); ctx.lineTo(X(6), Y(1)); ctx.stroke();
       ctx.setLineDash([]);
       ctx.strokeStyle = C.gold; ctx.lineWidth = 5; ctx.beginPath();
       for (let i = 0; i <= 400; i++) { const x = 1.2 + (6 - 1.2) * i / 400 - (i ? 0 : 0); const v = zetaReal(x); i ? ctx.lineTo(X(x), Y(v)) : (ctx.moveTo(X(1.248), Y(5)), ctx.lineTo(X(x), Y(v))); }
@@ -218,13 +224,13 @@ const Plots = (() => {
       const { ctx, W, H } = s, m = { l: 78, r: 40, t: 18, b: 48 };
       const { X, Y } = frame(s, { x0: 0, x1: D.xmax, y0: -1.5, y1: 1.5, m, zeroLine: true, yticks: [-1, 0, 1], xticks: [20, 40, 60, 80, 100], yfmt: String });
       const n = (W - m.l - m.r) * 3;                         // the target: pi(x) - R(x) itself
-      ctx.strokeStyle = 'rgba(241,233,216,.5)'; ctx.lineWidth = 2; ctx.beginPath();
+      ctx.strokeStyle = ink(.5); ctx.lineWidth = 2; ctx.beginPath();
       for (let i = 0; i <= n; i++) { const x = D.xmin + (D.xmax - D.xmin) * i / n, v = primePi[Math.floor(x)] - R(x); i ? ctx.lineTo(X(x), Y(v)) : ctx.moveTo(X(x), Y(v)); }
       ctx.stroke();
       ctx.strokeStyle = C.azure; ctx.lineWidth = 3.5; ctx.beginPath();
       current.forEach((v, i) => { const x = D.xmin + (D.xmax - D.xmin) * i / (current.length - 1); i ? ctx.lineTo(X(x), Y(v)) : ctx.moveTo(X(x), Y(v)); });
       ctx.stroke();
-      label(ctx, 'π(x) − R(x)', m.l + 20, m.t + 36, 'rgba(241,233,216,.75)');
+      label(ctx, 'π(x) − R(x)', m.l + 20, m.t + 36, ink(.75));
       label(ctx, caption(D.stages[step]), W - m.r - 8, m.t + 36, C.azure, { align: 'right', sans: true });
     }
     // The terms of the sum under the plot (data-wave-term="k") show once stage k is reached.
@@ -253,5 +259,5 @@ const Plots = (() => {
     return { go, draw };
   })();
 
-  return { PrimePlot, ZetaReal, ErrorPlot, WavePlot };
+  return { PrimePlot, ZetaReal, ErrorPlot, WavePlot, retheme };
 })();
