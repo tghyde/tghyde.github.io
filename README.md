@@ -60,6 +60,18 @@ plus ArithFlow's hover previews of footnotes, citations and references (copied f
 the ArithFlow repo. To publish another note, add its
 name to `NOTES` in the script and an entry to the Expository Notes section of `notes/index.html`.
 
+## Search engines
+
+`robots.txt` points crawlers at `sitemap.xml`, which lists every HTML page and PDF on the site. The three sync
+scripts regenerate it automatically; after adding or changing any other page, regenerate it by hand and commit:
+
+```bash
+sh scripts/build-sitemap.sh
+```
+
+Once the site is verified in Google Search Console, that is where to submit the sitemap or request indexing of a
+new page.
+
 ## Cache busting
 
 GitHub Pages lets browsers cache files for 10 minutes. Every page links the stylesheet and script with a

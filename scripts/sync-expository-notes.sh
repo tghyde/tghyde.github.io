@@ -51,3 +51,4 @@ open(sys.argv[2], "w", encoding="utf-8").write(out)' "$TMP/$n.site.html" "$DST/$
   echo "built $n.html and $n.pdf"
 done
 echo "synced notes from $SRC to $DST"
+sh "$(dirname "$0")/build-sitemap.sh"
