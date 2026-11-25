@@ -59,6 +59,8 @@ plus ArithFlow's hover previews of footnotes, citations and references (copied f
 `~/Documents/Claude/Arithflow`). It needs the math-notes venv (`make setup` there), Node, latexmk, and
 the ArithFlow repo. To publish another note, add its
 name to `NOTES` in the script and an entry to the Expository Notes section of `notes/index.html`.
+On the notes page, each entry's title links to the same place as its first button, which is its
+default version (HTML over PDF, the live page over GitHub).
 
 ## Search engines
 
