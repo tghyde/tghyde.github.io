@@ -15,5 +15,8 @@ rsync -a --delete --exclude .DS_Store "$SRC/vendor/" "$DST/vendor/"
 grep -oh 'figs/[A-Za-z0-9_.-]*' "$SRC/index.html" "$SRC"/assets/css/*.css "$SRC"/assets/js/*.js | sort -u > "$DST/.figs.txt"
 rsync -a --delete --files-from="$DST/.figs.txt" "$SRC/" "$DST/"
 rm -f "$DST/.figs.txt"
+python3 "$(dirname "$0")/add-page-meta.py" "$DST/index.html" /notes/riemann-hypothesis/ \
+  "Slides from Trevor Hyde's short talk on the Riemann Hypothesis: what it says, how the zeros of the zeta function control the primes, and the two proofs announced on November 20, 2026." \
+  /notes/riemann-zeta.png
 echo "synced deck from $SRC to $DST"
 sh "$(dirname "$0")/build-sitemap.sh"

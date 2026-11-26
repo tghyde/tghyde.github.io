@@ -71,7 +71,13 @@ scripts regenerate it automatically; after adding or changing any other page, re
 sh scripts/build-sitemap.sh
 ```
 
-Once the site is verified in Google Search Console, that is where to submit the sitemap or request indexing of a
+Google shows the site name "Trevor Hyde" in results because of the `WebSite` structured data in the head of
+`index.html`. Each main page also carries Open Graph tags (`og:site_name`, `og:title`, `og:description`, `og:url`,
+and on some pages `og:image`, the preferred thumbnail for Google and for link previews). A new hand-written page should
+copy that block. The deck sync scripts add the same tags to the copied decks with `scripts/add-page-meta.py`; each
+sync script sets its deck's description and thumbnail.
+
+The site is verified in Google Search Console, which is where to submit the sitemap or request indexing of a
 new page.
 
 ## Cache busting
